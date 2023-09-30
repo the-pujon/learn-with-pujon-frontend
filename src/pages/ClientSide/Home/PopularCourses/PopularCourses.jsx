@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-
-//import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-//import ClassCard from "../../Shared/ClassCard/ClassCard";
-import { Fade } from "react-awesome-reveal";
 import CourseCard from "../../../../Components/CourseCard/CourseCard";
+
+import { FaCircle } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 
 // import required modules
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 const PopularCourses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
@@ -28,28 +25,28 @@ const PopularCourses = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  console.log(popularClasses);
-
   return (
-    <div className="my-20">
-      {/*<SectionTitle title1="Popular Classes" />*/}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-fit gap-8 mx-auto">
+    <div className="my-20 ">
+      <div className="wrapper ">
+        <p className="uppercase tracking-wider flex gap-2 items-center">
+          <FaCircle className="text-[.5rem]" />  <FaCircle className="text-[.6rem]" /> <FaCircle className="text-xs" />
+          Learn new skills
+          <FaCircle className="text-xs" /> <FaCircle className="text-[.6rem]" /> <FaCircle className="text-[.5rem]" />
+        </p>
+        <h1 className="text-6xl">
+          <b>Popular</b> Courses.
+        </h1>
+
         <Swiper
-          slidesPerView={3}
+          slidesPerView={4}
           spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          loop={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
-          modules={[Autoplay, Pagination]}
-          className="mySwiper"
+          modules={[Autoplay]}
+          className="mySwiper h-[40rem] flex items-center justify-center "
         >
-          {/*<SwiperSlide>Slide 1</SwiperSlide>*/}
-
           {popularClasses.map((card) => (
             <SwiperSlide key={card._id}>
               <CourseCard card={card} />

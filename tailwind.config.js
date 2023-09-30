@@ -7,7 +7,12 @@ export default {
         secondary: "#EEEEEE",
         primary: "#213555",
       },
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif']
+      },
+
     },
+
   },
   plugins: [require("daisyui")],
   daisyui: {

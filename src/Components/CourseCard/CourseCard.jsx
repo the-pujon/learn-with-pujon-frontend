@@ -2,9 +2,7 @@ import React from "react";
 import { Fade } from "react-awesome-reveal";
 
 const CourseCard = (card) => {
-  console.log(card);
   const {
-    _id,
     className,
     image,
     instructor,
@@ -13,12 +11,12 @@ const CourseCard = (card) => {
     seatsAvailable,
     totalStudents,
   } = card.card;
-  console.log(image);
+
   return (
     <div>
       <Fade duration={2000}>
         <div
-          className={`card card-compact  w-80 md:w-96 bg-base-100 shadow-xl rounded-none ${
+          className={`card card-compact  w-80 md:w-[23rem] bg-base-100 shadow-xl rounded-none ${
             seatsAvailable === 0 && "border-[3px] border-red-600"
           }`}
         >
