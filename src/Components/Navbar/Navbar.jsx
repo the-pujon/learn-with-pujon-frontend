@@ -30,8 +30,8 @@ const navbarOption = (
 );
 const Navbar = () => {
   return (
-    <div className="bg-primary/50 backdrop-blur-sm text-white">
-      <div className="max-w-screen-2xl mx-auto">
+    <div className="bg-primary/50 backdrop-blur-sm text-white fixed z-50 w-full">
+      <div className="wrapper">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">

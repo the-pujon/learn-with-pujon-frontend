@@ -1,0 +1,50 @@
+import React from "react";
+
+import "./Banner.scss";
+import { Fade } from "react-awesome-reveal";
+
+
+const Banner = ({ image, title }) => {
+  return (
+    <div>
+      <div
+        className="  banner   space-y-8 "
+        style={{
+          backgroundImage: `url(${image}), linear-gradient(90deg, rgba(33, 53, 85,1) 30%, rgba(0,212,255,0) 100%)`,
+        }}
+      >
+        <div className="wrapper min-h-screen flex flex-col gap-4 justify-center ">
+          {/*<div className="hero-overlay bg-opacity-60"></div>*/}
+          <div className="  text-secondary uppercase  ">
+            <Fade
+              delay={0}
+              cascade
+              duration={2000}
+              damping={1e-1}
+              className=" text-2xl leading-tight md:text-6xl  text-white font-bold flex flex-col"
+            >
+              <span>WELCOME To</span>
+              <span>Learn With Pujon</span>
+            </Fade>
+          </div>
+          <div className="  text-secondary   ">
+            <Fade
+              delay={0}
+              cascade
+              duration={2000}
+              damping={1e-1}
+              className=" text-2xl leading-tight md:text-2xl  text-secondary font-medium flex flex-col"
+            >
+              <span>'Lean what your heart says,</span>
+              <span> learn from your heart'</span>
+            </Fade>
+          </div>
+          <button className="border-4 text-xl border-secondary relative border-double p-[1.25rem_2rem] w-fit text-secondary hover:shadow-[0px_0px_15px_1px_rgba(255,255,255,1)] transition-all duration-200" >Enroll Now </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Banner;
+//, linear-gradient(90deg, rgba(6,59,65,1) 30%, rgba(0,212,255,0) 100%)

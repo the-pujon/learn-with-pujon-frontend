@@ -1,0 +1,62 @@
+[
+    {
+        "_id": 1,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    },
+    {
+        "_id": 2,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    },
+    {
+        "_id": 3,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    },
+    {
+        "_id": 4,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    },
+    {
+        "_id": 5,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    },
+    {
+        "_id": 6,
+        "instrument": "Saxophone",
+        "image": "https://i.ibb.co/hL6QkGR/download.jpg",
+        "price": 55,
+        "instructor": "David Wilson",
+        "seatsAvailable": 22,
+        "className": "Saxophone Beginner",
+        "totalStudents": 23
+    }
+]
