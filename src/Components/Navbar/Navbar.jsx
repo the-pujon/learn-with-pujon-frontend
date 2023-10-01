@@ -8,10 +8,10 @@ const navbarOption = (
       <NavLink to="/">Home</NavLink>
     </li>
     <li>
-      <a href="/instructors">Instructors</a>
+      <NavLink to="/instructors">Instructors</NavLink>
     </li>
     <li>
-      <a href="/classes">Classes</a>
+      <NavLink to="/courses">Classes</NavLink>
     </li>
     <li>
       <a

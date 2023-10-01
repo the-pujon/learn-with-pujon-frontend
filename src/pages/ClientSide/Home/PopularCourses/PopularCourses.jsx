@@ -28,7 +28,7 @@ const PopularCourses = () => {
   return (
     <div className="my-20 ">
       <div className="wrapper ">
-        <div className="flex items-center justify-center flex-col">
+        <div className="flex items-center justify-center flex-col mb-5">
           <p className="uppercase tracking-wider flex gap-2 items-center">
             <FaCircle className="text-[.5rem]" />{" "}
             <FaCircle className="text-[.6rem]" />{" "}

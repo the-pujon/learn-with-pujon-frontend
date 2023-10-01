@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import InstructorCard from "../../../../Components/InstructorCard/InstructorCard";
-//import teacher from "../../assets/Header/teacher-1.jpg";
-//import PageCover from "../../Components/Shared/pageCover/PageCover";
-//import InstructorCard from "../../Components/Shared/InstructorCard/InstructorCard";
 
+import PageCover from "../../../../Components/PageCover/PageCover";
+import bannerImage from "../../../../assets/banner/index";
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
@@ -18,11 +17,11 @@ const Instructors = () => {
 
   return (
     <div>
-      {/*<PageCover
-        img={teacher}
+      <PageCover
+        img={bannerImage.banner3}
         title="Instructors"
         subtitle="“The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires.” - William Ward"
-      />*/}
+      />
       <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto">
         {instructors.map((instructor) => (
           <div key={instructor._id}>
