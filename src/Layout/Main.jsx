@@ -5,9 +5,9 @@ import Footer from "../Components/Footer/Footer";
 
 const Main = () => {
   return (
-    <div>
+    <div className=' ' >
       <Navbar />
-      <div className="">
+      <div className="min-h-[81vh]">
         <Outlet />
       </div>
       <Footer />

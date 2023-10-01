@@ -28,24 +28,35 @@ const PopularCourses = () => {
   return (
     <div className="my-20 ">
       <div className="wrapper ">
-        <p className="uppercase tracking-wider flex gap-2 items-center">
-          <FaCircle className="text-[.5rem]" />  <FaCircle className="text-[.6rem]" /> <FaCircle className="text-xs" />
-          Learn new skills
-          <FaCircle className="text-xs" /> <FaCircle className="text-[.6rem]" /> <FaCircle className="text-[.5rem]" />
-        </p>
-        <h1 className="text-6xl">
-          <b>Popular</b> Courses.
-        </h1>
+        <div className="flex items-center justify-center flex-col">
+          <p className="uppercase tracking-wider flex gap-2 items-center">
+            <FaCircle className="text-[.5rem]" />{" "}
+            <FaCircle className="text-[.6rem]" />{" "}
+            <FaCircle className="text-xs" />
+            Learn new skills
+            <FaCircle className="text-xs" />{" "}
+            <FaCircle className="text-[.6rem]" />{" "}
+            <FaCircle className="text-[.5rem]" />
+          </p>
+          <h1 className="text-6xl">
+            <b>Popular</b> Courses.
+          </h1>
+        </div>
+        {/*{popularClasses.map((card) => (
+            <SwiperSlide key={card._id}>
+              <CourseCard card={card} />
+            </SwiperSlide>
+          ))}*/}
 
         <Swiper
           slidesPerView={4}
-          spaceBetween={30}
+          spaceBetween={0}
           autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
-          className="mySwiper h-[40rem] flex items-center justify-center "
+          className="mySwiper   flex items-center justify-center "
         >
           {popularClasses.map((card) => (
             <SwiperSlide key={card._id}>
