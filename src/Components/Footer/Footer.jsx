@@ -5,10 +5,10 @@ const Footer = () => {
     <div className=" text-secondary bg-primary">
       <footer className="wrapper ">
         <section className="footer p-10">
-          <div>
+          <div className='flex flex-col items-center justify-center' >
             {/*<img src={logo} alt="" className="w-28" />*/}
-
-            <p>Learn With Pujon</p>
+            <p className="text-3xl font-bold tracking-widest "  >LWP</p>
+            <p className="text-sm font-thin -mt-4 tracking-widest">Learn With Pujon</p>
           </div>
           <div>
             <span className="footer-title">Social</span>
@@ -50,11 +50,11 @@ const Footer = () => {
           </div>
         </section>
         <section>
-          <div className="footer footer-center p-4 bg-[color:var(--hoverColor1)] text-secondary">
+          <div className="footer  p-4 bg-[color:var(--hoverColor1)] text-secondary">
             <div>
               <p>
-                Copyright © 2023 - All right reserved by SONGLE MELODY MUSIC
-                HEAVEN
+                Copyright © {new Date().getFullYear()} - All right reserved by
+                SONGLE MELODY MUSIC HEAVEN
               </p>
             </div>
           </div>

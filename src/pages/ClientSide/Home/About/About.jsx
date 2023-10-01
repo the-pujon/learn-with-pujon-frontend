@@ -9,7 +9,7 @@ const About = () => {
       <Fade
         duration={2000}
         id="About"
-        className="res__about text-white  wrapper  shadow-2xl"
+        className="res__about text-white  wrapper h-full shadow-2xl"
       >
         <div className="res__about-container">
           <div className="res__about-paragraph text-black">

@@ -7,7 +7,7 @@ const Courses = () => {
   const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
-    fetch("/Courses.json")
+    fetch("http://localhost:3000/courses")
       .then((res) => res.json())
       .then((data) => {
         setAllCourses(data);
@@ -19,7 +19,7 @@ const Courses = () => {
     <div>
       <PageCover
         img={bannerImage.banner4}
-        title="Classes"
+        title="All Courses"
         subtitle="Everything in the universe has a rhythm, everything dances. ~ Maya Angelou"
       />
       <div className="wrapper grid my-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-11/12 mx-auto">

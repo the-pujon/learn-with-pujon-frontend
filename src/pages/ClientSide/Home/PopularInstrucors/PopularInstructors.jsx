@@ -18,7 +18,7 @@ const PopularInstructors = () => {
   const [popularInstructor, setPopularInstructor] = useState([]);
 
   useEffect(() => {
-    fetch("/Instructors.json")
+    fetch("http://localhost:3000/instructors")
       .then((res) => res.json())
       .then((data) => {
         const sliceData = data.slice(0, 6);

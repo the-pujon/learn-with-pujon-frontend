@@ -7,7 +7,7 @@ const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("/Instructors.json")
+    fetch("http://localhost:3000/instructors")
       .then((res) => res.json())
       .then((data) => {
         setInstructors(data);
@@ -19,7 +19,7 @@ const Instructors = () => {
     <div>
       <PageCover
         img={bannerImage.banner3}
-        title="Instructors"
+        title="All Instructors"
         subtitle="“The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires.” - William Ward"
       />
       <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto">

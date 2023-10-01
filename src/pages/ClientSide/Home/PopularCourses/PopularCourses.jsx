@@ -15,7 +15,7 @@ const PopularCourses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
 
   useEffect(() => {
-    fetch("/Courses.json")
+    fetch("http://localhost:3000/courses")
       .then((res) => res.json())
       .then((data) => {
         const sliceData = data.slice(0, 6);
@@ -42,11 +42,23 @@ const PopularCourses = () => {
             <b>Popular</b> Courses.
           </h1>
         </div>
-        {/*{popularClasses.map((card) => (
+
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={0}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          className="mySwiper items-center justify-center !flex md:!hidden "
+        >
+          {popularClasses.map((card) => (
             <SwiperSlide key={card._id}>
               <CourseCard card={card} />
             </SwiperSlide>
-          ))}*/}
+          ))}
+        </Swiper>
 
         <Swiper
           slidesPerView={4}
@@ -56,7 +68,7 @@ const PopularCourses = () => {
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
-          className="mySwiper   flex items-center justify-center "
+          className="mySwiper items-center justify-center !hidden md:!flex "
         >
           {popularClasses.map((card) => (
             <SwiperSlide key={card._id}>

@@ -64,7 +64,7 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-            <ul className=" menu menu-horizontal px-1">{navbarOption}</ul>
+            <ul className=" menu menu-horizontal px-1 hidden md:flex">{navbarOption}</ul>
 
             <div className="dropdown dropdown-end text-black">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -74,7 +74,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
               >
                 <li>
                   <a className="justify-between">
