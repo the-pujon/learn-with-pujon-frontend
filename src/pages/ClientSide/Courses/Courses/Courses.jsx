@@ -7,7 +7,7 @@ const Courses = () => {
   const [allCourses, setAllCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/courses")
+    fetch("https://learn-with-pujon-backend.vercel.app/courses")
       .then((res) => res.json())
       .then((data) => {
         setAllCourses(data);

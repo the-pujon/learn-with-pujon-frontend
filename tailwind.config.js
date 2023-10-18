@@ -4,15 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        secondary: "#EEEEEE",
+        secondary: "#ffffff",
         primary: "#213555",
+        bgColor: "#ff6600",
       },
       fontFamily: {
-        'roboto': ['Roboto', 'sans-serif']
+        roboto: ["Roboto", "sans-serif"],
       },
-
     },
-
   },
   plugins: [require("daisyui")],
   daisyui: {

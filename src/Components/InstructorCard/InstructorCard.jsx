@@ -2,7 +2,6 @@ import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
 
 const InstructorCard = ({ img, name, email, className }) => {
-  console.log("her");
   return (
     <Fade delay={0} duration={500} cascade damping={1e-1}>
       <div className=" my-5 antialiased text-gray-900">
@@ -25,7 +24,7 @@ const InstructorCard = ({ img, name, email, className }) => {
               </div>*/}
 
               <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate">
-               {name}
+                {name}
               </h4>
               <p>{email}</p>
 

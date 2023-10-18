@@ -6,7 +6,20 @@ import { RouterProvider } from "react-router-dom";
 import { Router } from "./Router/Router.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <div>
+    <ul className="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
     <RouterProvider router={Router} />
-  </React.StrictMode>
+  </div>
 );

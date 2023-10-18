@@ -18,7 +18,7 @@ const PopularInstructors = () => {
   const [popularInstructor, setPopularInstructor] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/instructors")
+    fetch("https://learn-with-pujon-backend.vercel.app/instructors")
       .then((res) => res.json())
       .then((data) => {
         const sliceData = data.slice(0, 6);

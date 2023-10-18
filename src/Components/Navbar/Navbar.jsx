@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Navbar.scss";
 
 const navbarOption = (
@@ -29,8 +29,37 @@ const navbarOption = (
   </>
 );
 const Navbar = () => {
+  const [scroll, setScroll] = useState(true);
+
+  const location = useLocation().pathname;
+
+  /**
+   * Used for navbar animation when scroll
+   */
+  const listenScrollEvent = () => {
+    if (location === "/") {
+      window.scrollY > 600 ? setScroll(false) : setScroll(true);
+    } else {
+      window.scrollY > 280 ? setScroll(false) : setScroll(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => {
+      window.removeEventListener("scroll", listenScrollEvent);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
   return (
-    <div className="bg-primary/50 backdrop-blur-sm text-white fixed z-50 w-full">
+    <div
+      className={` text-white fixed z-50 w-full transition-all duration-500 ease-linear  ${
+        mask
+          ? " py-12 backdrop-blur-sm bg-opacity-0"
+          : " backdrop-blur-sm bg-primary/70 bg-opacity-100 "
+      }`}
+    >
       <div className="wrapper">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
@@ -58,13 +87,24 @@ const Navbar = () => {
                 {navbarOption}
               </ul>
             </div>
-            <Link to="/" className="normal-case text-xl">
-              LWP
+            <Link to="/" className=" text-5xl font-medium">
+              SKILL VOYAGE
             </Link>
           </div>
 
+          <div className="navbar-center">
+            {" "}
+            <ul className=" menu menu-horizontal px-1 hidden md:flex">
+              {navbarOption}
+            </ul>
+          </div>
+
           <div className="navbar-end">
-            <ul className=" menu menu-horizontal px-1 hidden md:flex">{navbarOption}</ul>
+            <ul>
+              <li>
+                <NavLink to="/instructors">Become an Instructor</NavLink>
+              </li>
+            </ul>
 
             <div className="dropdown dropdown-end text-black">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
