@@ -24,7 +24,7 @@ const Banner = ({ image, title }) => {
               className=" text-2xl leading-tight md:text-6xl  text-white font-bold flex flex-col"
             >
               <span>WELCOME To</span>
-              <span>Learn With Pujon</span>
+              <span>SKILLS VOYAGE</span>
             </Fade>
           </div>
           <div className="  text-secondary   ">

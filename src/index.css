@@ -7,7 +7,7 @@
   /*background: url(./assets/background/backgraound.png);*/
   background: conic-gradient(
     from 90deg at 100% 0%,
-    rgb(33, 53, 85) 0%,
+    #213555 0%,
     rgba(255, 255, 255, 1) 50%
   );
   background-repeat: no-repeat;
@@ -22,6 +22,7 @@
   @apply max-w-screen-2xl mx-auto px-2 md:px-5;
 }
 
+/* bg animation start */
 .circles {
   position: fixed;
   top: 0;
@@ -129,4 +130,50 @@
     opacity: 0;
     border-radius: 50%;
   }
+}
+/* Bg animation end */
+
+/* buttons */
+.SVButton-2 {
+  display: inline-block;
+  border-radius: 4px;
+
+  background: conic-gradient(
+    from 90deg at 100% 0%,
+    #213555 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
+  border: none;
+  text-align: center;
+
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.SVButton-2 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.SVButton-2 span:after {
+  content: "➤";
+  font-size: 1rem;
+  font-weight: 500;
+
+  position: absolute;
+  opacity: 0;
+  top: 0rem;
+  right: -15px;
+  transition: 0.5s;
+}
+
+.SVButton-2:hover span {
+  padding-right: 15px;
+}
+
+.SVButton-2:hover span:after {
+  opacity: 1;
+  right: -8px;
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Navbar.scss";
+import logo1 from "../../assets/logos/logo3.png";
+import { useUser } from "../../Hooks/useUser";
 
 const navbarOption = (
   <>
@@ -33,12 +35,14 @@ const Navbar = () => {
 
   const location = useLocation().pathname;
 
+  const { loggedUser, logOut, userLoading } = useUser();
+
   /**
    * Used for navbar animation when scroll
    */
   const listenScrollEvent = () => {
     if (location === "/") {
-      window.scrollY > 600 ? setScroll(false) : setScroll(true);
+      window.scrollY > 650 ? setScroll(false) : setScroll(true);
     } else {
       window.scrollY > 280 ? setScroll(false) : setScroll(true);
     }
@@ -49,15 +53,20 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", listenScrollEvent);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    logOut().then(() => console.log("logout"));
+  };
 
   return (
     <div
       className={` text-white fixed z-50 w-full transition-all duration-500 ease-linear  ${
-        mask
-          ? " py-12 backdrop-blur-sm bg-opacity-0"
-          : " backdrop-blur-sm bg-primary/70 bg-opacity-100 "
+        scroll
+          ? " py-12 backdrop-blur-sm bg-opacity-0 "
+          : " backdrop-blur-sm bg-primary/70 bg-opacity-100 py-3"
       }`}
     >
       <div className="wrapper">
@@ -88,7 +97,13 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/" className=" text-5xl font-medium">
-              SKILL VOYAGE
+              <img
+                src={logo1}
+                alt=""
+                className={`${
+                  scroll ? "w-32" : "w-20"
+                } transition-all duration-500 ease-linear`}
+              />
             </Link>
           </div>
 
@@ -106,7 +121,8 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <div className="dropdown dropdown-end text-black">
+            {/*<div className="dropdown dropdown-end text-black">
+
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -129,6 +145,41 @@ const Navbar = () => {
                   <a>Logout</a>
                 </li>
               </ul>
+            </div>*/}
+            <div className="dropdown dropdown-end text-black">
+              {loggedUser ? (
+                <>
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img src={loggedUser?.photoURL} />
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] shadow-2xl bg-transparent text-white rounded-box w-52 "
+                  >
+                    <li
+                      className=" bg-primary/20 p-2 backdrop-blur-md"
+                      onClick={handleLogOut}
+                    >
+                      <a>Logout</a>
+                    </li>
+                  </ul>
+                </>
+              ) : (
+                <>
+                  <ul>
+                    <li className="text-xl text-white">
+                      <NavLink to="/auth" className={" flex items-center"}>
+                        Login
+                      </NavLink>
+                    </li>
+                  </ul>
+                </>
+              )}
             </div>
           </div>
         </div>
