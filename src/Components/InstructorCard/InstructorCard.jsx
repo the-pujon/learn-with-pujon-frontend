@@ -1,15 +1,16 @@
 import React from "react";
 import { Fade, Slide } from "react-awesome-reveal";
+import { Link } from 'react-router-dom';
 
-const InstructorCard = ({ img, name, email, className }) => {
+const InstructorCard = ({ img, name, email, className, id }) => {
   return (
     <Fade delay={0} duration={500} cascade damping={1e-1}>
-      <div className=" my-5 antialiased text-gray-900">
+      <Link to={`/instructors/${id}`} className=" my-5 antialiased text-gray-900">
         <div>
           <img
             src={img}
-            alt="random imgee"
-            className="w-full object-cover object-center rounded-lg shadow-md"
+            alt="random image"
+            className="w-[30rem] h-[30rem] object-cover object-center rounded-lg shadow-md"
           />
 
           <div className="relative px-4 -mt-16  ">
@@ -28,10 +29,6 @@ const InstructorCard = ({ img, name, email, className }) => {
               </h4>
               <p>{email}</p>
 
-              {/*<div className="mt-1">
-                $1800
-                <span className="text-gray-600 text-sm"> /wk</span>
-              </div>*/}
               <div className="mt-4">
                 <span className="text-primary text-md font-semibold">
                   4/5 ratings{" "}
@@ -43,7 +40,7 @@ const InstructorCard = ({ img, name, email, className }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </Fade>
   );
 };

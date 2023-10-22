@@ -6,17 +6,24 @@ import bannerImage from "../../../../assets/banner/index";
 import CategoryDropdown from "../../../../Components/CategoryDropdown/CategoryDropdown";
 
 const instructorCategory = [
-  "Programming Instructors", "Math Instructors", "English Instructors", "Physics Instructors",
+  "Programming Instructors",
+  "Math Instructors",
+  "English Instructors",
+  "Physics Instructors",
 ];
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("https://learn-with-pujon-backend.vercel.app/instructors")
+    fetch("http://localhost:5000/api/instructors")
       .then((res) => res.json())
       .then((data) => {
-        setInstructors(data);
+        const allInstructors = data;
+        const approvedInstructors = allInstructors.filter(
+          (instructor) => instructor.approved === true
+        );
+        setInstructors(approvedInstructors);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -29,7 +36,7 @@ const Instructors = () => {
         subtitle="“The mediocre teacher tells. The good teacher explains. The superior teacher demonstrates. The great teacher inspires.” - William Ward"
       />
       <div className="wrapper">
-        <div className="flex justify-between">
+        {/*<div className="flex justify-between">
           <div className="flex gap-2 items-center w-full p-2">
             <input
               type="search"
@@ -48,14 +55,15 @@ const Instructors = () => {
             buttonName={"Instructors"}
             categoryList={instructorCategory}
           />
-        </div>
+        </div>*/}
         <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-2 lg:grid-cols-3 w-11/12 mx-auto">
           {instructors.map((instructor) => (
             <div key={instructor._id}>
               <InstructorCard
-                img={instructor.image}
+                img={instructor.instructorImage}
                 name={instructor.name}
                 email={instructor.email}
+                id={instructor._id}
               />
             </div>
           ))}

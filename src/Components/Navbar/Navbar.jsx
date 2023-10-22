@@ -15,19 +15,6 @@ const navbarOption = (
     <li>
       <NavLink to="/courses">Classes</NavLink>
     </li>
-    <li>
-      <a
-      //to={`/dashboard/${
-      //  role === "admin"
-      //    ? "manageUsers"
-      //    : role === "instructor"
-      //    ? "myClasses"
-      //    : "selectedClass"
-      //}`}
-      >
-        Dashboard
-      </a>
-    </li>
   </>
 );
 const Navbar = () => {
@@ -44,7 +31,7 @@ const Navbar = () => {
     if (location === "/") {
       window.scrollY > 650 ? setScroll(false) : setScroll(true);
     } else {
-      window.scrollY > 280 ? setScroll(false) : setScroll(true);
+      setScroll(false);
     }
   };
 
@@ -56,6 +43,9 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
+  /**
+   * Used for log out
+   */
   const handleLogOut = (e) => {
     e.preventDefault();
     logOut().then(() => console.log("logout"));
@@ -117,7 +107,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <ul>
               <li>
-                <NavLink to="/instructors">Become an Instructor</NavLink>
+                <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
               </li>
             </ul>
 
@@ -161,6 +151,22 @@ const Navbar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content mt-3 z-[1] shadow-2xl bg-transparent text-white rounded-box w-52 "
                   >
+                    {" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                      <a>My Classes</a>
+                    </li>{" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                      <a>Payment History</a>
+                    </li>{" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                      <a>Add Classes</a>
+                    </li>{" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                      <a>All Classes</a>
+                    </li>{" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                      <Link to={`/requests`}>Instructor Requests</Link>
+                    </li>
                     <li
                       className=" bg-primary/20 p-2 backdrop-blur-md"
                       onClick={handleLogOut}
