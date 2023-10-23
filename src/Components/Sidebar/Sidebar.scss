@@ -1,0 +1,69 @@
+.sidebar {
+
+    a {
+        position: relative;
+        margin: 0 5px;
+        padding: 0 5px;
+        font-size: 1.25rem;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0.4rem;
+            right: -1rem;
+            border-radius: 10rem;
+            width: 8px;
+            height: 8px;
+            background-color: white;
+            transition: all .5s;
+            opacity: 0;
+        }
+
+
+        &:active {
+            background: none;
+
+            &::after {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            &::after {
+                opacity: 1;
+
+            }
+        }
+
+        &:focus {
+            background-color: transparent;
+        }
+    }
+
+}
+
+.active {
+    color: var(--primaryColor);
+    background-color: transparent;
+    position: relative;
+
+
+    &::before {
+        content: "";
+        position: absolute;
+        //bottom: -.3rem;
+        border-radius: 10rem;
+
+        left: 103.999%;
+        //right: -1rem;
+        bottom: .4rem;
+        //left: 2.1rem;//border-radius: 50%;
+        display: block;
+        width: 8px;
+        height: 8px;
+        background-color: white;
+
+
+    }
+}

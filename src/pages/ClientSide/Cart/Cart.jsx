@@ -10,165 +10,77 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const handleRemove = (id) => {
-    console.log("remove")
+    console.log("remove");
     dispatch(removeItemFromCart(id));
   };
 
   return (
     <div>
       {" "}
-      <div class="container mx-auto h-screen flex items-center justify-center w-full text-primary">
+      <div class="container mx-auto min-h-[70vh] flex items-center justify-center w-full text-primary">
         <div class="flex shadow-md w-full">
           <div class="w-3/4 bg-transparent backdrop-blur-md border-r-2 px-10 py-10">
             <div class="flex justify-between border-b pb-8">
-              <h1 class="font-semibold text-2xl">Shopping Cart</h1>
+              <h1 class="font-semibold text-2xl">Your Orders</h1>
               <h2 class="font-semibold text-2xl">
                 {cartItems.totalItem} Items
               </h2>
             </div>
-            <div class="flex mt-10 mb-5">
-              <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">
-                Product Details
-              </h3>
-              {/*<h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
-                Quantity
-              </h3>*/}
-              <h3 class="font-semibold   text-gray-600 text-xs uppercase w-1/5 text-center">
-                Price
-              </h3>
-              <h3 class="font-semibold  text-gray-600 text-xs uppercase w-1/5 text-center">
-                Total
-              </h3>
-            </div>
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Instructor</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.courses?.map((course) => (
+                  <tr key={course._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={course?.classImage}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
 
-            {cartItems.courses.map((course) => (
-              <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                <div class="flex w-2/5">
-                  <div class="w-20">
-                    <img class="h-24" src={course.classImage} alt="" />
-                  </div>
-                  <div class="flex flex-col justify-between ml-4 flex-grow">
-                    <span class="font-bold text-sm">Iphone 6S</span>
-                    <span class="text-red-500 text-xs">Apple</span>
-                    <a
-                      href="#"
-                      class="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                    >
-                      Remove
-                    </a>
-                  </div>
-                </div>
-                <span class="text-center w-1/5 font-semibold text-sm">
-                  $400.00
-                </span>
-                <span class="text-center w-1/5 font-semibold text-sm">
-                  $400.00
-                </span>
-                <button
-                  onClick={() => handleRemove(course._id)}
-                  class="text-center w-1/5 font-semibold text-sm"
-                >
-                  <AiFillDelete />
-                </button>
-              </div>
-            ))}
+                        <div>
+                          <div className="font-bold">{course.name}</div>
+                          <div className="text-sm text-gray-500">
+                            {course.category}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">
+                            {course.instructorName}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="font-semibold">$ {course.price}</td>
 
-            {/*<div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-              <div class="flex w-2/5">
-                <div class="w-20">
-                  <img
-                    class="h-24"
-                    src="https://drive.google.com/uc?id=10ht6a9IR3K2i1j0rHofp9-Oubl1Chraw"
-                    alt=""
-                  />
-                </div>
-                <div class="flex flex-col justify-between ml-4 flex-grow">
-                  <span class="font-bold text-sm">Xiaomi Mi 20000mAh</span>
-                  <span class="text-red-500 text-xs">Xiaomi</span>
-                  <a
-                    href="#"
-                    class="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                  >
-                    Remove
-                  </a>
-                </div>
-              </div>
-              <div class="flex justify-center w-1/5">
-                <svg
-                  class="fill-current text-gray-600 w-3"
-                  viewBox="0 0 448 512"
-                >
-                  <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
-
-                <input
-                  class="mx-2 border text-center w-8"
-                  type="text"
-                  value="1"
-                />
-
-                <svg
-                  class="fill-current text-gray-600 w-3"
-                  viewBox="0 0 448 512"
-                >
-                  <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
-              </div>
-              <span class="text-center w-1/5 font-semibold text-sm">
-                $40.00
-              </span>
-              <span class="text-center w-1/5 font-semibold text-sm">
-                $40.00
-              </span>
-            </div>
-
-            <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-              <div class="flex w-2/5">
-                <div class="w-20">
-                  <img
-                    class="h-24"
-                    src="https://drive.google.com/uc?id=1vXhvO9HoljNolvAXLwtw_qX3WNZ0m75v"
-                    alt=""
-                  />
-                </div>
-                <div class="flex flex-col justify-between ml-4 flex-grow">
-                  <span class="font-bold text-sm">Airpods</span>
-                  <span class="text-red-500 text-xs">Apple</span>
-                  <a
-                    href="#"
-                    class="font-semibold hover:text-red-500 text-gray-500 text-xs"
-                  >
-                    Remove
-                  </a>
-                </div>
-              </div>
-              <div class="flex justify-center w-1/5">
-                <svg
-                  class="fill-current text-gray-600 w-3"
-                  viewBox="0 0 448 512"
-                >
-                  <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
-                <input
-                  class="mx-2 border text-center w-8"
-                  type="text"
-                  value="1"
-                />
-
-                <svg
-                  class="fill-current text-gray-600 w-3"
-                  viewBox="0 0 448 512"
-                >
-                  <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
-              </div>
-              <span class="text-center w-1/5 font-semibold text-sm">
-                $150.00
-              </span>
-              <span class="text-center w-1/5 font-semibold text-sm">
-                $150.00
-              </span>
-            </div>*/}
+                    <td>
+                      <button
+                        onClick={() => handleRemove(course._id)}
+                        class="text-center w-1/5 font-semibold text-sm"
+                      >
+                        <AiFillDelete />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
             <a
               href="#"
@@ -184,44 +96,30 @@ const Cart = () => {
             </a>
           </div>
 
-          <div id="summary" class="w-1/4 px-8 py-10">
+          <div id="summary" class="w-1/4 px-8 py-10 backdrop-blur-md">
             <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
             <div class="flex justify-between mt-10 mb-5">
-              <span class="font-semibold text-sm uppercase">Items 3</span>
-              <span class="font-semibold text-sm">590$</span>
+              <span class="font-semibold text-sm uppercase">Subtotal</span>
+              <span class="font-semibold text-sm">
+                $ {cartItems.totalPrice}
+              </span>
             </div>
-            {/*<div>
-              <label class="font-medium inline-block mb-3 text-sm uppercase">
-                Shipping
-              </label>
-              <select class="block p-2 text-gray-600 w-full text-sm">
-                <option>Standard shipping - $10.00</option>
-              </select>
-            </div>*/}
-            {/*<div class="py-10">
-              <label
-                for="promo"
-                class="font-semibold inline-block mb-3 text-sm uppercase"
-              >
-                Promo Code
-              </label>
-              <input
-                type="text"
-                id="promo"
-                placeholder="Enter your code"
-                class="p-2 text-sm w-full"
-              />
+            <div class="flex justify-between mt-10 mb-5">
+              <span class="font-semibold text-sm uppercase">Tax (10%)</span>
+              <span class="font-semibold text-sm">
+                $ {(cartItems.totalPrice * 0.1).toFixed(2)}
+              </span>
             </div>
-            <button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
-              Apply
-            </button>*/}
+
             <div class="border-t mt-8">
               <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>
+                  $ {cartItems.totalPrice + cartItems.totalPrice * 0.1}
+                </span>
               </div>
-              <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
-                Checkout
+              <button class=" SVButton-2 py-2 uppercase w-full">
+                <span> Checkout</span>
               </button>
             </div>
           </div>

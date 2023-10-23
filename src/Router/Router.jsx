@@ -9,6 +9,8 @@ import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
 import InstructorRequest from "../pages/Dashboard/Admin/InstructorRequest/InstructorRequest";
 import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
+import Dashboard from "../Layout/Dashboard";
+import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 
 export const Router = createBrowserRouter([
@@ -40,18 +42,29 @@ export const Router = createBrowserRouter([
         path: "instructors/:id",
         element: <Instructor />,
       },
-      {
-        path: "requests",
-        element: <InstructorRequest />,
-      },
+
       {
         path: "addCourse",
         element: <AddCourse />,
       },
       {
         path: "cart",
-        element: <Cart/>
-      }
+        element: <Cart />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "instructorApplication",
+        element: <InstructorRequest />,
+      },
+      {
+        path: "courseRequest",
+        element: <CourseRequest />,
+      },
     ],
   },
 ]);
