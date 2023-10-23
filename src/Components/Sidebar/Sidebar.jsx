@@ -52,7 +52,7 @@ const Sidebar = () => {
               <AiOutlineHome className="text-xl" />
               <p className="text-base"> Home</p>
             </NavLink>
-            <NavLink to="/dashboard/requests" className="flex items-center space-x-2 w-fit ">
+            <NavLink to="/dashboard/manageUsers" className="flex items-center space-x-2 w-fit ">
               <AiOutlineHome className="text-xl" />
               <span className="text-base">Manage Users</span>
             </NavLink>

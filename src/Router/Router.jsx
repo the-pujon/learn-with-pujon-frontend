@@ -11,6 +11,7 @@ import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
 import Dashboard from "../Layout/Dashboard";
 import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 
 export const Router = createBrowserRouter([
@@ -64,6 +65,10 @@ export const Router = createBrowserRouter([
       {
         path: "courseRequest",
         element: <CourseRequest />,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers />,
       },
     ],
   },

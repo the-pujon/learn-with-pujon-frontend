@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
 
-const InstructorRequest = () => {
-  const [instructors, setAllInstructors] = useState([]);
-  const [filteredInstructors, setFilteredInstructors] = useState([]);
+const ManageUsers = () => {
+  const [users, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/instructors")
+    fetch("http://localhost:5000/api/users")
       .then((res) => res.json())
       .then((data) => {
-        setAllInstructors(data);
-        setFilteredInstructors(data);
+        console.log(data);
+        setAllUsers(data);
+        setFilteredUsers(data);
       });
 
     //fetch("/category.json")
@@ -74,30 +76,29 @@ const InstructorRequest = () => {
   //    }
   //  };
 
-  const handleApproved = (email) => {
-    fetch(`http://localhost:5000/api/instructors/${email}`, {
-      method: "PUT",
+  const handleAdmin = (email) => {
+    fetch(`http://localhost:5000/api/users/${email}`, {
+      method: "PATCH",
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ approved: true }),
+      body: JSON.stringify({ role: "admin" }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.approved) {
-          fetch(`http://localhost:5000/api/users/${email}`, {
-            method: "PATCH",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({ role: "instructor" }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              setRefresh(data.approved);
-            })
-            .catch((err) => console.error(err));
-        } else {
-          console.log(data);
-          setRefresh(data.approved);
-        }
+        console.log(data);
+        setRefresh(data.approved);
+      })
+      .catch((err) => console.error(err));
+    setRefresh(null);
+  };
+
+  const handleRemove = (email) => {
+    fetch(`http://localhost:5000/api/users/${email}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setRefresh(data.approved);
       })
       .catch((err) => console.error(err));
     setRefresh(null);
@@ -152,58 +153,59 @@ const InstructorRequest = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>Instructor Name</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Category</th>
-                <th>Experience</th>
-                <th>Education</th>
-                <th>About</th>
+                <th>Role</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {filteredInstructors?.map((instructor) => (
-                <tr key={instructor._id}>
+              {filteredUsers?.map((user) => (
+                <tr key={user._id}>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src={instructor?.instructorImage}
+                            src={user?.image}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
 
-                      <div className="font-bold">{instructor.name}</div>
+                      <div className="font-bold">{user.name}</div>
                     </div>
                   </td>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div>
-                        <div className="font-bold">{instructor.email}</div>
+                        <div className="font-bold">{user.email}</div>
                       </div>
                     </div>
                   </td>
-                  <td>{instructor.category}</td>
-                  <td> {instructor.experience}</td>
-                  <td> {instructor.education}</td>
-                  <td> {instructor.about}</td>
-                  <th>
+                  {/*<td>{user.category}</td>
+                  <td> {user.experience}</td>
+                  <td> {user.education}</td>
+                  <td> {user.about}</td>*/}
+                  <td>{user.role}</td>
+                  <td className="flex gap-2">
                     <button
-                      disabled={instructor.approved}
-                      onClick={() => {
-                        handleApproved(instructor.email);
-                      }}
+                      onClick={() => handleAdmin(user.email)}
                       className={
-                        instructor.approved
-                          ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
-                          : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
+                        "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal flex items-center gap-1 "
                       }
                     >
-                      {instructor.approved ? "Approved" : "Not approved yet"}
+                      <MdAdminPanelSettings /> Make Admin
                     </button>
-                  </th>
+                    <button
+                      onClick={() => handleRemove(user.email)}
+                      className={
+                        "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal flex gap-1 items-center"
+                      }
+                    >
+                      <MdDeleteSweep /> Remove User
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -214,4 +216,4 @@ const InstructorRequest = () => {
   );
 };
 
-export default InstructorRequest;
+export default ManageUsers;
