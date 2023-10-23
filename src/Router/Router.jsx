@@ -7,6 +7,9 @@ import Authentication from "../pages/Authentication/Authentication/Authenticatio
 import BecomeInstructor from "../pages/ClientSide/Instructors/BecomeInstructor/BecomeInstructor";
 import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
 import InstructorRequest from "../pages/Dashboard/Admin/InstructorRequest/InstructorRequest";
+import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
+import Cart from "../pages/ClientSide/Cart/Cart";
+//import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 
 export const Router = createBrowserRouter([
   {
@@ -41,6 +44,14 @@ export const Router = createBrowserRouter([
         path: "requests",
         element: <InstructorRequest />,
       },
+      {
+        path: "addCourse",
+        element: <AddCourse />,
+      },
+      {
+        path: "cart",
+        element: <Cart/>
+      }
     ],
   },
 ]);

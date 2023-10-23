@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import "./Navbar.scss";
 import logo1 from "../../assets/logos/logo3.png";
 import { useUser } from "../../Hooks/useUser";
+import { useSelector } from "react-redux";
 
 const navbarOption = (
   <>
@@ -18,6 +19,11 @@ const navbarOption = (
   </>
 );
 const Navbar = () => {
+  const cartItems = useSelector((state) => state.cart);
+  console.log(cartItems);
+
+  //console.log(cartItems.length);
+
   const [scroll, setScroll] = useState(true);
 
   const location = useLocation().pathname;
@@ -111,6 +117,51 @@ const Navbar = () => {
               </li>
             </ul>
 
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />
+                  </svg>
+                  <span className="badge badge-sm bg-primary border-none indicator-item">
+                    {cartItems.totalItem}
+                  </span>
+                </div>
+              </label>
+              <div
+                tabIndex={0}
+                className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-primary/50 backdrop-blur-md shadow-2xl"
+              >
+                <div className="card-body">
+                  <span className="font-bold text-lg">
+                    {cartItems.totalItem} Items
+                  </span>
+                  <span className="text-info">
+                    Subtotal: $ {cartItems.totalPrice}
+                  </span>
+                  <div className="card-actions">
+                    <Link
+                      to="/cart"
+                      className="SVButton-2 text-primary py-2 px-4 text-base"
+                    >
+                      <span> View cart</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/*<div className="dropdown dropdown-end text-black">
 
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -159,7 +210,7 @@ const Navbar = () => {
                       <a>Payment History</a>
                     </li>{" "}
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <a>Add Classes</a>
+                      <Link to="/addCourse">Add Course</Link>
                     </li>{" "}
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
                       <a>All Classes</a>

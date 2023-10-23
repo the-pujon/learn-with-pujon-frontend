@@ -4,7 +4,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { Router } from "./Router/Router.jsx";
-import {AuthProvider} from "./Context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext";
+import { Provider } from "react-redux";
+import store from "./App/Store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
@@ -21,8 +23,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <li></li>
     </ul>
 
-    <AuthProvider>
-      <RouterProvider router={Router} />
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <RouterProvider router={Router} />
+      </AuthProvider>
+    </Provider>
   </div>
 );
