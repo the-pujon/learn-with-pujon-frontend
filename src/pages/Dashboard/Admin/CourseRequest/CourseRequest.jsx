@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaRegEye } from "react-icons/fa";
 
 const CourseRequest = () => {
   const [courses, setAllCourses] = useState([]);
@@ -191,22 +192,27 @@ const CourseRequest = () => {
                   {/*<td> {course.totalStudent}</td>*/}
                   <td> {course.duration}</td>
                   <td>{course.price}</td>
-                  <th>
+                  <td>
                     {console.log(course.approved)}
-                    <button
-                      disabled={course.approved}
-                      onClick={() => {
-                        handleApproved(course._id);
-                      }}
-                      className={
-                        course.approved
-                          ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
-                          : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
-                      }
-                    >
-                      {course.approved ? "Approved" : "Not approved yet"}
-                    </button>
-                  </th>
+                    <div className="flex items-center">
+                      <button
+                        disabled={course.approved}
+                        onClick={() => {
+                          handleApproved(course._id);
+                        }}
+                        className={
+                          course.approved
+                            ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
+                            : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
+                        }
+                      >
+                        {course.approved ? "Approved" : "Not approved yet"}
+                      </button>
+                      <button className="ml-2 border px-2 py-1 text-primary text-xl rounded-full border-primary">
+                        <FaRegEye />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

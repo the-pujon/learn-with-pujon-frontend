@@ -3,6 +3,7 @@ import { Fade, Slide } from "react-awesome-reveal";
 import { Link } from 'react-router-dom';
 
 const InstructorCard = ({ img, name, email, className, id }) => {
+  console.log(img)
   return (
     <Fade delay={0} duration={500} cascade damping={1e-1}>
       <Link to={`/instructors/${id}`} className=" my-5 antialiased text-gray-900">

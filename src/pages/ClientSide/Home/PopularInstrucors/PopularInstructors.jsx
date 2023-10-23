@@ -17,11 +17,29 @@ import { FaCircle } from "react-icons/fa";
 const PopularInstructors = () => {
   const [popularInstructor, setPopularInstructor] = useState([]);
 
+  //useEffect(() => {
+  //  fetch("https://learn-with-pujon-backend.vercel.app/instructors")
+  //    .then((res) => res.json())
+  //    .then((data) => {
+  //      const sliceData = data.slice(0, 6);
+
+  //      setPopularInstructor(sliceData);
+  //    })
+  //    .catch((err) => console.error(err));
+  //}, []);
+
   useEffect(() => {
-    fetch("https://learn-with-pujon-backend.vercel.app/instructors")
+    fetch("http://localhost:5000/api/instructors")
       .then((res) => res.json())
       .then((data) => {
-        const sliceData = data.slice(0, 6);
+        const allInstructors = data;
+        const approvedInstructors = allInstructors.filter(
+          (instructor) => instructor.approved === true
+        );
+
+        const sliceData = approvedInstructors.slice(0, 6);
+
+        console.log(sliceData);
 
         setPopularInstructor(sliceData);
       })
@@ -31,7 +49,7 @@ const PopularInstructors = () => {
   return (
     <div>
       <div className="my-10 wrapper ">
-        <div className="flex items-center justify-center flex-col">
+        <div className="flex items-center justify-center flex-col py-6">
           <p className="uppercase tracking-wider flex gap-2 items-center">
             <FaCircle className="text-[.5rem]" />{" "}
             <FaCircle className="text-[.6rem]" />{" "}
@@ -42,7 +60,7 @@ const PopularInstructors = () => {
             <FaCircle className="text-[.5rem]" />
           </p>
           <h1 className="text-6xl">
-            <b>Popular</b> Courses.
+            <b>Popular</b> Instructors.
           </h1>
         </div>
 
@@ -62,12 +80,13 @@ const PopularInstructors = () => {
           modules={[EffectCoverflow, Pagination]}
           className="mySwiper w-11/12 mx-auto !block md:!hidden"
         >
-          {popularInstructor.map((card) => (
-            <SwiperSlide key={card._id}>
+          {popularInstructor.map((instructor) => (
+            <SwiperSlide key={instructor._id}>
               <InstructorCard
-                img={card.image}
-                name={card.name}
-                email={card.name}
+                img={instructor.instructorImage}
+                name={instructor.name}
+                email={instructor.email}
+                id={instructor._id}
               />
             </SwiperSlide>
           ))}
@@ -89,12 +108,13 @@ const PopularInstructors = () => {
           modules={[EffectCoverflow, Pagination]}
           className="mySwiper   w-11/12 mx-auto !hidden md:!block "
         >
-          {popularInstructor.map((card) => (
-            <SwiperSlide key={card._id}>
+          {popularInstructor.map((instructor) => (
+            <SwiperSlide key={instructor._id}>
               <InstructorCard
-                img={card.image}
-                name={card.name}
-                email={card.name}
+                img={instructor.instructorImage}
+                name={instructor.name}
+                email={instructor.email}
+                id={instructor._id}
               />
             </SwiperSlide>
           ))}

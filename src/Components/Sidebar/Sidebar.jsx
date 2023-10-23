@@ -2,21 +2,14 @@ import React from "react";
 import wave from "../../assets/wave5.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
+import { FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
+import logo from "../../assets/logos/logo3.png";
 
 const Sidebar = () => {
   return (
     <div>
-      <div
-        //  x-transition:enter="transform transition-transform duration-300"
-        //  x-transition:enter-start="-translate-x-full"
-        //  x-transition:enter-end="translate-x-0"
-        //  x-transition:leave="transform transition-transform duration-300"
-        //  x-transition:leave-start="translate-x-0"
-        //  x-transition:leave-end="-translate-x-full"
-        //  x-show="isSidebarOpen"
-        className="fixed inset-y-0 z-10 flex w-80"
-      >
+      <div className="fixed inset-y-0 z-10 flex w-80">
         <svg
           className="absolute inset-0 w-full h-full text-white"
           style={{ filter: "drop-shadow(10px 0 10px #00000030)" }}
@@ -29,38 +22,33 @@ const Sidebar = () => {
         </svg>
 
         <div className="z-10 flex flex-col flex-1">
-          <div className="flex items-center justify-between flex-shrink-0 w-64 p-4">
-            <a href="#">
-              <span className="sr-only">K-UI</span>
-              <svg
-                aria-hidden="true"
-                className="w-16 h-auto text-blue-600"
-                viewBox="0 0 96 53"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7.69141 34.7031L13.9492 28.1992L32.0898 52H40.1758L18.4492 23.418L38.5938 0.8125H30.4375L7.69141 26.125V0.8125H0.941406V52H7.69141V34.7031ZM35.3008 26.9102H52.457V21.6016H35.3008V26.9102ZM89.1914 13V35.5117C89.1914 39.2148 88.1719 42.0859 86.1328 44.125C84.1172 46.1641 81.1992 47.1836 77.3789 47.1836C73.6055 47.1836 70.6992 46.1641 68.6602 44.125C66.6211 42.0625 65.6016 39.1797 65.6016 35.4766V0.8125H58.9219V35.6875C58.9688 40.9844 60.6562 45.1445 63.9844 48.168C67.3125 51.1914 71.7773 52.7031 77.3789 52.7031L79.1719 52.6328C84.3281 52.2578 88.4062 50.5352 91.4062 47.4648C94.4297 44.3945 95.9531 40.4453 95.9766 35.6172V13H89.1914ZM89 8H96V1H89V8Z"
-                />
-              </svg>
-            </a>
+          <div className="flex items-end justify-between flex-shrink-0 pl-2  w-28">
+            <img src={logo} alt="" className="w-24 " />
+            <div className="text-2xl text-secondary font-normal mb-2">SKILLS VOYAGE</div>
           </div>
           <nav className="flex flex-col flex-1 w-64 p-4 mt-4 gap-4 text-secondary sidebar">
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
               <p className="text-base"> Home</p>
             </NavLink>
-            <NavLink to="/dashboard/manageUsers" className="flex items-center space-x-2 w-fit ">
-              <AiOutlineHome className="text-xl" />
+            <NavLink
+              to="/dashboard/manageUsers"
+              className="flex items-center space-x-2 w-fit "
+            >
+              <FaUsersCog className="text-xl" />
               <span className="text-base">Manage Users</span>
             </NavLink>
-            <NavLink to="/dashboard/instructorApplication" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard/instructorApplication"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
               <span className="text-base">Instructor Application</span>
             </NavLink>
-            <NavLink to="/dashboard/courseRequest" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard/courseRequest"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
               <span className="text-base">Course Request</span>
             </NavLink>

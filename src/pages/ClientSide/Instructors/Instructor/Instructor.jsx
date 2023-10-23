@@ -25,7 +25,9 @@ const Instructor = () => {
               className="max-w-sm w-full flex-1 rounded-lg shadow-2xl"
             />
             <div className=" w-[50rem]">
-              <h1 className="text-5xl pb-3 font-bold">{instructorDetails.name}</h1>
+              <h1 className="text-5xl pb-3 font-bold">
+                {instructorDetails.name}
+              </h1>
               <p className="py-1">Category: {instructorDetails.category}</p>
               <p className="py-1">Email: {instructorDetails.email}</p>
               <p className="py-1">Experience: {instructorDetails.experience}</p>
@@ -47,7 +49,6 @@ const Instructor = () => {
                 sit eaque, harum tenetur rerum. Blanditiis nisi voluptates unde
                 eum, modi voluptas?
               </p>
-              <button className="btn btn-primary">Get Started</button>
             </div>
           </div>
         </div>

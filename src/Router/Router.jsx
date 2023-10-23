@@ -13,6 +13,7 @@ import Dashboard from "../Layout/Dashboard";
 import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
+import PrivateRoute from "./PrivateRoute";
 
 export const Router = createBrowserRouter([
   {
@@ -37,7 +38,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: "becomeInstructor",
-        element: <BecomeInstructor />,
+        element: (
+          <PrivateRoute>
+            <BecomeInstructor />
+          </PrivateRoute>
+        ),
       },
       {
         path: "instructors/:id",
@@ -46,7 +51,11 @@ export const Router = createBrowserRouter([
 
       {
         path: "addCourse",
-        element: <AddCourse />,
+        element: (
+          <PrivateRoute>
+            <AddCourse />
+          </PrivateRoute>
+        ),
       },
       {
         path: "cart",
@@ -60,15 +69,15 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "instructorApplication",
-        element: <InstructorRequest />,
+        element: <PrivateRoute><InstructorRequest /></PrivateRoute>,
       },
       {
         path: "courseRequest",
-        element: <CourseRequest />,
+        element: <PrivateRoute><CourseRequest /></PrivateRoute>,
       },
       {
         path: "manageUsers",
-        element: <ManageUsers />,
+        element:<PrivateRoute> <ManageUsers /></PrivateRoute>,
       },
     ],
   },

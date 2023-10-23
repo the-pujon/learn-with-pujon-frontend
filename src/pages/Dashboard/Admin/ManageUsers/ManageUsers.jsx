@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {FaChalkboardTeacher, FaUserGraduate} from "react-icons/fa";
 import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
 
 const ManageUsers = () => {
@@ -183,16 +184,18 @@ const ManageUsers = () => {
                       </div>
                     </div>
                   </td>
-                  {/*<td>{user.category}</td>
-                  <td> {user.experience}</td>
-                  <td> {user.education}</td>
-                  <td> {user.about}</td>*/}
-                  <td>{user.role}</td>
+                  <td>
+                  {user.role === "admin" && <div className="flex items-center gap-1"> <MdAdminPanelSettings /> Admin</div>}
+                  {user.role === "instructor" && <div className="flex items-center gap-1"> <FaChalkboardTeacher /> Instructor</div>}
+                  {user.role === "user" && <div className="flex items-center gap-1"> <FaUserGraduate /> User</div>}
+
+
+                  </td>
                   <td className="flex gap-2">
                     <button
                       onClick={() => handleAdmin(user.email)}
                       className={
-                        "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal flex items-center gap-1 "
+                        "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 "
                       }
                     >
                       <MdAdminPanelSettings /> Make Admin
@@ -200,7 +203,7 @@ const ManageUsers = () => {
                     <button
                       onClick={() => handleRemove(user.email)}
                       className={
-                        "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal flex gap-1 items-center"
+                        "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center"
                       }
                     >
                       <MdDeleteSweep /> Remove User
