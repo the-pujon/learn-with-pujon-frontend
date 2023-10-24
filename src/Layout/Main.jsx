@@ -5,6 +5,12 @@ import Footer from "../Components/Footer/Footer";
 
 const Main = () => {
   const pathName = useLocation().pathname;
+  console.log(import.meta)
+  //console.log(process.env.REACT_APP_DB_PASSWORD);
+  const dbPassword = import.meta.env.DB_PASSWORD;
+console.log(dbPassword);
+
+
 
   const noHeaderFooter = pathName === "/auth";
 

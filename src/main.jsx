@@ -33,6 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           outerScale={2}
           outerAlpha={0}
           hasBlendMode={true}
+          showSystemCursor={true}
           innerStyle={{
             backgroundColor: "#213555",
           }}
