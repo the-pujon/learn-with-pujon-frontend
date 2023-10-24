@@ -4,6 +4,7 @@ import "./Navbar.scss";
 import logo1 from "../../assets/logos/logo3.png";
 import { useUser } from "../../Hooks/useUser";
 import { useSelector } from "react-redux";
+import useRole from "./../../Hooks/useRole";
 
 const navbarOption = (
   <>
@@ -14,21 +15,18 @@ const navbarOption = (
       <NavLink to="/instructors">Instructors</NavLink>
     </li>
     <li>
-      <NavLink to="/courses">Classes</NavLink>
+      <NavLink to="/courses">Courses</NavLink>
     </li>
   </>
 );
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart);
-  console.log(cartItems);
-
-  //console.log(cartItems.length);
-
   const [scroll, setScroll] = useState(true);
-
   const location = useLocation().pathname;
-
   const { loggedUser, logOut, userLoading } = useUser();
+  const role = useRole();
+
+  console.log(role);
 
   /**
    * Used for navbar animation when scroll
@@ -111,11 +109,11 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-            <ul>
+          { role=== "instructor" ||  <ul>
               <li>
                 <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
               </li>
-            </ul>
+            </ul>}
 
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -202,22 +200,25 @@ const Navbar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content mt-3 z-[1] shadow-2xl bg-transparent text-white rounded-box w-52 "
                   >
-                    {" "}
+                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                    <Link to="/cart">Cart</Link>
+                    </li>
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
                       <a>My Classes</a>
-                    </li>{" "}
+                    </li>
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
                       <a>Payment History</a>
-                    </li>{" "}
-                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <Link to="/addCourse">Add Course</Link>
-                    </li>{" "}
-                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <a>All Classes</a>
-                    </li>{" "}
-                    <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <Link to={`/requests`}>Instructor Requests</Link>
                     </li>
+                    {role === "instructor" && (
+                      <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                        <Link to="/addCourse">Add Course</Link>
+                      </li>
+                    )}
+                    {role === "admin" && (
+                      <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                        <Link to="/dashboard">Dashboard</Link>
+                      </li>
+                    )}
                     <li
                       className=" bg-primary/20 p-2 backdrop-blur-md"
                       onClick={handleLogOut}

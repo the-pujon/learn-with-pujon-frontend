@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useUser } from "./useUser";
 
-const useRole = (email) => {
-  console.log(email);
+const useRole = () => {
   const [role, setRole] = useState(null);
+  const { loggedUser } = useUser();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/users/${email}`)
+    fetch(`http://localhost:5000/api/users/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setRole(data.role);
       })
       .catch((err) => console.error(err));
