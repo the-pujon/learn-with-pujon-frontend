@@ -14,6 +14,10 @@ import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest"
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 import PrivateRoute from "./PrivateRoute";
+import MyCourses from "../pages/ClientSide/Instructors/MyCourses/MyCourses";
+import AllTransactions from "../pages/Dashboard/Admin/AllTransactions/AllTransactions";
+import PaymentHistory from "../pages/ClientSide/PaymentHistory/PaymentHistory";
+import EnrolledCourses from "../pages/ClientSide/EnrolledCourses/EnrolledCourses";
 
 export const Router = createBrowserRouter([
   {
@@ -61,6 +65,30 @@ export const Router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
+      {
+        path: "myCourses",
+        element: (
+          <PrivateRoute>
+            <MyCourses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "paymentHistory",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "enrolledCourses",
+        element: (
+          <PrivateRoute>
+            <EnrolledCourses />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -69,15 +97,35 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "instructorApplication",
-        element: <PrivateRoute><InstructorRequest /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <InstructorRequest />
+          </PrivateRoute>
+        ),
       },
       {
         path: "courseRequest",
-        element: <PrivateRoute><CourseRequest /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <CourseRequest />
+          </PrivateRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element:<PrivateRoute> <ManageUsers /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ManageUsers />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allTransactions",
+        element: (
+          <PrivateRoute>
+            <AllTransactions />
+          </PrivateRoute>
+        ),
       },
     ],
   },

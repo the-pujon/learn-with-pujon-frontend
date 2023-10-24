@@ -109,11 +109,13 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-          { role=== "instructor" ||  <ul>
-              <li>
-                <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
-              </li>
-            </ul>}
+            {role === "instructor" || (
+              <ul>
+                <li>
+                  <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
+                </li>
+              </ul>
+            )}
 
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -201,13 +203,20 @@ const Navbar = () => {
                     className="menu menu-sm dropdown-content mt-3 z-[1] shadow-2xl bg-transparent text-white rounded-box w-52 "
                   >
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                    <Link to="/cart">Cart</Link>
+                      <Link to="/cart">Cart</Link>
                     </li>
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <a>My Classes</a>
+                      <Link to="/enrolledCourses">Enrolled Course</Link>
                     </li>
+                    {role === "user" || (
+                      <li className=" bg-primary/20 p-2 backdrop-blur-md">
+                        <Link to="/myCourses">My Course</Link>
+                      </li>
+                    )}
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <a>Payment History</a>
+                      <Link to={"/paymentHistory"}>
+                        Payment History
+                      </Link>
                     </li>
                     {role === "instructor" && (
                       <li className=" bg-primary/20 p-2 backdrop-blur-md">
