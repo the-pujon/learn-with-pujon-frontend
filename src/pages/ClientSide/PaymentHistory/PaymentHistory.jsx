@@ -11,7 +11,7 @@ const PaymentHistory = () => {
   const { loggedUser } = useUser();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/payments/${loggedUser?.email}`)
+    fetch(`https://sv-ashen.vercel.app/api/payments/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

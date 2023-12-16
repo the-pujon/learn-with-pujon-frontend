@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAll, removeItemFromCart } from "../../../Features/CartSlice/CartSlice";
+import {
+  removeAll,
+  removeItemFromCart,
+} from "../../../Features/CartSlice/CartSlice";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser } from "./../../../Hooks/useUser";
@@ -31,7 +34,7 @@ const Cart = () => {
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch("http://localhost:5000/api/checkout", {
+    const response = await fetch("https://sv-ashen.vercel.app/api/checkout", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),

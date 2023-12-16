@@ -52,6 +52,13 @@ const Sidebar = () => {
               <AiOutlineHome className="text-xl" />
               <span className="text-base">Course Request</span>
             </NavLink>
+            <NavLink
+              to="/dashboard/categories"
+              className="flex items-center space-x-2 w-fit"
+            >
+              <AiOutlineHome className="text-xl" />
+              <span className="text-base">Categories</span>
+            </NavLink>
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
               <span className="text-base">All Classes</span>

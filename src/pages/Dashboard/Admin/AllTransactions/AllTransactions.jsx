@@ -11,7 +11,7 @@ const AllTransactions = () => {
   const { loggedUser } = useUser();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/payments`)
+    fetch(`https://sv-ashen.vercel.app/api/payments`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

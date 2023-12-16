@@ -14,21 +14,20 @@ const Authentication = () => {
   const { loginWithEmail, loginWithGoogle, loginWithGithub } = useUser();
   //registration by google
 
-
   const handleGoogleLogin = () => {
     console.log("sd");
     loginWithGoogle()
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
 
-        fetch(`http://localhost:5000/api/users/${email}`)
+        fetch(`https://sv-ashen.vercel.app/api/users/${email}`)
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
             if (data) {
               navigate("/");
             } else {
-              fetch("http://localhost:5000/api/users", {
+              fetch("https://sv-ashen.vercel.app/api/users", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({
@@ -63,7 +62,7 @@ const Authentication = () => {
             className={`authContainer  ${RP ? "right-panel-active" : ""}`}
             id="container"
           >
-            <SignUp handleGoogleLogin={handleGoogleLogin}/>
+            <SignUp handleGoogleLogin={handleGoogleLogin} />
             <Login handleGoogleLogin={handleGoogleLogin} />
             <div className="overlay-container">
               <div className="overlay">

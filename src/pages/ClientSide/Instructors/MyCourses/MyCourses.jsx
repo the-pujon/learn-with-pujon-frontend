@@ -11,7 +11,7 @@ const MyCourses = () => {
   const { loggedUser } = useUser();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/courses/email/${loggedUser?.email}`)
+    fetch(`https://sv-ashen.vercel.app/api/courses/email/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -58,7 +58,7 @@ const MyCourses = () => {
   //  const handleCategory = (e) => {
   //    e.preventDefault();
   //    //console.log(e.target.value);
-  //    fetch(`http://localhost:5000/api/toys?category=${e.target.value}`)
+  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
   //      .then((res) => res.json())
   //      .then((data) => {
   //        setAllToys(data);

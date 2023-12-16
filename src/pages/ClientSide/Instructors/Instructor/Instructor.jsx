@@ -7,7 +7,9 @@ const Instructor = () => {
 
   //  console.log(id);
   useEffect(() => {
-    fetch(`http://localhost:5000/api/instructors/singleInstructor?id=${id}`)
+    fetch(
+      `https://sv-ashen.vercel.app/api/instructors/singleInstructor?id=${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

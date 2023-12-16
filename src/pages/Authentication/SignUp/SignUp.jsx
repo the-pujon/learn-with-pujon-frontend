@@ -45,7 +45,7 @@ const SignUp = ({ handleGoogleLogin }) => {
               photoURL: data.data.url,
             })
               .then((res) => {
-                fetch("http://localhost:5000/api/users", {
+                fetch("https://sv-ashen.vercel.app/api/users", {
                   method: "POST",
                   headers: { "Content-type": "application/json" },
                   body: JSON.stringify({

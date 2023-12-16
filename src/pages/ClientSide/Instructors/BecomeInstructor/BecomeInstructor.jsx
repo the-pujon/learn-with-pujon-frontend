@@ -60,7 +60,7 @@ const BecomeInstructor = () => {
 
         data.instructorImage = d.data.url;
 
-        fetch("http://localhost:5000/api/instructors", {
+        fetch("https://sv-ashen.vercel.app/api/instructors", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),

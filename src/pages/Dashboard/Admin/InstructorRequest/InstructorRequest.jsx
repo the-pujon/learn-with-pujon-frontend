@@ -8,7 +8,7 @@ const InstructorRequest = () => {
   const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/instructors")
+    fetch("https://sv-ashen.vercel.app/api/instructors")
       .then((res) => res.json())
       .then((data) => {
         setAllInstructors(data);
@@ -54,7 +54,7 @@ const InstructorRequest = () => {
   //  const handleCategory = (e) => {
   //    e.preventDefault();
   //    //console.log(e.target.value);
-  //    fetch(`http://localhost:5000/api/toys?category=${e.target.value}`)
+  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
   //      .then((res) => res.json())
   //      .then((data) => {
   //        setAllToys(data);
@@ -75,7 +75,7 @@ const InstructorRequest = () => {
   //  };
 
   const handleApproved = (email) => {
-    fetch(`http://localhost:5000/api/instructors/${email}`, {
+    fetch(`https://sv-ashen.vercel.app/api/instructors/${email}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ approved: true }),
@@ -83,7 +83,7 @@ const InstructorRequest = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.approved) {
-          fetch(`http://localhost:5000/api/users/${email}`, {
+          fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
             method: "PATCH",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({ role: "instructor" }),

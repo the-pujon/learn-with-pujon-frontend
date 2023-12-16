@@ -56,7 +56,7 @@ const useAuth = () => {
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        fetch("http://localhost:5000/api/users/jwt", {
+        fetch("https://sv-ashen.vercel.app/api/users/jwt", {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ email: currentUser.email }),

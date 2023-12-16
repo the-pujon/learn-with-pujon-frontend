@@ -8,9 +8,11 @@ import { AuthProvider } from "./Context/AuthContext";
 import { Provider } from "react-redux";
 import store from "./App/Store";
 import AnimatedCursor from "react-animated-cursor";
+import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
+    <div><Toaster/></div>
     <ul className="circles">
       <li></li>
       <li></li>

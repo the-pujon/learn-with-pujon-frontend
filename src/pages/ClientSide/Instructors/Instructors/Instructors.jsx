@@ -16,7 +16,7 @@ const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/instructors")
+    fetch("https://sv-ashen.vercel.app/api/instructors")
       .then((res) => res.json())
       .then((data) => {
         const allInstructors = data;

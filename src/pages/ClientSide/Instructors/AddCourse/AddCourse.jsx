@@ -38,7 +38,7 @@ const AddCourse = () => {
 
     loggedUser &&
       fetch(
-        `http://localhost:5000/api/instructors/singleInstructor?email=${loggedUser?.email}`
+        `https://sv-ashen.vercel.app/api/instructors/singleInstructor?email=${loggedUser?.email}`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -104,7 +104,7 @@ const AddCourse = () => {
 
         console.log(classDataWithArray);
 
-        fetch("http://localhost:5000/api/courses", {
+        fetch("https://sv-ashen.vercel.app/api/courses", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(classDataWithArray),

@@ -9,7 +9,7 @@ const CourseRequest = () => {
   const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/courses")
+    fetch("https://sv-ashen.vercel.app/api/courses")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -56,7 +56,7 @@ const CourseRequest = () => {
   //  const handleCategory = (e) => {
   //    e.preventDefault();
   //    //console.log(e.target.value);
-  //    fetch(`http://localhost:5000/api/toys?category=${e.target.value}`)
+  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
   //      .then((res) => res.json())
   //      .then((data) => {
   //        setAllToys(data);
@@ -77,7 +77,7 @@ const CourseRequest = () => {
   //  };
 
   const handleApproved = (email) => {
-    fetch(`http://localhost:5000/api/Courses/${email}`, {
+    fetch(`https://sv-ashen.vercel.app/api/Courses/${email}`, {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ approved: true }),

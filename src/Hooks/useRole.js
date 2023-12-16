@@ -6,13 +6,13 @@ const useRole = () => {
   const { loggedUser } = useUser();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/users/${loggedUser?.email}`)
+    fetch(`https://sv-ashen.vercel.app/api/users/${loggedUser?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setRole(data.role);
       })
       .catch((err) => console.error(err));
-  });
+  }, [loggedUser]);
 
   return role;
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {FaChalkboardTeacher, FaUserGraduate} from "react-icons/fa";
+import { FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
 
 const ManageUsers = () => {
@@ -10,7 +10,7 @@ const ManageUsers = () => {
   const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/users")
+    fetch("https://sv-ashen.vercel.app/api/users")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -57,7 +57,7 @@ const ManageUsers = () => {
   //  const handleCategory = (e) => {
   //    e.preventDefault();
   //    //console.log(e.target.value);
-  //    fetch(`http://localhost:5000/api/toys?category=${e.target.value}`)
+  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
   //      .then((res) => res.json())
   //      .then((data) => {
   //        setAllToys(data);
@@ -78,7 +78,7 @@ const ManageUsers = () => {
   //  };
 
   const handleAdmin = (email) => {
-    fetch(`http://localhost:5000/api/users/${email}`, {
+    fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
       method: "PATCH",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ role: "admin" }),
@@ -93,7 +93,7 @@ const ManageUsers = () => {
   };
 
   const handleRemove = (email) => {
-    fetch(`http://localhost:5000/api/users/${email}`, {
+    fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -185,11 +185,24 @@ const ManageUsers = () => {
                     </div>
                   </td>
                   <td>
-                  {user.role === "admin" && <div className="flex items-center gap-1"> <MdAdminPanelSettings /> Admin</div>}
-                  {user.role === "instructor" && <div className="flex items-center gap-1"> <FaChalkboardTeacher /> Instructor</div>}
-                  {user.role === "user" && <div className="flex items-center gap-1"> <FaUserGraduate /> User</div>}
-
-
+                    {user.role === "admin" && (
+                      <div className="flex items-center gap-1">
+                        {" "}
+                        <MdAdminPanelSettings /> Admin
+                      </div>
+                    )}
+                    {user.role === "instructor" && (
+                      <div className="flex items-center gap-1">
+                        {" "}
+                        <FaChalkboardTeacher /> Instructor
+                      </div>
+                    )}
+                    {user.role === "user" && (
+                      <div className="flex items-center gap-1">
+                        {" "}
+                        <FaUserGraduate /> User
+                      </div>
+                    )}
                   </td>
                   <td className="flex gap-2">
                     <button

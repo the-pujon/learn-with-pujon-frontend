@@ -18,6 +18,7 @@ import MyCourses from "../pages/ClientSide/Instructors/MyCourses/MyCourses";
 import AllTransactions from "../pages/Dashboard/Admin/AllTransactions/AllTransactions";
 import PaymentHistory from "../pages/ClientSide/PaymentHistory/PaymentHistory";
 import EnrolledCourses from "../pages/ClientSide/EnrolledCourses/EnrolledCourses";
+import ManageCategories from "../pages/Dashboard/Admin/ManageCategories/ManageCategories.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -127,6 +128,18 @@ export const Router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "categories",
+        element: (
+          <PrivateRoute>
+            <ManageCategories />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
+  {
+    path: "/drop",
+    element: <ManageCategories />,
+  }
 ]);
