@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import toast from "react-hot-toast"
-//import { toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
 
 const useApi = () => {
   const [data, setData] = useState(null);
@@ -18,18 +16,18 @@ const useApi = () => {
   const fetchData = async (url, method, body = null) => {
     setLoading(true);
     setError(null);
+    let loadingToast
 
     try {
+      if (method === 'PUT' || method === 'POST' || method === 'DELETE') {
+         loadingToast = toast.loading('Wait...', { position: 'top-right' });
+      }
+
       const response = await fetch(url, {
         method,
         headers,
         body: body ? JSON.stringify(body) : null,
       });
-
-      //if (!response.ok) {
-
-      //  throw new Error(`HTTP error! Status: ${response.status}`);
-      //}
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -40,19 +38,23 @@ const useApi = () => {
       const result = await response.json();
       setData(result);
 
-      // Show success toast for PUT
-      if (method === 'PUT') {
-        toast.success('Successfully Updated!', { position: 'top-right', duration: 2000 });
-      }
+      switch (method) {
+        case 'PUT':
+          toast.dismiss(loadingToast.id);
+          toast.success('Successfully Updated!', { position: 'top-right', duration: 2000 });
+          break;
 
-      // Show success toast for POST
-      if (method === 'POST') {
-        toast.success('Successfully Created!', { position: 'top-right', duration: 2000 });
-      }
+        case 'POST':
+          toast.dismiss(loadingToast.id);
+          toast.success('Successfully Created!', { position: 'top-right', duration: 2000 });
+          break;
 
-      // Show success toast for DELETE
-      if (method === 'DELETE') {
-        toast.success('Successfully Deleted!', { position: 'top-right', duration: 2000 });
+        case 'DELETE':
+          toast.dismiss(loadingToast.id);
+          toast.success('Successfully Deleted!', { position: 'top-right', duration: 2000 });
+          break;
+        default:
+          break;
       }
 
       return result; // Return the response
@@ -60,26 +62,17 @@ const useApi = () => {
       setError(error.message || 'Something went wrong.');
       console.log(error.message)
 
-      // Show error toast for PUT
-      if (method === 'PUT') {
+      if (method === 'PUT' || method === 'POST' || method === 'DELETE') {
+        toast.dismiss(loadingToast.id);
         toast.error(`${error.message}`, { position: 'top-right', duration: 5000 });
       }
-
-      // Show error toast for POST
-      if (method === 'POST') {
-        toast.error(`${error.message}`, { position: 'top-right', duration: 5000 });
-      }
-
-      // Show error toast for DELETE
-      if (method === 'DELETE') {
-        toast.error(`${error.message}`, { position: 'top-right', duration: 5000 });
-      }
-
       throw error; // Re-throw the error to propagate it to the calling component
     } finally {
       setLoading(false);
     }
   };
+
+
 
   const get = (endpoint) => fetchData(`${apiUrl}/${endpoint}`, 'GET');
 
@@ -88,10 +81,6 @@ const useApi = () => {
   const put = (endpoint, body) => fetchData(`${apiUrl}/${endpoint}`, 'PUT', body);
 
   const del = (endpoint) => fetchData(`${apiUrl}/${endpoint}`, 'DELETE');
-
-  useEffect(() => {
-    // You can add any default fetch or initialization logic here
-  }, []);
 
   return {
     data,
