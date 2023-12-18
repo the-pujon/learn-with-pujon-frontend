@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useUser } from "../../../../Hooks/useUser";
-import { json, useNavigate } from "react-router-dom";
+import React,{useEffect,useState} from "react";
+import {useUser} from "../../../../Hooks/useUser";
+import {json,useNavigate} from "react-router-dom";
 import upImage from "../../../../assets/upImage.svg";
+import useApi from "../../../../Hooks/useApi";
 
-const AddCourse = () => {
-  const { loggedUser } = useUser();
-  const navigate = useNavigate();
+const AddCourse=() => {
+  const {loggedUser}=useUser();
+  const navigate=useNavigate();
+  const {get,post}=useApi()
 
-  const [upLoadedImages, setUpLoadedImages] = useState(null);
-  const [instructor, setInstructor] = useState({});
+  const [upLoadedImages,setUpLoadedImages]=useState(null);
+  const [instructor,setInstructor]=useState({});
 
-  const [category, setCategory] = useState([]);
-  const [subcategory, setSubcategory] = useState([]);
+  const [category,setCategory]=useState([]);
+  const [subcategory,setSubcategory]=useState([]);
 
-  const [classData, setClassData] = useState({
+  const [classData,setClassData]=useState({
     name: "",
     classImage: "",
     instructor: "", // You need to select an instructor from a list
@@ -36,57 +38,51 @@ const AddCourse = () => {
   useEffect(() => {
     console.log(loggedUser?.email);
 
-    loggedUser &&
-      fetch(
-        `https://sv-ashen.vercel.app/api/instructors/singleInstructor?email=${loggedUser?.email}`
-      )
-        .then((res) => res.json())
+    loggedUser&&
+      get(`instructors/singleInstructor?email=${loggedUser?.email}`)
         .then((data) => {
           console.log(data);
           setInstructor(data);
         });
 
-    fetch("/category.json")
-      .then((res) => res.json())
+    get("categories")
       .then((data) => {
         setCategory(data);
-        setSubcategory(data[0].subcategory);
+        //setSubcategory(data[0].subcategory);
       });
-  }, [loggedUser]);
+  },[loggedUser]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange=(e) => {
+    const {name,value}=e.target;
     setClassData({
       ...classData,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit=(e) => {
     e.preventDefault();
 
-    const apiKey = "3771a5eec87b0ec98c5b62855eab4fae";
-    const apiUrl = "https://api.imgbb.com/1/upload";
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
+    const apiUrl = import.meta.env.VITE_IMGBB_API_URL;
 
-    const formData = new FormData();
-    formData.append("image", upLoadedImages);
+    const formData=new FormData();
+    formData.append("image",upLoadedImages);
 
-    fetch(`${apiUrl}?key=${apiKey}`, {
+    fetch(`${apiUrl}?key=${apiKey}`,{
       method: "POST",
       body: formData,
     })
       .then((response) => {
-        if (response.ok) {
+        if(response.ok) {
           return response.json();
         } else {
           throw new Error("Failed to upload image");
         }
       })
       .then((d) => {
-        // Handle the uploaded image data here (e.g., display the URL)
-        console.log("Uploaded image URL:", d.data.url);
 
-        const classDataWithArray = {
+        const classDataWithArray={
           ...classData,
           classImage: d.data.url,
           instructor: instructor,
@@ -102,53 +98,41 @@ const AddCourse = () => {
             .map((requirement) => requirement.trim()),
         };
 
-        console.log(classDataWithArray);
-
-        fetch("https://sv-ashen.vercel.app/api/courses", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(classDataWithArray),
-        })
-          .then((res) => res.json())
-          .then((data) => {
+        post("courses", classDataWithArray,'addCourse')
+          .then(() => {
             navigate("/courses");
-            console.log(data);
           })
           .catch((err) => console.error(err));
       })
       .catch((error) => {
-        console.error("Error uploading image:", error);
+        console.error("Error uploading image:",error);
       });
   };
 
-  const handleCategory = (e) => {
-    const { name, value } = e.target;
+  const handleCategory=(e) => {
+    const {name,value}=e.target;
     setClassData({
       ...classData,
       [name]: value,
     });
-
-    //[1,2,3].fin
-    const sub = category.find((c) => {
-      return c.value === value;
+    const sub=category.find((c) => {
+      return c.CategoryName===value;
     });
-
-    const sc = sub.subcategory;
-
+    const sc=sub.subcategory;
     setSubcategory(sc);
   };
 
   return (
     <div className="">
-      <div className="flex wrapper min-h-screen pt-16 items-center justify-center gap-4">
+      <div className="flex wrapper min-h-screen pt-24 items-center justify-center gap-4">
         <div className="flex-1  flex items-center justify-center ">
-          {upLoadedImages ? (
+          {upLoadedImages? (
             <img
               src={URL.createObjectURL(upLoadedImages)}
               alt=""
               className="w-full rounded-3xl"
             />
-          ) : (
+          ):(
             <div className="border border-primary w-80  h-80 rounded-full flex items-center justify-center">
               {" "}
               <img src={upImage} alt="" className="  p-5 w-52" />
@@ -274,11 +258,11 @@ const AddCourse = () => {
                 </option>
                 {category.map((c) => (
                   <option
-                    value={c.value}
-                    key={c.value}
+                    value={c.CategoryName}
+                    key={c._id}
                     className="bg-primary text-secondary"
                   >
-                    {c.name}
+                    {c.CategoryName}
                   </option>
                 ))}
               </select>
@@ -296,11 +280,11 @@ const AddCourse = () => {
                 </option>
                 {subcategory.map((c) => (
                   <option
-                    value={c.value}
-                    key={c.value}
+                    value={c.SubCategoryName}
+                    key={c._id}
                     className="bg-primary text-secondary"
                   >
-                    {c.name}
+                    {c.SubCategoryName}
                   </option>
                 ))}
               </select>
