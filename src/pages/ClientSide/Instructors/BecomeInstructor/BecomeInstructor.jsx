@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "../../../../Hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import upImage from "../../../../assets/upImage.svg";
+import useApi from './../../../../Hooks/useApi';
 
 const BecomeInstructor = () => {
   const { loggedUser } = useUser();
@@ -10,10 +11,10 @@ const BecomeInstructor = () => {
   const [upLoadedImages, setUpLoadedImages] = useState(null);
 
   const [category, setCategory] = useState([]);
+  const {get, post} = useApi()
 
   useEffect(() => {
-    fetch("/category.json")
-      .then((res) => res.json())
+    get('categories')
       .then((data) => {
         setCategory(data);
       });
@@ -35,10 +36,9 @@ const BecomeInstructor = () => {
       phone: form.phone.value,
       address: form.address.value,
     };
-    console.log(data);
 
-    const apiKey = "3771a5eec87b0ec98c5b62855eab4fae";
-    const apiUrl = "https://api.imgbb.com/1/upload";
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
+    const apiUrl = import.meta.env.VITE_IMGBB_API_URL;
 
     const formData = new FormData();
     formData.append("image", upLoadedImages);
@@ -55,22 +55,12 @@ const BecomeInstructor = () => {
         }
       })
       .then((d) => {
-        // Handle the uploaded image data here (e.g., display the URL)
-        console.log("Uploaded image URL:", d.data.url);
-
         data.instructorImage = d.data.url;
 
-        fetch("https://sv-ashen.vercel.app/api/instructors", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
+        post("instructors", data, 'BecomeInstructor')
           .then((data) => {
             navigate("/instructors");
-            console.log(data);
           })
-          .catch((err) => console.error(err));
       })
       .catch((error) => {
         console.error("Error uploading image:", error);
@@ -189,11 +179,11 @@ const BecomeInstructor = () => {
                 </option>
                 {category.map((c) => (
                   <option
-                    value={c.value}
-                    key={c.value}
+                    value={c.CategoryName}
+                    key={c._id}
                     className="bg-primary/70 text-secondary"
                   >
-                    {c.name}
+                    {c.CategoryName}
                   </option>
                 ))}
               </select>
