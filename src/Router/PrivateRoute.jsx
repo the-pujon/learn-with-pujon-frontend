@@ -18,9 +18,9 @@ const PrivateRoute = ({ children }) => {
           <g
             fill="none"
             stroke="#213555"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="6"
           >
             <path d="M 21 40 V 59">
               <animateTransform

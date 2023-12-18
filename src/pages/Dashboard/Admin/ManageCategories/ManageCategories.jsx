@@ -5,14 +5,13 @@ import useApi from "../../../../Hooks/useApi";
 const ManageCategories=() => {
     const [refresh,setRefresh]=useState(null);
     const [filteredCategories,setFilteredCategories]=useState([]);
-    const [subcategory,setSubcategory]=useState([])
+    const [subcategory,setSubcategory]=useState(null)
     const [showDropdown,setShowDropdown]=useState('');
 
-    const {get,post, loading} = useApi()
+    const {get,post,loading}=useApi()
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/categories")
-            .then((res) => res.json())
+        get("categories", 'CategoryRead')
             .then((data) => {
                 setFilteredCategories(data);
                 setRefresh(null)
@@ -21,37 +20,39 @@ const ManageCategories=() => {
 
     const handleCategory=(e) => {
         const {name,value}=e.target;
-        get(`categories/${value}`).then(res=>setSubcategory(res.subcategory))
+        get(`categories/${value}`).then(res => setSubcategory(res.subcategory))
     };
 
-
-    const handleCategorySubmit = (e) =>{
+    const handleCategorySubmit=(e) => {
         e.preventDefault();
-        const categoryName = e.target.CategoryName.value
-        const categorySlug = e.target.CategorySlug.value
-        post('categories', { CategoryName: categoryName, CategorySlug: categorySlug });
-        e.target.reset()
-        setRefresh(true)
+        const categoryName=e.target.CategoryName.value
+        const categorySlug=e.target.CategorySlug.value
+        post('categories',{CategoryName: categoryName,CategorySlug: categorySlug},'CategorySubmit').then(() => {
+            e.target.reset()
+            setRefresh(true)
+        })
     }
 
-    const handleSubcategorySubmit = (e)=>{
+    const handleSubcategorySubmit=(e) => {
         e.preventDefault()
-        const form= e.target
+        const form=e.target
 
-        const categoryId = form.CategoryName.value
-        const SubCategoryName = form.SubCategoryName.value
-        const SubCategorySlug = form.SubCategorySlug.value
+        const categoryId=form.CategoryName.value
+        const SubCategoryName=form.SubCategoryName.value
+        const SubCategorySlug=form.SubCategorySlug.value
 
-        post(`categories/${categoryId}/subcategories`, {SubCategoryName:SubCategoryName, SubCategorySlug:SubCategorySlug})
-        form.reset()
-        setRefresh(true)
+        post(`categories/${categoryId}/subcategories`,{SubCategoryName: SubCategoryName,SubCategorySlug: SubCategorySlug},'SubcategorySubmit').then(() => {
+            form.reset()
+            setRefresh(true)
+        })
+
     }
 
 
     return (
         <div className="wrapper min-h-screen  text-primary backdrop-blur-md">
             <div className="flex divide-x gap-4 min-h-screen  overflow-x-auto pt-[8rem]">
-                <div className="flex-1 " >
+                <div className="basis-[35rem]" >
                     {/* for add category */}
                     <div className="pb-10">
                         <p className="text-2xl font-semibold">Add Category</p>
@@ -66,7 +67,7 @@ const ManageCategories=() => {
                                     className="peer placeholder-transparent h-10 w-full   bg-transparent text-primary focus:outline-none focus:borer-rose-600 border-b-primary border-b"
                                     placeholder="CategoryName"
                                     required
-                                    //onChange={handleChange}
+                                //onChange={handleChange}
                                 />
                                 <label
                                     htmlFor="CategoryName"
@@ -86,7 +87,7 @@ const ManageCategories=() => {
                                     className="peer placeholder-transparent h-10 w-full   bg-transparent text-primary focus:outline-none focus:borer-rose-600 border-b-primary border-b"
                                     placeholder="CategorySlug"
                                     required
-                                    //onChange={handleChange}
+                                //onChange={handleChange}
                                 />
                                 <label
                                     htmlFor="CategorySlug"
@@ -95,26 +96,25 @@ const ManageCategories=() => {
                                     Category Slug
                                 </label>
                             </div>
-                            <button type="submit" className="SVButton-2 py-1 px-2">{loading?'Loading':'Save'}</button>
+                            <button disabled={loading==='CategorySubmit'? true:false} type="submit" className="SVButton-2 py-1 px-2 disabled:cursor-not-allowed">{loading==='CategorySubmit'? 'Loading':'Save'}</button>
                         </form>
                     </div>
 
                     {/* for add subcategory */}
-
-                    <div >
+                    <>
                         <p className="text-2xl font-semibold">Add Subcategory</p>
                         <form action="" onSubmit={handleSubcategorySubmit}
                         >
-
                             {/* Category Name */}
                             <div className="form-control relative my-6 w-full">
                                 <select
+                                defaultValue='Category'
                                     onChange={handleCategory}
                                     id="CategoryName"
                                     name="CategoryName"
                                     className="select select-ghost w-full  border-t-0 border-l-0 border-r-0 rounded-none border-b text-primary text-sm border-b-primary outline-none  focus:text-primary focus:outline-none"
                                 >
-                                    <option disabled selected>
+                                    <option disabled >
                                         Category
                                     </option>
                                     {filteredCategories.map((c) => (
@@ -153,14 +153,14 @@ const ManageCategories=() => {
 
                                 {showDropdown==='SubCategoryName'&&(
                                     <div className="py-1 z-10 mt-1 w-full bg-primary text-secondary text-sm border border-gray-300 rounded-md shadow-lg">
-                                        {subcategory.length!==0? subcategory.map((option) => (
+                                        {!subcategory? <div className="px-2">Please Select Category first</div>:subcategory.length!==0? subcategory.map((option) => (
                                             <div
-                                                key={option}
+                                                key={option._id}
                                                 className="cursor-pointer px-4 hover:bg-gray-500"
                                             >
                                                 {option.SubCategoryName}
                                             </div>
-                                        )):<div className="px-2">Please Select Category first</div>}
+                                        )):<div className="px-2">No Subcategory here</div>}
                                     </div>
                                 )}
                             </div>
@@ -189,27 +189,23 @@ const ManageCategories=() => {
 
                                 {showDropdown==='SubCategorySlug'&&(
                                     <div className="py-1 z-10 mt-1 w-full bg-primary text-secondary text-sm border border-gray-300 rounded-md shadow-lg">
-                                        {subcategory.length!==0? subcategory.map((option) => (
+                                        {!subcategory? <div className="px-2">Please Select Category first</div>:subcategory.length!==0? subcategory.map((option) => (
                                             <div
-                                                key={option}
+                                                key={option._id}
                                                 className="cursor-pointer px-4 hover:bg-gray-500"
                                             >
                                                 {option.SubCategorySlug}
                                             </div>
-                                        )):<div className="px-2">Please Select Category first</div>}
+                                        )):<div className="px-2">No Subcategory slug here</div>}
                                     </div>
                                 )}
                             </div>
-                            <button type="submit" className="SVButton-2 py-1 px-2">Save</button>
+                            <button disabled={loading==='SubcategorySubmit'? true:false} type="submit" className="SVButton-2 py-1 px-2 disabled:cursor-not-allowed">{loading==='SubcategorySubmit'? 'Loading':'Save'}</button>
                         </form>
-
-
-
-                    </div>
-
+                    </>
                 </div>
                 <div className="flex-1 max-h-[80vh] overflow-auto">
-                    <ShowCategories filteredCategories={filteredCategories} />
+                    <ShowCategories loading={loading} filteredCategories={filteredCategories} setRefresh={setRefresh} />
                 </div>
             </div>
         </div>

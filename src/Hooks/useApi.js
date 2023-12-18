@@ -13,8 +13,8 @@ const useApi = () => {
     //...(jwtToken && { Authorization: `Bearer ${jwtToken}` }),
   };
 
-  const fetchData = async (url, method, body = null) => {
-    setLoading(true);
+  const fetchData = async (url, method, body = null, loadingId) => {
+    setLoading(loadingId);
     setError(null);
     let loadingToast
 
@@ -31,7 +31,6 @@ const useApi = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log('Error Data:', errorData.error); // Log the entire error data
         throw new Error(errorData.error || 'HTTP error');
       }
 
@@ -60,7 +59,6 @@ const useApi = () => {
       return result; // Return the response
     } catch (error) {
       setError(error.message || 'Something went wrong.');
-      console.log(error.message)
 
       if (method === 'PUT' || method === 'POST' || method === 'DELETE') {
         toast.dismiss(loadingToast.id);
@@ -74,13 +72,13 @@ const useApi = () => {
 
 
 
-  const get = (endpoint) => fetchData(`${apiUrl}/${endpoint}`, 'GET');
+  const get = (endpoint, loadingId) => fetchData(`${apiUrl}/${endpoint}`, 'GET',null, loadingId);
 
-  const post = (endpoint, body) => fetchData(`${apiUrl}/${endpoint}`, 'POST', body);
+  const post = (endpoint, body, loadingId) => fetchData(`${apiUrl}/${endpoint}`, 'POST', body,loadingId);
 
-  const put = (endpoint, body) => fetchData(`${apiUrl}/${endpoint}`, 'PUT', body);
+  const put = (endpoint, body, loadingId) => fetchData(`${apiUrl}/${endpoint}`, 'PUT', body,loadingId);
 
-  const del = (endpoint) => fetchData(`${apiUrl}/${endpoint}`, 'DELETE');
+  const del = (endpoint, loadingId) => fetchData(`${apiUrl}/${endpoint}`, 'DELETE',null, loadingId);
 
   return {
     data,

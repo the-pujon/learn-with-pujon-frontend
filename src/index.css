@@ -18,6 +18,25 @@
   position: relative;
 }
 
+::-webkit-scrollbar {
+  width: 0.15rem;
+  height: 0.25rem;
+}
+
+::-webkit-scrollbar-track {
+  --bg-opacity: 0.5;
+  background-color: #00000015;
+}
+
+::-webkit-scrollbar-thumb {
+  --bg-opacity: 0.5;
+  background-color: #13131374;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+}
+
 .wrapper {
   @apply max-w-screen-2xl mx-auto px-2 md:px-5;
 }
