@@ -5,6 +5,7 @@ import logo1 from "../../assets/logos/logo3.png";
 import { useUser } from "../../Hooks/useUser";
 import { useSelector } from "react-redux";
 import useRole from "./../../Hooks/useRole";
+import { toast } from 'react-hot-toast';
 
 const navbarOption = (
   <>
@@ -26,7 +27,6 @@ const Navbar = () => {
   const { loggedUser, logOut, userLoading } = useUser();
   const role = useRole();
 
-  console.log(role);
 
   /**
    * Used for navbar animation when scroll
@@ -52,7 +52,10 @@ const Navbar = () => {
    */
   const handleLogOut = (e) => {
     e.preventDefault();
-    logOut().then(() => console.log("logout"));
+    logOut().then(() =>{
+      toast.success('Log out Successful', {position:'top-right'})
+      window.location.reload()
+    });
   };
 
   return (

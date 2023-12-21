@@ -19,6 +19,7 @@ import AllTransactions from "../pages/Dashboard/Admin/AllTransactions/AllTransac
 import PaymentHistory from "../pages/ClientSide/PaymentHistory/PaymentHistory";
 import EnrolledCourses from "../pages/ClientSide/EnrolledCourses/EnrolledCourses";
 import ManageCategories from "../pages/Dashboard/Admin/ManageCategories/ManageCategories.jsx";
+import CourseDetails from "../pages/ClientSide/CourseDetails/CourseDetails.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ export const Router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: 'courseDetails/:id',
+        element: <CourseDetails/>,
+      }
     ],
   },
   {
@@ -140,6 +145,6 @@ export const Router = createBrowserRouter([
   },
   {
     path: "/drop",
-    element: <ManageCategories />,
+    element: <CourseDetails />,
   }
 ]);

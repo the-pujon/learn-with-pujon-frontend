@@ -1,12 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useUser } from "./../../../Hooks/useUser";
+import { toast } from 'react-hot-toast';
 const Login = ({ handleGoogleLogin }) => {
   const { loginWithEmail, loginWithGoogle, loginWithGithub } = useUser();
-
-  const location = useLocation();
 
   const [error, setError] = useState(false);
 
@@ -23,10 +22,12 @@ const Login = ({ handleGoogleLogin }) => {
     //login with email
     loginWithEmail(email, password)
       .then((result) => {
+        toast.success('Login Successful', {position:'top-right'})
         navigate("/");
       })
       .catch((err) => {
         console.error(err);
+        toast.error('Wrong email or password', {position:'top-right'})
         setError(true);
       });
   };
@@ -67,7 +68,7 @@ const Login = ({ handleGoogleLogin }) => {
             placeholder="Password"
           />
           {/*<a href="#">Forgot your password?</a>*/}
-          <button className="SVButton-2 text-primary px-4 py-2 mt-2 ">
+          <button type="submit" className="SVButton-2 text-primary px-4 py-2 mt-2 ">
             <span className=" text-base font-semibold ">Sign In</span>
           </button>
         </form>

@@ -10,7 +10,7 @@ const Courses = () => {
     fetch("https://sv-ashen.vercel.app/api/courses")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data[0]);
         setAllCourses(data);
       })
       .catch((err) => console.error(err));

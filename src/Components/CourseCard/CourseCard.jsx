@@ -2,6 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../Features/CartSlice/CartSlice";
+import {Link} from "react-router-dom";
 
 const CourseCard = (card) => {
   //console.log(card?.card.card?.card);
@@ -70,9 +71,10 @@ const CourseCard = (card) => {
               </p>
 
               <div className="flex gap-4 items-center mt-2">
-                <button className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300">
+               <Link to={`/courseDetails/${card.card._id}`} >
+               <button className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300">
                   Course Details
-                </button>{" "}
+                </button>{" "}</Link>
                 <button
                   onClick={handleAddToCart}
                   className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300"

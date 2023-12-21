@@ -36,12 +36,9 @@ const AddCourse=() => {
   });
 
   useEffect(() => {
-    console.log(loggedUser?.email);
-
     loggedUser&&
       get(`instructors/singleInstructor?email=${loggedUser?.email}`)
         .then((data) => {
-          console.log(data);
           setInstructor(data);
         });
 
@@ -124,7 +121,7 @@ const AddCourse=() => {
 
   return (
     <div className="">
-      <div className="flex wrapper min-h-screen pt-24 items-center justify-center gap-4">
+      <div className="flex wrapper min-h-screen pt-16 items-center justify-center gap-4">
         <div className="flex-1  flex items-center justify-center ">
           {upLoadedImages? (
             <img
@@ -140,7 +137,7 @@ const AddCourse=() => {
           )}
         </div>
         <form
-          className="flex-1 p-5 rounded-3xl bg-primary/20 "
+          className="flex-1 p-5 mt-16 mb-4 rounded-3xl bg-primary/20 "
           style={{
             background:
               "conic-gradient(from 270deg at 0% 0%, rgba(255, 255, 255, 1) 20%,#213555  100% )",
@@ -166,27 +163,6 @@ const AddCourse=() => {
               Name
             </label>
           </div>
-
-          {/* instructorEmail */}
-          {/*<div className="form-control relative my-6 mt-12">
-            <input
-              autoComplete="off"
-              id="instructorEmail"
-              name="instructorEmail"
-              type="text"
-              value={loggedUser?.email}
-              disabled
-              className="peer placeholder-transparent h-10 w-full   bg-transparent text-secondary focus:outline-none focus:borer-rose-600 border-b-secondary/50 border-b-2"
-              placeholder="instructorEmail"
-              required
-            />
-            <label
-              htmlFor="instructorEmail"
-              className="absolute left-0 -top-3.5 text-gray-200 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-secondary peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-200 peer-focus:text-sm"
-            >
-              Instructor Email
-            </label>
-          </div>*/}
 
           {/* Class Image */}
           <div className="form-control relative my-6 ">

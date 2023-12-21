@@ -4,8 +4,12 @@ import { useUser } from "../../../Hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../Firebase/firebase.config";
 import { updateProfile } from "firebase/auth";
+import useApi from "../../../Hooks/useApi";
+import { toast } from 'react-hot-toast';
+
 const SignUp = ({ handleGoogleLogin }) => {
   const { registrationWithEmail, loginWithGoogle, loginWithGithub } = useUser();
+  const {post} = useApi()
 
   const navigate = useNavigate();
 
@@ -17,11 +21,14 @@ const SignUp = ({ handleGoogleLogin }) => {
 
     const name = form.name.value;
     const email = form.email.value;
-    const password = form.email.value;
+    const password = form.password.value;
     const photoURL = form[6].files[0];
+    console.log(password)
+    console.log(email)
 
-    const apiKey = "3771a5eec87b0ec98c5b62855eab4fae";
-    const apiUrl = "https://api.imgbb.com/1/upload";
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
+    const apiUrl = import.meta.env.VITE_IMGBB_API_URL;
+
 
     const formData = new FormData();
     formData.append("image", photoURL);
@@ -57,6 +64,7 @@ const SignUp = ({ handleGoogleLogin }) => {
                 })
                   .then((res) => res.json())
                   .then((d) => {
+                    toast.success('Sign up Successful',{position:'top-right'})
                     navigate("/");
                   })
                   .catch((err) => console.error(err));
