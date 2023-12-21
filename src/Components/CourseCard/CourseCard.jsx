@@ -5,13 +5,7 @@ import { addItemToCart } from "../../Features/CartSlice/CartSlice";
 import {Link} from "react-router-dom";
 
 const CourseCard = (card) => {
-  //console.log(card?.card.card?.card);
-  //console.log(card.card)
-  console.log(card);
-
   const dispatch = useDispatch();
-
-  // ... (your existing code)
 
   const handleAddToCart = () => {
     const cart = {
