@@ -1,14 +1,18 @@
 import React from "react";
+import logo1 from "../../assets/logos/logo3.png";
 
 const Footer = () => {
   return (
     <div className=" text-secondary bg-primary">
       <footer className="wrapper ">
         <section className="footer p-10">
-          <div className='flex flex-col items-center justify-center' >
+          <div className='flex flex-col items-start justify-center' >
             {/*<img src={logo} alt="" className="w-28" />*/}
-            <p className="text-3xl font-bold tracking-widest "  >LWP</p>
-            <p className="text-sm font-thin -mt-4 tracking-widest">Learn With Pujon</p>
+            <p className="text-3xl font-bold tracking-widest ">
+              <img src={logo1} className="w-20" alt="" />
+            </p>
+            <p className="text-sm font-thin -mt-3 tracking-widest">Skills Voyage</p>
+            <p className="text-sm font-thin -mt-3 tracking-widest">Explore, Learn, Master</p>
           </div>
           <div>
             <span className="footer-title">Social</span>
@@ -54,7 +58,7 @@ const Footer = () => {
             <div>
               <p>
                 Copyright © {new Date().getFullYear()} - All right reserved by
-                SONGLE MELODY MUSIC HEAVEN
+                Skills Voyage
               </p>
             </div>
           </div>
