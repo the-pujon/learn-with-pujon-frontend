@@ -34,7 +34,7 @@ const Instructor = () => {
 
   return (
     <div>
-      <div className="wrapper min-h-screen pt-32">
+      <div className="wrapper pt-32">
         <div className="hero  bg-base-200">
           <div className="hero-content flex-col lg:flex-row-reverse wrapper w-full justify-between">
             <img
@@ -76,14 +76,16 @@ const Instructor = () => {
             </div>
           </div>
         </div>
-        <div>
-          <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
-            All Courses of this instructor
-          </h1>
+        {instructorCourses?.length > 0 && (
           <div>
-            <CourseSlider instructorCourses={instructorCourses} />
+            <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
+              All Courses of this instructor
+            </h1>
+            <div>
+              <CourseSlider instructorCourses={instructorCourses} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

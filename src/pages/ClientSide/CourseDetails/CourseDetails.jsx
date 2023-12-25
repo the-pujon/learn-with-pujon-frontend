@@ -19,10 +19,12 @@ const CourseDetails = () => {
   useEffect(() => {
     get(`courses/${id}`).then((res) => {
       if (res.error) return console.log(res.error);
-      console.log(res?.classCategory);
+      console.log(res);
       setCardData(res);
       get(`courses/category/${res?.classCategory}`).then((result) => {
-        const courses = result.filter((r) => r._id === res._id); //removing current course that is already showing
+        console.log(result);
+        const courses = result.filter((r) => r._id !== res._id);
+        console.log(courses); //removing current course that is already showing
         setSameCategoryCourses(courses);
       });
     });
@@ -210,14 +212,16 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      <div>
-        <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
-          You may also like this courses
-        </h1>
+      {sameCategoryCourses?.length > 0 &&
         <div>
-          <CourseSlider instructorCourses={sameCategoryCourses} />
+          <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
+            You may also like this courses
+          </h1>
+          <div>
+            <CourseSlider instructorCourses={sameCategoryCourses} />
+          </div>
         </div>
-      </div>
+      }
     </div>
   );
 };

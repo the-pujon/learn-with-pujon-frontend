@@ -2,10 +2,9 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../Features/CartSlice/CartSlice";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const CourseCard = ({card}) => {
-  console.log(card)
+const CourseCard = ({ card }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -23,12 +22,12 @@ const CourseCard = ({card}) => {
 
   return (
     <div>
-      <div className=" ">
-        <div className=" relative w-full md:w-[23rem] bg-secondary rounded   shadow-lg  ">
+      <div className="">
+        <div className=" relative w-full md:w-[23rem] h-full bg-secondary rounded   shadow-lg  ">
           <p className="absolute top-4 right-4 font-semibold px-2 py-1 text-primary bg-secondary rounded-full shadow-sm">
             ${card?.price}
           </p>
-          <div className=" h-2/4 sm:h-64 overflow-hidden">
+          <div className=" h-2/4 sm:h-56 overflow-hidden">
             <img
               className="w-full rounded-t"
               src={card?.classImage}
@@ -55,21 +54,22 @@ const CourseCard = ({card}) => {
           <div className="">
             <div className="px-7 pb-7 mb-8">
               <h2 className="text-3xl font-bold text-primary ">
-                {card?.name}
+                {card?.name?.length > 16 ? (
+                  <>{card?.name?.slice(0, 16)}...</>
+                ) : (
+                  <>{card?.name}</>
+                )}
               </h2>
-              <p className="text-primary mt-2 ">{card?.classCategory}</p>
-              {/*<p className="text-primary mt-2 ">
-                Seats Available: {seatsAvailable}
-              </p>*/}
+              <p className="text-primary mt-2 ">{card?.classSubCategory}</p>
               <p className="text-primary mt-2 ">
-                {/*Total Students: {totalStudents}*/}
               </p>
 
               <div className="flex gap-4 items-center mt-2">
-               <Link to={`/courseDetails/${card?._id}`} >
-               <button className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300">
-                  Course Details
-                </button>{" "}</Link>
+                <Link to={`/courseDetails/${card?._id}`}>
+                  <button className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300">
+                    Course Details
+                  </button>{" "}
+                </Link>
                 <button
                   onClick={handleAddToCart}
                   className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300"
