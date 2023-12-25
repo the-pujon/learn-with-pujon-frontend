@@ -20,12 +20,6 @@ import bannerImage from "./../../../../assets/banner/index";
 const Header = () => {
   return (
     <div className="flex items-center justify-center bg-[color:var(--secondaryColor)]">
-      {/*<div className="text-white">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime minima
-        adipisci provident esse quae sunt vero ipsam cumque rem officia
-        voluptatum fugiat, similique ex dignissimos sapiente consectetur
-        voluptate cupiditate quia.
-      </div>*/}
       <>
         <Swiper
           loop={true}
