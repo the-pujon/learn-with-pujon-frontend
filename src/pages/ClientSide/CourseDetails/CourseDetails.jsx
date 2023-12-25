@@ -3,24 +3,30 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useParams } from "react-router-dom";
 import useApi from "../../../Hooks/useApi";
-import { useDispatch } from 'react-redux';
-import {addItemToCart} from "../../../Features/CartSlice/CartSlice";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../../Features/CartSlice/CartSlice";
+import CourseSlider from "../../../Components/CourseSlider/CourseSlider";
 
 const CourseDetails = () => {
   const id = useParams().id;
   const { get } = useApi();
 
   const [cardData, setCardData] = useState([]);
+  const [sameCategoryCourses, setSameCategoryCourses] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     get(`courses/${id}`).then((res) => {
       if (res.error) return console.log(res.error);
+      console.log(res?.classCategory);
       setCardData(res);
+      get(`courses/category/${res?.classCategory}`).then((result) => {
+        const courses = result.filter((r) => r._id === res._id); //removing current course that is already showing
+        setSameCategoryCourses(courses);
+      });
     });
   }, []);
-
 
   const handleAddToCart = () => {
     const cart = {
@@ -124,8 +130,10 @@ const CourseDetails = () => {
                 </div>
               </TabPanel>
               <TabPanel>
-              <div>
-                  <li className="text-xl font-medium">Minimum Requirements for this course</li>
+                <div>
+                  <li className="text-xl font-medium">
+                    Minimum Requirements for this course
+                  </li>
                   <p className="pl-7">
                     {cardData?.requirements?.map((c, i) => (
                       <li key={i}>{c}</li>
@@ -156,7 +164,9 @@ const CourseDetails = () => {
               </div>{" "}
               <div className="py-1 px-2 flex justify-between items-center border-b">
                 <span>Tags</span>
-                <span title={cardData?.tags} >{cardData?.tags?.slice(0,2).join(', ')}...</span>
+                <span title={cardData?.tags}>
+                  {cardData?.tags?.slice(0, 2).join(", ")}...
+                </span>
               </div>{" "}
               <div className="py-1 px-2 flex justify-between items-center border-b">
                 <span>Category</span>
@@ -184,14 +194,28 @@ const CourseDetails = () => {
               />
             </div>
             <div className="text-4xl font-bold mb-4">${cardData?.price}</div>
-            <button onClick={handleAddToCart} className="py-2 px-4 mb-8 SVButton-2">Add to cart</button>
+            <button
+              onClick={handleAddToCart}
+              className="py-2 px-4 mb-8 SVButton-2"
+            >
+              Add to cart
+            </button>
             <div className="mb-4">
               <h3 className="font-semibold mb-2">Course Description</h3>
               <p className="text-sm">
-                {cardData?.description?.slice(0,150)}...
+                {cardData?.description?.slice(0, 150)}...
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div>
+        <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
+          You may also like this courses
+        </h1>
+        <div>
+          <CourseSlider instructorCourses={sameCategoryCourses} />
         </div>
       </div>
     </div>

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useApi from "../../../../Hooks/useApi";
+import CourseSlider from "../../../../Components/CourseSlider/CourseSlider";
 
 const Instructor = () => {
   const id = useParams().id;
   const [instructorDetails, setInstructorDetails] = useState({});
+  const [instructorEmail, setInstructorEmail] = useState("");
+  const [instructorCourses, setInstructorCourses] = useState([]);
+
+  const { get } = useApi();
 
   //  console.log(id);
   useEffect(() => {
@@ -14,13 +20,22 @@ const Instructor = () => {
       .then((data) => {
         console.log(data);
         setInstructorDetails(data);
+        //setInstructorEmail(data.instructor.email)
+        console.log(data.email);
+        const encodedEmail = encodeURIComponent(data.email);
+        console.log(encodedEmail);
+
+        get(`courses/email/${encodedEmail}`).then((res) => {
+          console.log(res);
+          setInstructorCourses(res);
+        });
       });
   }, []);
 
   return (
     <div>
-      <div>
-        <div className="hero min-h-screen bg-base-200">
+      <div className="wrapper min-h-screen pt-32">
+        <div className="hero  bg-base-200">
           <div className="hero-content flex-col lg:flex-row-reverse wrapper w-full justify-between">
             <img
               src={instructorDetails.instructorImage}
@@ -31,10 +46,10 @@ const Instructor = () => {
                 {instructorDetails.name}
               </h1>
               <p className="text-xl text-gray-500 pb-1">
-              {instructorDetails.category} Instructor
+                {instructorDetails.category} Instructor
               </p>
               <p className="text-sm text-gray-500 pb-3">
-              {instructorDetails.experience} years of experience
+                {instructorDetails.experience} years of experience
               </p>
 
               <p className="py-6">
@@ -58,8 +73,15 @@ const Instructor = () => {
               <li className="">Phone: {instructorDetails.phone}</li>
               <li className="">Education: {instructorDetails.education}</li>
               <li className="">Address: {instructorDetails.address}</li>
-
             </div>
+          </div>
+        </div>
+        <div>
+          <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
+            All Courses of this instructor
+          </h1>
+          <div>
+            <CourseSlider instructorCourses={instructorCourses} />
           </div>
         </div>
       </div>
