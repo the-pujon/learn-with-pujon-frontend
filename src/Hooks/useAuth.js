@@ -9,11 +9,13 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.config";
+import useApi from "./useApi";
 
 const useAuth = () => {
   const [loggedUser, setLoggedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(true);
+  const {post} = useApi()
 
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
@@ -56,13 +58,13 @@ const useAuth = () => {
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        fetch("https://sv-ashen.vercel.app/api/users/jwt", {
+        fetch("http://localhost:5000/api/users/jwt", {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ email: currentUser.email }),
-        })
-          .then((res) => res.json())
+        }).then((res)=>res.json())
           .then((data) => {
+            console.log(data)
             setLoggedUser(currentUser);
             setLoading(false);
             setUserLoading(false);

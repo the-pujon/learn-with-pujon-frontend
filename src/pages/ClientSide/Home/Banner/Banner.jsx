@@ -15,7 +15,6 @@ const Banner = ({ image, title }) => {
         }}
       >
         <div className="wrapper min-h-screen flex flex-col gap-4 justify-center ">
-          {/*<div className="hero-overlay bg-opacity-60"></div>*/}
           <div className="  text-secondary uppercase  ">
             <Fade
               delay={0}
@@ -48,4 +47,3 @@ const Banner = ({ image, title }) => {
 };
 
 export default Banner;
-//, linear-gradient(90deg, rgba(6,59,65,1) 30%, rgba(0,212,255,0) 100%)

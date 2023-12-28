@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import PageCover from "../../../../Components/PageCover/PageCover";
 import CourseCard from "../../../../Components/CourseCard/CourseCard";
 import bannerImage from "../../../../assets/banner";
+import useApi from './../../../../Hooks/useApi';
 
 const Courses = () => {
   const [allCourses, setAllCourses] = useState([]);
 
+  const {get} = useApi()
+
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/courses")
-      .then((res) => res.json())
+    get("courses")
       .then((data) => {
         console.log(data[0]);
         setAllCourses(data);

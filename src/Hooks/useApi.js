@@ -5,12 +5,14 @@ const useApi = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const jwtToken = localStorage.getItem('access-token')
+  console.log(jwtToken)
 
   const apiUrl = `http://localhost:5000/api`;
 
   const headers = {
     'Content-Type': 'application/json',
-    //...(jwtToken && { Authorization: `Bearer ${jwtToken}` }),
+    ...(jwtToken && { Authorization: `Bearer ${jwtToken}` }),
   };
 
   const fetchData = async (url, method, body = null, loadingId) => {
@@ -37,7 +39,7 @@ const useApi = () => {
       const result = await response.json();
       setData(result);
 
-      switch (method) {
+      switch (method ) {
         case 'PUT':
           toast.dismiss(loadingToast.id);
           toast.success('Successfully Updated!', { position: 'top-right', duration: 2000 });
