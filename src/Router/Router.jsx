@@ -143,8 +143,4 @@ export const Router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/drop",
-    element: <CourseDetails />,
-  }
 ]);
