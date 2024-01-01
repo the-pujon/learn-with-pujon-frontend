@@ -25,7 +25,7 @@ const Navbar = () => {
   const [scroll, setScroll] = useState(true);
   const location = useLocation().pathname;
   const { loggedUser, logOut, userLoading } = useUser();
-  const role = useRole();
+  const [role] = useRole();
 
 
   /**

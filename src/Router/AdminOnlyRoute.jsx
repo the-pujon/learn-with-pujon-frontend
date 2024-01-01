@@ -6,14 +6,13 @@ import { useUser } from "../Hooks/useUser";
 const AdminOnlyRoute = ({ children }) => {
   const { loggedUser, userLoading } = useUser();
 
-  const role = useRole(loggedUser?.email);
-  console.log(role);
+  const [role, roleLoading] = useRole()
 
-  if (userLoading) {
+  if (userLoading||roleLoading) {
     return <div>loading</div>
   }
 
-  if (!userLoading && role === "admin") {
+  if (loggedUser && role === "admin") {
     return children;
   }
 

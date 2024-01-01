@@ -5,17 +5,13 @@ import PopularCourses from "../PopularCourses/PopularCourses";
 import PopularInstructors from "../PopularInstrucors/PopularInstructors";
 import HelpStudents from "../HelpStudents/HelpStudents";
 import Brands from "../Brands/Brands";
+import useRole from "../../../../Hooks/useRole";
 
 const Home = () => {
 
-  useEffect(()=>{
-    fetch(`http://localhost:5000/api/users/pujondas1234@gmail.com`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data)
-      //setRole(data.role);
-    })
-  },[])
+ const [role, roleLoading] = useRole()
+ console.log(role)
+ console.log(roleLoading)
   return (
     <div>
       <Header />

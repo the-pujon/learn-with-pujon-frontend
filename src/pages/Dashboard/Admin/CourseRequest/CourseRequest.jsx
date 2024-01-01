@@ -29,6 +29,7 @@ const CourseRequest = () => {
     useEffect(() => {
       let value = search.toLowerCase();
       let courseSearch = courses.filter((data) => {
+        console.log(data)
         const name = data.name.toLowerCase();
         return name.startsWith(value);
       });

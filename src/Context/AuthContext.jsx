@@ -8,5 +8,3 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={useAuth()}> {children}</AuthContext.Provider>
   );
 };
-
-export const useUserCtx = () => useContext(AuthContext);
