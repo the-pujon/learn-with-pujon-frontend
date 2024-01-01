@@ -12,7 +12,7 @@ const InstructorOnlyRoute = ({ children }) => {
     return <div>loading...</div>
   }
 
-  if (!userLoading && role === "instructor") {
+  if (loggedUser && role === "instructor") {
     return children;
   }
 
