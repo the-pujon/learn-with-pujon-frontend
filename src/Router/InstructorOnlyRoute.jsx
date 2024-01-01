@@ -6,10 +6,10 @@ import { useUser } from "../Hooks/useUser";
 const InstructorOnlyRoute = ({ children }) => {
   const { loggedUser, userLoading } = useUser();
 
-  const role = useRole(loggedUser?.email);
+  const [role, roleLoading] = useRole()
 
-  if (userLoading) {
-    return <div>loading</div>;
+  if (userLoading||roleLoading) {
+    return <div>loading...</div>
   }
 
   if (!userLoading && role === "instructor") {

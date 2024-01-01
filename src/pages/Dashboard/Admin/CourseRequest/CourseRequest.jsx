@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CourseRequest = () => {
   const [courses, setAllCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
 
   useEffect(() => {
@@ -17,61 +16,48 @@ const CourseRequest = () => {
         setAllCourses(data);
         setFilteredCourses(data);
       });
-
   }, [refresh]);
 
   //for search
-    const handleChange = (e) => {
-      setSearch(e.target.value);
-    };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   //for search
-    useEffect(() => {
-      let value = search.toLowerCase();
-      let courseSearch = courses.filter((data) => {
-        console.log(data)
-        const name = data.name.toLowerCase();
-        return name.startsWith(value);
-      });
-      setFilteredCourses(courseSearch);
-    }, [search]);
+  useEffect(() => {
+    let value = search.toLowerCase();
+    let courseSearch = courses.filter((data) => {
+      const name = data.name.toLowerCase();
+      return name.startsWith(value);
+    });
+    setFilteredCourses(courseSearch);
+  }, [search]);
 
   //for search
-    const handleSubmit = (e) => {
-      e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      let value = search.toLowerCase();
+    let value = search.toLowerCase();
 
-      let courseSearch = courses.filter((data) => {
-        const name = data.name.toLowerCase();
-        return name === value;
-      });
+    let courseSearch = courses.filter((data) => {
+      const name = data.name.toLowerCase();
+      return name === value;
+    });
 
-      setFilteredCourses(courseSearch);
-    };
+    setFilteredCourses(courseSearch);
+  };
 
-    const handleCategory = (e) => {
-      e.preventDefault();
-      //console.log(e.target.value);
-      fetch(`https://sv-ashen.vercel.app/api/courses?category=${e.target.value}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setAllCourses(data);
-          setFilteredCourses(data);
-        });
-    };
+  const handleSort = (e) => {
+    if (e.target.value === "price-lowest") {
+      const s = [...filteredCourses].sort((a, b) => a.price - b.price);
+      setFilteredCourses(s);
+    }
 
-    const handleSort = (e) => {
-      if (e.target.value === "price-lowest") {
-        const s = [...filteredcourses].sort((a, b) => a.price - b.price);
-        setFilteredCourses(s);
-      }
-
-      if (e.target.value === "price-highest") {
-        const s = [...filteredcourses].sort((b, a) => a.price - b.price);
-        setFilteredCourses(s);
-      }
-    };
+    if (e.target.value === "price-highest") {
+      const s = [...filteredCourses].sort((b, a) => a.price - b.price);
+      setFilteredCourses(s);
+    }
+  };
 
   const handleApproved = (email) => {
     fetch(`https://sv-ashen.vercel.app/api/Courses/${email}`, {
@@ -97,37 +83,31 @@ const CourseRequest = () => {
               <input
                 type="text"
                 placeholder="Search courses..."
-                class="px-4 py-2 border border-secondary text-secondary bg-transparent rounded-lg focus:outline-none "
+                class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
                 onchange="{handleSearch}"
                 onChange={handleChange}
                 onSubmit={handleSubmit}
               />
-              <select
-                onChange={handleCategory}
-                //defaultValue="All Categories"
-                class="px-4 py-2 border border-secondary bg-transparent text-secondary rounded-lg focus:outline-none "
-              >
-                <option>All Categories</option>
-                {category.map((c) => (
-                  <option value={c.value} className="bg-primary text-secondary">
-                    {c.name}
-                  </option>
-                ))}
-              </select>
             </div>
             <select
               class="px-4 py-2 border border-secondary bg-transparent rounded-lg focus:outline-none "
               //  value="{sortOption}"
               onChange={handleSort}
             >
-              <option value="" className="bg-primary">
+              <option value="" className="bg-primary text-secondary">
                 Sort By
               </option>
 
-              <option value="price-lowest" className="bg-primary">
+              <option
+                value="price-lowest"
+                className="bg-primary text-secondary"
+              >
                 Price (Lowest to Highest)
               </option>
-              <option value="price-highest" className="bg-primary">
+              <option
+                value="price-highest"
+                className="bg-primary text-secondary"
+              >
                 Price (Highest to Lowest)
               </option>
             </select>
@@ -183,7 +163,9 @@ const CourseRequest = () => {
                       </div>
                     </div>
                   </td>
-                  <td title={course?.description} >{course?.description?.slice(0, 30)}...</td>
+                  <td title={course?.description}>
+                    {course?.description?.slice(0, 30)}...
+                  </td>
                   <td> {course.totalLessons}</td>
                   <td> {course.totalQuizzes}</td>
                   <td> {course.duration}</td>
@@ -203,7 +185,10 @@ const CourseRequest = () => {
                       >
                         {course.approved ? "Approved" : "Not approved yet"}
                       </button>
-                      <Link to={`/courseDetails/${course?._id}`} className="ml-2 border px-2 py-1 text-primary text-xl rounded-full border-primary">
+                      <Link
+                        to={`/courseDetails/${course?._id}`}
+                        className="ml-2 border px-2 py-1 text-primary text-xl rounded-full border-primary"
+                      >
                         <FaRegEye />
                       </Link>
                     </div>
