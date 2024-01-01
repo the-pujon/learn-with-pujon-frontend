@@ -28,7 +28,7 @@ export const Router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -36,7 +36,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element:<Instructors />,
+        element: <Instructors />,
       },
       {
         path: "courses",
@@ -63,7 +63,9 @@ export const Router = createBrowserRouter([
         path: "addCourse",
         element: (
           <PrivateRoute>
-           <InstructorOnlyRoute> <AddCourse /></InstructorOnlyRoute>
+            <InstructorOnlyRoute>
+              <AddCourse />
+            </InstructorOnlyRoute>
           </PrivateRoute>
         ),
       },
@@ -105,7 +107,9 @@ export const Router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard />
+        <AdminOnlyRoute>
+          <Dashboard />
+        </AdminOnlyRoute>
       </PrivateRoute>
     ),
     children: [
@@ -113,7 +117,9 @@ export const Router = createBrowserRouter([
         path: "instructorApplication",
         element: (
           <PrivateRoute>
-            <InstructorRequest />
+            <AdminOnlyRoute>
+              <InstructorRequest />
+            </AdminOnlyRoute>
           </PrivateRoute>
         ),
       },
@@ -121,7 +127,9 @@ export const Router = createBrowserRouter([
         path: "courseRequest",
         element: (
           <PrivateRoute>
-            <CourseRequest />
+            <AdminOnlyRoute>
+              <CourseRequest />
+            </AdminOnlyRoute>
           </PrivateRoute>
         ),
       },
@@ -129,7 +137,9 @@ export const Router = createBrowserRouter([
         path: "manageUsers",
         element: (
           <PrivateRoute>
-            <ManageUsers />
+            <AdminOnlyRoute>
+              <ManageUsers />
+            </AdminOnlyRoute>
           </PrivateRoute>
         ),
       },
@@ -137,7 +147,9 @@ export const Router = createBrowserRouter([
         path: "allTransactions",
         element: (
           <PrivateRoute>
-            <AllTransactions />
+            <AdminOnlyRoute>
+              <AllTransactions />
+            </AdminOnlyRoute>
           </PrivateRoute>
         ),
       },
@@ -145,7 +157,9 @@ export const Router = createBrowserRouter([
         path: "categories",
         element: (
           <PrivateRoute>
-            <ManageCategories />
+            <AdminOnlyRoute>
+              <ManageCategories />
+            </AdminOnlyRoute>
           </PrivateRoute>
         ),
       },
