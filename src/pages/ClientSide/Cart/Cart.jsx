@@ -21,27 +21,31 @@ const Cart = () => {
     dispatch(removeItemFromCart(id));
   };
 
-  const makePayment = async () => {
+  const makePayment = async (totalPrice) => {
     const stripe = await loadStripe(
       "pk_test_51NIBhSHkcuY3CefPvUijdLj28l4fJrqiHJuXjmMXHHMyXbFf1a9SrKtAc6tBU8GM9VhaiT6K9Q1eb5bNWQu7GIIC009YNPmpaQ"
     );
 
+    console.log(cartItems)
+
     const body = {
-      products: cartItems,
+      products: cartItems.courses,
+      totalItem: cartItems.totalItem,
+      totalPrice: totalPrice,
       email: loggedUser.email,
       paymentStatus: isPaymentSuccessful,
     };
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch("https://sv-ashen.vercel.app/api/checkout", {
+    const response = await fetch("https://skill-voyage-backend-2st8.vercel.app/api/checkout", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
     });
 
     const session = await response.json();
-    dispatch(removeAll());
+    //dispatch(removeAll());
 
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
@@ -171,7 +175,7 @@ const Cart = () => {
                 </span>
               </div>
               <button
-                onClick={makePayment}
+                onClick={()=>{makePayment(cartItems.totalPrice + cartItems.totalPrice * 0.1)}}
                 class=" SVButton-2 py-2 uppercase w-full"
               >
                 <span> Checkout</span>

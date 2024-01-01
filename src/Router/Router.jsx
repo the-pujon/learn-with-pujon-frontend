@@ -9,7 +9,6 @@ import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
 import InstructorRequest from "../pages/Dashboard/Admin/InstructorRequest/InstructorRequest";
 import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
-import Dashboard from "../Layout/Dashboard";
 import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
@@ -23,6 +22,8 @@ import CourseDetails from "../pages/ClientSide/CourseDetails/CourseDetails.jsx";
 import AdminOnlyRoute from "./AdminOnlyRoute.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
 import InstructorOnlyRoute from "./InstructorOnlyRoute.jsx";
+import DashboardLayout from "../Layout/DashboardLayout.jsx";
+import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -108,11 +109,19 @@ export const Router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <AdminOnlyRoute>
-          <Dashboard />
+          <DashboardLayout />
         </AdminOnlyRoute>
       </PrivateRoute>
     ),
     children: [
+      {
+        path: '/dashboard',
+        element: <PrivateRoute>
+        <AdminOnlyRoute>
+          <Dashboard />
+        </AdminOnlyRoute>
+      </PrivateRoute>
+      },
       {
         path: "instructorApplication",
         element: (

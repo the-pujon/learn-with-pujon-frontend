@@ -2,7 +2,7 @@ import React from "react";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 
-const Dashboard = () => {
+const DashboardLayout = () => {
   return (
     <div className="flex gap-4">
       <div className="w-2/12">
@@ -15,4 +15,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardLayout;
