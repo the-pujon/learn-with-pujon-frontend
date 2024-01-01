@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 const CourseRequest = () => {
   const [courses, setAllCourses] = useState([]);
@@ -17,64 +18,59 @@ const CourseRequest = () => {
         setFilteredCourses(data);
       });
 
-    //fetch("/category.json")
-    //  .then((res) => res.json())
-    //  .then((data) => {
-    //    setCategory(data);
-    //  });
   }, [refresh]);
 
   //for search
-  //  const handleChange = (e) => {
-  //    setSearch(e.target.value);
-  //  };
+    const handleChange = (e) => {
+      setSearch(e.target.value);
+    };
 
   //for search
-  //  useEffect(() => {
-  //    let value = search.toLowerCase();
-  //    let toySearch = toys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name.startsWith(value);
-  //    });
-  //    setFilteredToys(toySearch);
-  //  }, [search]);
+    useEffect(() => {
+      let value = search.toLowerCase();
+      let courseSearch = courses.filter((data) => {
+        const name = data.name.toLowerCase();
+        return name.startsWith(value);
+      });
+      setFilteredCourses(courseSearch);
+    }, [search]);
 
   //for search
-  //  const handleSubmit = (e) => {
-  //    e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-  //    let value = search.toLowerCase();
+      let value = search.toLowerCase();
 
-  //    let toySearch = loadedToys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name === value;
-  //    });
+      let courseSearch = courses.filter((data) => {
+        const name = data.name.toLowerCase();
+        return name === value;
+      });
 
-  //    setFilteredToys(toySearch);
-  //  };
+      setFilteredCourses(courseSearch);
+    };
 
-  //  const handleCategory = (e) => {
-  //    e.preventDefault();
-  //    //console.log(e.target.value);
-  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        setAllToys(data);
-  //        setFilteredToys(data);
-  //      });
-  //  };
+    const handleCategory = (e) => {
+      e.preventDefault();
+      //console.log(e.target.value);
+      fetch(`https://sv-ashen.vercel.app/api/courses?category=${e.target.value}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setAllCourses(data);
+          setFilteredCourses(data);
+        });
+    };
 
-  //  const handleSort = (e) => {
-  //    if (e.target.value === "price-lowest") {
-  //      const s = [...filteredToys].sort((a, b) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
+    const handleSort = (e) => {
+      if (e.target.value === "price-lowest") {
+        const s = [...filteredcourses].sort((a, b) => a.price - b.price);
+        setFilteredCourses(s);
+      }
 
-  //    if (e.target.value === "price-highest") {
-  //      const s = [...filteredToys].sort((b, a) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
-  //  };
+      if (e.target.value === "price-highest") {
+        const s = [...filteredcourses].sort((b, a) => a.price - b.price);
+        setFilteredCourses(s);
+      }
+    };
 
   const handleApproved = (email) => {
     fetch(`https://sv-ashen.vercel.app/api/Courses/${email}`, {
@@ -95,11 +91,11 @@ const CourseRequest = () => {
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
         <div className="overflow-x-auto pt-[8rem]">
-          {/*<div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-4 text-primary">
               <input
                 type="text"
-                placeholder="Search toys..."
+                placeholder="Search courses..."
                 class="px-4 py-2 border border-secondary text-secondary bg-transparent rounded-lg focus:outline-none "
                 onchange="{handleSearch}"
                 onChange={handleChange}
@@ -134,7 +130,7 @@ const CourseRequest = () => {
                 Price (Highest to Lowest)
               </option>
             </select>
-          </div>*/}
+          </div>
 
           <table className="table">
             {/* head */}
@@ -186,14 +182,12 @@ const CourseRequest = () => {
                       </div>
                     </div>
                   </td>
-                  <td> {course.description}</td>
+                  <td title={course?.description} >{course?.description?.slice(0, 30)}...</td>
                   <td> {course.totalLessons}</td>
                   <td> {course.totalQuizzes}</td>
-                  {/*<td> {course.totalStudent}</td>*/}
                   <td> {course.duration}</td>
                   <td>{course.price}</td>
                   <td>
-                    {console.log(course.approved)}
                     <div className="flex items-center">
                       <button
                         disabled={course.approved}
@@ -208,9 +202,9 @@ const CourseRequest = () => {
                       >
                         {course.approved ? "Approved" : "Not approved yet"}
                       </button>
-                      <button className="ml-2 border px-2 py-1 text-primary text-xl rounded-full border-primary">
+                      <Link to={`/courseDetails/${course?._id}`} className="ml-2 border px-2 py-1 text-primary text-xl rounded-full border-primary">
                         <FaRegEye />
-                      </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>

@@ -63,7 +63,7 @@ export const Router = createBrowserRouter([
         path: "addCourse",
         element: (
           <PrivateRoute>
-            <AddCourse />
+           <InstructorOnlyRoute> <AddCourse /></InstructorOnlyRoute>
           </PrivateRoute>
         ),
       },
