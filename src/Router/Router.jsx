@@ -22,6 +22,7 @@ import ManageCategories from "../pages/Dashboard/Admin/ManageCategories/ManageCa
 import CourseDetails from "../pages/ClientSide/CourseDetails/CourseDetails.jsx";
 import AdminOnlyRoute from "./AdminOnlyRoute.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
+import InstructorOnlyRoute from "./InstructorOnlyRoute.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <AdminOnlyRoute><Instructors /></AdminOnlyRoute>,
+        element:<Instructors />,
       },
       {
         path: "courses",
