@@ -6,14 +6,14 @@ import useRole from "../Hooks/useRole";
 const PrivateRoute = ({ children }) => {
   const { loggedUser, userLoading } = useUser();
 
-  const role = useRole("pujondas1234@gmail.com")
+  const role = useRole(loggedUser?.email)
   console.log(role)
 
+  console.log(loggedUser?.email)
+
   if (userLoading) {
-    console.log("here");
     return (
       <div className="h-screen flex items-center justify-center  backdrop-blur-lg">
-        {/*<span className="loading loading-bars loading-lg"></span>*/}
         <svg className="fixed   h-36 w-36" viewBox="0 0 100 100">
           <g
             fill="none"

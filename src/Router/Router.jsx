@@ -20,11 +20,14 @@ import PaymentHistory from "../pages/ClientSide/PaymentHistory/PaymentHistory";
 import EnrolledCourses from "../pages/ClientSide/EnrolledCourses/EnrolledCourses";
 import ManageCategories from "../pages/Dashboard/Admin/ManageCategories/ManageCategories.jsx";
 import CourseDetails from "../pages/ClientSide/CourseDetails/CourseDetails.jsx";
+import AdminOnlyRoute from "./AdminOnlyRoute.jsx";
+import ErrorPage from "../pages/ErrorPage.jsx";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement:<ErrorPage/>,
     children: [
       {
         path: "/",
@@ -32,7 +35,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <Instructors />,
+        element: <AdminOnlyRoute><Instructors /></AdminOnlyRoute>,
       },
       {
         path: "courses",
@@ -92,14 +95,18 @@ export const Router = createBrowserRouter([
         ),
       },
       {
-        path: 'courseDetails/:id',
-        element: <CourseDetails/>,
-      }
+        path: "courseDetails/:id",
+        element: <CourseDetails />,
+      },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "instructorApplication",

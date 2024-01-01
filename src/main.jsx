@@ -13,7 +13,7 @@ import { Toaster } from 'react-hot-toast';
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
     <div><Toaster/></div>
-    <ul className="circles">
+    <ul className="circles -z-50">
       <li></li>
       <li></li>
       <li></li>
