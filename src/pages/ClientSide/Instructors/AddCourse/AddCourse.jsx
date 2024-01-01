@@ -96,7 +96,8 @@ const AddCourse=() => {
         };
 
         post("courses", classDataWithArray,'addCourse')
-          .then(() => {
+          .then((res) => {
+            console.log(res)
             navigate("/courses");
           })
           .catch((err) => console.error(err));

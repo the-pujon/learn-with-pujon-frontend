@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import PageCover from "../../../../Components/PageCover/PageCover";
 import CourseCard from "../../../../Components/CourseCard/CourseCard";
 import bannerImage from "../../../../assets/banner";
-import useApi from './../../../../Hooks/useApi';
+import useApi from "./../../../../Hooks/useApi";
 
 const Courses = () => {
   const [allCourses, setAllCourses] = useState([]);
 
-  const {get} = useApi()
+  const { get } = useApi();
 
   useEffect(() => {
     get("courses")
       .then((data) => {
-        console.log(data[0]);
-        setAllCourses(data);
+        const approvedCourses = data.filter(
+          (course) => course.approved === true
+        );
+
+        setAllCourses(approvedCourses);
       })
       .catch((err) => console.error(err));
   }, []);

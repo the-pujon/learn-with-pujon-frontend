@@ -18,8 +18,7 @@ const useRole = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        setRole(data.role);
+        setRole(data?.role);
         setRoleLoading(false)
       })
       .catch((err) => console.error(err));

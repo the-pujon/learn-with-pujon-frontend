@@ -6,7 +6,6 @@ const useApi = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const jwtToken = localStorage.getItem('access-token')
-  console.log(jwtToken)
 
   const apiUrl = `http://localhost:5000/api`;
 

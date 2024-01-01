@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useApi from "../../../../Hooks/useApi";
 
 const CourseRequest = () => {
   const [courses, setAllCourses] = useState([]);
@@ -8,14 +9,13 @@ const CourseRequest = () => {
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(null);
 
+  const { get, put } = useApi();
+
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/courses")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setAllCourses(data);
-        setFilteredCourses(data);
-      });
+    get("courses").then((data) => {
+      setAllCourses(data);
+      setFilteredCourses(data);
+    });
   }, [refresh]);
 
   //for search
@@ -59,13 +59,12 @@ const CourseRequest = () => {
     }
   };
 
-  const handleApproved = (email) => {
-    fetch(`https://sv-ashen.vercel.app/api/Courses/${email}`, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ approved: true }),
-    })
-      .then((res) => res.json())
+  const handleApproved = (id) => {
+    put(
+      `Courses/${id}`,
+      {approved: true},
+      "courseRequest"
+    )
       .then((data) => {
         console.log(data);
         setRefresh(data.approved);
@@ -78,19 +77,18 @@ const CourseRequest = () => {
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
         <div className="overflow-x-auto pt-[8rem]">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-4 text-primary">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-4 text-primary">
               <input
                 type="text"
                 placeholder="Search courses..."
-                class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
-                onchange="{handleSearch}"
+                className="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none"
                 onChange={handleChange}
                 onSubmit={handleSubmit}
               />
             </div>
             <select
-              class="px-4 py-2 border border-secondary bg-transparent rounded-lg focus:outline-none "
+              className="px-4 py-2 border border-primary bg-transparent rounded-lg focus:outline-none "
               //  value="{sortOption}"
               onChange={handleSort}
             >
@@ -183,7 +181,7 @@ const CourseRequest = () => {
                             : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
                         }
                       >
-                        {course.approved ? "Approved" : "Not approved yet"}
+                        {course.approved ? "Approved" : "Not approved"}
                       </button>
                       <Link
                         to={`/courseDetails/${course?._id}`}
