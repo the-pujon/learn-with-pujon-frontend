@@ -35,6 +35,7 @@ const Cart = () => {
       email: loggedUser.email,
       paymentStatus: isPaymentSuccessful,
     };
+    console.log(body)
     const headers = {
       "Content-Type": "application/json",
     };
@@ -45,7 +46,7 @@ const Cart = () => {
     });
 
     const session = await response.json();
-    //dispatch(removeAll());
+    dispatch(removeAll());
 
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
