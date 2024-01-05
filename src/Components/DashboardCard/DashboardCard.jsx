@@ -15,7 +15,7 @@ const DashboardCard = ({ name, total, url }) => {
         <span className="text-green-500" >5</span> / <span className="text-red-500" >10</span>
       </div>*/}
       <div className="flex justify-between">
-        <Link to={url}>See all {name}</Link>
+        <Link to={url} className="underline" >See all {name}</Link>
         <div>
           {name === "users" ? (
             <FaUser size={18} />

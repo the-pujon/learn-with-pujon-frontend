@@ -3,8 +3,8 @@ import { FaRegEye } from "react-icons/fa";
 import { useUser } from "./../../../../Hooks/useUser";
 
 const AllTransactions = () => {
-  const [courses, setAllCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [allTransactions, setAllTransactions] = useState([]);
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState([]);
 
@@ -15,8 +15,8 @@ const AllTransactions = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setAllCourses(data);
-        setFilteredCourses(data);
+        setAllTransactions(data);
+        setFilteredTransactions(data);
       });
   }, [loggedUser]);
 
@@ -30,15 +30,30 @@ const AllTransactions = () => {
               <tr>
                 <th>Session ID</th>
                 <th>Email</th>
+                <th>Total Courses</th>
+                <th>Total Amount</th>
                 <th>Time</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {filteredCourses?.map((course) => (
-                <tr key={course._id}>
-                  <td> {course.sessionId}</td>
-                  <td> {course.email}</td>
-                  <td> {new Date(parseInt(course?.date)).toLocaleString()}</td>
+              {filteredTransactions?.map((transaction) => (
+                <tr key={transaction._id}>
+                  <td> {transaction.sessionId}</td>
+                  <td> {transaction.email}</td>
+                  <td> {transaction.courses.length}</td>
+                  <td> {transaction.totalAmount}</td>
+
+                  <td> {new Date(parseInt(transaction?.date)).toLocaleString()}</td>
+                 <td>
+                 <div
+                   className={
+                     transaction.paymentStatus === 'paid'
+                      ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal text-center"
+                      : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal text-center"
+                  }
+                  > {transaction.paymentStatus}</div>
+                 </td>
                 </tr>
               ))}
             </tbody>

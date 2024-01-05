@@ -39,14 +39,14 @@ const Cart = () => {
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch("https://skill-voyage-backend-2st8.vercel.app/api/checkout", {
+    const response = await fetch("http://localhost:5000/api/checkout", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
     });
 
     const session = await response.json();
-    dispatch(removeAll());
+    //dispatch(removeAll());
 
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
