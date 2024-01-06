@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import useApi from "./../../../../Hooks/useApi";
+import { AiOutlineClose } from "react-icons/ai";
+import Empty from "../../../../assets/animations/empty.gif";
 
 const InstructorRequest = () => {
   const [instructors, setAllInstructors] = useState([]);
@@ -7,19 +10,13 @@ const InstructorRequest = () => {
   const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
 
-  useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/instructors")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllInstructors(data);
-        setFilteredInstructors(data);
-      });
+  const { get, put, del } = useApi();
 
-    //fetch("/category.json")
-    //  .then((res) => res.json())
-    //  .then((data) => {
-    //    setCategory(data);
-    //  });
+  useEffect(() => {
+    get("instructors").then((data) => {
+      setAllInstructors(data);
+      setFilteredInstructors(data);
+    });
   }, [refresh]);
 
   //for search
@@ -75,20 +72,10 @@ const InstructorRequest = () => {
   //  };
 
   const handleApproved = (email) => {
-    fetch(`https://sv-ashen.vercel.app/api/instructors/${email}`, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ approved: true }),
-    })
-      .then((res) => res.json())
+    put(`instructors/${email}`, { approved: true }, "instructorUpdate")
       .then((data) => {
         if (data.approved) {
-          fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
-            method: "PATCH",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({ role: "instructor" }),
-          })
-            .then((res) => res.json())
+          put(`users/${email}`, { role: "instructor" }, "userUpdate")
             .then((data) => {
               console.log(data);
               setRefresh(data.approved);
@@ -103,111 +90,108 @@ const InstructorRequest = () => {
     setRefresh(null);
   };
 
+  const handleDelete = (email) => {
+    del(`instructors/${email}`, "instructorDelete").then((data) => {
+      console.log(data);
+      setRefresh(data.approved);
+
+      del(`users/${email}`, "userDelete");
+    });
+    setRefresh(null);
+  };
+
   return (
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
         <div className="overflow-x-auto pt-5 sm:pt-[8rem]">
-          {/*<div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-4 text-primary">
+          <div class="flex items-center justify-between mb-4">
+          <div class="flex flex-col sm:flex-row items-start gap-4 sm:items-center justify-between w-full text-primary">
+              <div className="text-4xl font-semibold">Manage Instructors</div>
               <input
                 type="text"
-                placeholder="Search toys..."
-                class="px-4 py-2 border border-secondary text-secondary bg-transparent rounded-lg focus:outline-none "
-                onchange="{handleSearch}"
-                onChange={handleChange}
-                onSubmit={handleSubmit}
+                placeholder="Search users..."
+                class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
+                //onChange={handleChange}
+                //onSubmit={handleSubmit}
               />
-              <select
-                onChange={handleCategory}
-                //defaultValue="All Categories"
-                class="px-4 py-2 border border-secondary bg-transparent text-secondary rounded-lg focus:outline-none "
-              >
-                <option>All Categories</option>
-                {category.map((c) => (
-                  <option value={c.value} className="bg-primary text-secondary">
-                    {c.name}
-                  </option>
-                ))}
-              </select>
             </div>
-            <select
-              class="px-4 py-2 border border-secondary bg-transparent rounded-lg focus:outline-none "
-              //  value="{sortOption}"
-              onChange={handleSort}
-            >
-              <option value="" className="bg-primary">
-                Sort By
-              </option>
+          </div>
 
-              <option value="price-lowest" className="bg-primary">
-                Price (Lowest to Highest)
-              </option>
-              <option value="price-highest" className="bg-primary">
-                Price (Highest to Lowest)
-              </option>
-            </select>
-          </div>*/}
+          {filteredInstructors.length <= 0 ? (
+            <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
+              <div>
+                <img src={Empty} alt="empty" />
+              </div>
+            </div>
+          ) : (
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>Instructor Name</th>
+                  <th>Email</th>
+                  <th>Category</th>
+                  <th>Experience</th>
+                  <th>Education</th>
+                  <th>About</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredInstructors?.map((instructor) => (
+                  <tr key={instructor._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={instructor?.instructorImage}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
 
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>Instructor Name</th>
-                <th>Email</th>
-                <th>Category</th>
-                <th>Experience</th>
-                <th>Education</th>
-                <th>About</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredInstructors?.map((instructor) => (
-                <tr key={instructor._id}>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={instructor?.instructorImage}
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                        <div className="font-bold">{instructor.name}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">{instructor.email}</div>
                         </div>
                       </div>
-
-                      <div className="font-bold">{instructor.name}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div>
-                        <div className="font-bold">{instructor.email}</div>
+                    </td>
+                    <td>{instructor.category}</td>
+                    <td> {instructor.experience}</td>
+                    <td> {instructor.education}</td>
+                    <td> {instructor.about}</td>
+                    <th>
+                      <div className="flex items-center gap-4">
+                        <button
+                          disabled={instructor.approved}
+                          onClick={() => {
+                            handleApproved(instructor.email);
+                          }}
+                          className={
+                            instructor.approved
+                              ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
+                              : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
+                          }
+                        >
+                          {instructor.approved
+                            ? "Approved"
+                            : "Not approved yet"}
+                        </button>
+                        <button onClick={() => handleDelete(instructor.email)}>
+                          <AiOutlineClose className="text-2xl font-bold" />
+                        </button>
                       </div>
-                    </div>
-                  </td>
-                  <td>{instructor.category}</td>
-                  <td> {instructor.experience}</td>
-                  <td> {instructor.education}</td>
-                  <td> {instructor.about}</td>
-                  <th>
-                    <button
-                      disabled={instructor.approved}
-                      onClick={() => {
-                        handleApproved(instructor.email);
-                      }}
-                      className={
-                        instructor.approved
-                          ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
-                          : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
-                      }
-                    >
-                      {instructor.approved ? "Approved" : "Not approved yet"}
-                    </button>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>

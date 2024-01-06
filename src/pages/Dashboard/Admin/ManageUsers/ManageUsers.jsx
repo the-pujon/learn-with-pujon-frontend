@@ -2,59 +2,64 @@ import React, { useEffect, useState } from "react";
 import { FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
 import useApi from "../../../../Hooks/useApi";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ManageUsers = () => {
   const [users, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const { get, post, put, del } = useApi();
+  const { get, put, del } = useApi();
 
   useEffect(() => {
-    get("users")
-      .then((data) => {
-        setAllUsers(data);
-        setFilteredUsers(data);
-      });
+    get("users").then((data) => {
+      setAllUsers(data);
+      setFilteredUsers(data);
+      setLoading(false);
+    });
   }, [refresh]);
 
   //for search
-    const handleChange = (e) => {
-      setSearch(e.target.value);
-    };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   //for search
-    useEffect(() => {
-      let value = search.toLowerCase();
-      let toySearch = users.filter((data) => {
-        console.log(data)
-        const name = data.name.toLowerCase();
-        const email = data.email.toLowerCase();
-        return name.startsWith(value) || email.startsWith(value) ;
-      });
-      setFilteredUsers(toySearch);
-    }, [search]);
+  useEffect(() => {
+    let value = search.toLowerCase();
+    let userSearch = users.filter((data) => {
+      const name = data.name.toLowerCase();
+      const email = data.email.toLowerCase();
+      return name.startsWith(value) || email.startsWith(value);
+    });
+    setFilteredUsers(userSearch);
+  }, [search]);
 
   //for search
-    const handleSubmit = (e) => {
-      e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      let value = search.toLowerCase();
+    let value = search.toLowerCase();
 
-      let toySearch = users.filter((data) => {
-        const name = data.name.toLowerCase();
-        return name === value;
-      });
+    let userSearch = users.filter((data) => {
+      const name = data.name.toLowerCase();
+      return name === value;
+    });
 
-      setFilteredUsers(toySearch);
-    };
-
+    setFilteredUsers(userSearch);
+  };
 
   const handleAdmin = (email) => {
-    put(`users/${email}`, {
-      role: "admin",
-    }, 'updateUser')
+    put(
+      `users/${email}`,
+      {
+        role: "admin",
+      },
+      "updateUser"
+    )
       .then((data) => {
         console.log(data);
         setRefresh(data.approved);
@@ -82,7 +87,7 @@ const ManageUsers = () => {
               <div className="text-4xl font-semibold">Manage Users</div>
               <input
                 type="text"
-                placeholder="Search toys..."
+                placeholder="Search users..."
                 class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
                 onChange={handleChange}
                 onSubmit={handleSubmit}
@@ -101,69 +106,109 @@ const ManageUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers?.map((user) => (
-                <tr key={user._id}>
+              {loading ? (
+                <tr>
                   <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={user?.image}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="font-bold">{user.name}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div>
-                        <div className="font-bold">{user.email}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    {user.role === "admin" && (
-                      <div className="flex items-center gap-1">
-                        {" "}
-                        <MdAdminPanelSettings /> Admin
-                      </div>
-                    )}
-                    {user.role === "instructor" && (
-                      <div className="flex items-center gap-1">
-                        {" "}
-                        <FaChalkboardTeacher /> Instructor
-                      </div>
-                    )}
-                    {user.role === "user" && (
-                      <div className="flex items-center gap-1">
-                        {" "}
-                        <FaUserGraduate /> User
-                      </div>
-                    )}
-                  </td>
-                  <td className="flex gap-2">
-                    <button
-                      onClick={() => handleAdmin(user.email)}
-                      className={
-                        "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 "
-                      }
+                    <SkeletonTheme
+                      baseColor="#ABB3BF"
+                      highlightColor="#CED3DA"
+                      height={50}
                     >
-                      <MdAdminPanelSettings /> Make Admin
-                    </button>
-                    <button
-                      onClick={() => handleRemove(user.email)}
-                      className={
-                        "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center"
-                      }
+                      <Skeleton />
+                    </SkeletonTheme>
+                  </td>
+                  <td>
+                    <SkeletonTheme
+                      baseColor="#ABB3BF"
+                      highlightColor="#CED3DA"
+                      height={50}
                     >
-                      <MdDeleteSweep /> Remove User
-                    </button>
+                      <Skeleton />
+                    </SkeletonTheme>
+                  </td>
+                  <td>
+                    <SkeletonTheme
+                      baseColor="#ABB3BF"
+                      highlightColor="#CED3DA"
+                      height={50}
+                    >
+                      <Skeleton />
+                    </SkeletonTheme>
+                  </td>
+                  <td>
+                    <SkeletonTheme
+                      baseColor="#ABB3BF"
+                      highlightColor="#CED3DA"
+                      height={50}
+                    >
+                      <Skeleton />
+                    </SkeletonTheme>
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredUsers?.map((user) => (
+                  <tr key={user._id}>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img
+                              src={user?.image}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="font-bold">{user.name}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center space-x-3">
+                        <div>
+                          <div className="font-bold">{user.email}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {user.role === "admin" && (
+                        <div className="flex items-center gap-1">
+                          <MdAdminPanelSettings /> Admin
+                        </div>
+                      )}
+                      {user.role === "instructor" && (
+                        <div className="flex items-center gap-1">
+                          <FaChalkboardTeacher /> Instructor
+                        </div>
+                      )}
+                      {user.role === "user" && (
+                        <div className="flex items-center gap-1">
+                          <FaUserGraduate /> User
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleAdmin(user.email)}
+                          className={
+                            "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 "
+                          }
+                        >
+                          <MdAdminPanelSettings /> Make Admin
+                        </button>
+                        <button
+                          onClick={() => handleRemove(user.email)}
+                          className={
+                            "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center"
+                          }
+                        >
+                          <MdDeleteSweep /> Remove User
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

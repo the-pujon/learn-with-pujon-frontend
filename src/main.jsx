@@ -10,6 +10,8 @@ import store from "./App/Store";
 import AnimatedCursor from "react-animated-cursor";
 import { Toaster } from 'react-hot-toast';
 
+import "react-loading-skeleton/dist/skeleton.css";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
     <div><Toaster/></div>
