@@ -92,10 +92,7 @@ const InstructorRequest = () => {
 
   const handleDelete = (email) => {
     del(`instructors/${email}`, "instructorDelete").then((data) => {
-      console.log(data);
       setRefresh(data.approved);
-
-      del(`users/${email}`, "userDelete");
     });
     setRefresh(null);
   };

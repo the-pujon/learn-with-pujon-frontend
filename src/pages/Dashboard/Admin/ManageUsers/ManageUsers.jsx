@@ -3,6 +3,8 @@ import { FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
 import useApi from "../../../../Hooks/useApi";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Empty from "../../../../assets/animations/empty.gif";
+
 import "react-loading-skeleton/dist/skeleton.css";
 
 const ManageUsers = () => {
@@ -52,6 +54,7 @@ const ManageUsers = () => {
     setFilteredUsers(userSearch);
   };
 
+  //update user
   const handleAdmin = (email) => {
     put(
       `users/${email}`,
@@ -68,11 +71,16 @@ const ManageUsers = () => {
     setRefresh(null);
   };
 
+  //for delete
   const handleRemove = (email) => {
+    console.log(email);
     del(`users/${email}`, "userDelete")
       .then((data) => {
-        console.log(data);
-        setRefresh(data.approved);
+        if (data.role === "instructor") {
+          del(`instructors/${email}`, "instructorUpdate").then((data) => {
+            setRefresh(data.approved);
+          });
+        }
       })
       .catch((err) => console.error(err));
     setRefresh(null);
@@ -95,58 +103,65 @@ const ManageUsers = () => {
             </div>
           </div>
 
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
+          {!loading &&  filteredUsers.length <= 0 ? (
+            <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
+              <div>
+                <img src={Empty} alt="empty" />
+              </div>
+            </div>
+          ) : (
+            <table className="table">
+              {/* head */}
+              <thead>
                 <tr>
-                  <td>
-                    <SkeletonTheme
-                      baseColor="#ABB3BF"
-                      highlightColor="#CED3DA"
-                      height={50}
-                    >
-                      <Skeleton />
-                    </SkeletonTheme>
-                  </td>
-                  <td>
-                    <SkeletonTheme
-                      baseColor="#ABB3BF"
-                      highlightColor="#CED3DA"
-                      height={50}
-                    >
-                      <Skeleton />
-                    </SkeletonTheme>
-                  </td>
-                  <td>
-                    <SkeletonTheme
-                      baseColor="#ABB3BF"
-                      highlightColor="#CED3DA"
-                      height={50}
-                    >
-                      <Skeleton />
-                    </SkeletonTheme>
-                  </td>
-                  <td>
-                    <SkeletonTheme
-                      baseColor="#ABB3BF"
-                      highlightColor="#CED3DA"
-                      height={50}
-                    >
-                      <Skeleton />
-                    </SkeletonTheme>
-                  </td>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Action</th>
                 </tr>
-              ) : (
-                filteredUsers?.map((user) => (
+              </thead>
+              <tbody>
+                {loading && (
+                  <tr>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                  </tr>
+                )}
+                {filteredUsers?.map((user) => (
                   <tr key={user._id}>
                     <td>
                       <div className="flex items-center space-x-3">
@@ -189,17 +204,19 @@ const ManageUsers = () => {
                     <td>
                       <div className="flex gap-2">
                         <button
+                          disabled={user.role === "admin"}
                           onClick={() => handleAdmin(user.email)}
                           className={
-                            "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 "
+                            "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 disabled:cursor-not-allowed"
                           }
                         >
                           <MdAdminPanelSettings /> Make Admin
                         </button>
                         <button
+                          disabled={user.role === "admin"}
                           onClick={() => handleRemove(user.email)}
                           className={
-                            "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center"
+                            "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center disabled:cursor-not-allowed"
                           }
                         >
                           <MdDeleteSweep /> Remove User
@@ -207,10 +224,10 @@ const ManageUsers = () => {
                       </div>
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
