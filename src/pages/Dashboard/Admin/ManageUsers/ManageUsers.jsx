@@ -7,86 +7,54 @@ const ManageUsers = () => {
   const [users, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
 
-  const {get,post,put, del} = useApi()
+  const { get, post, put, del } = useApi();
 
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/users")
-      .then((res) => res.json())
+    get("users")
       .then((data) => {
-        console.log(data);
         setAllUsers(data);
         setFilteredUsers(data);
       });
-
-    //fetch("/category.json")
-    //  .then((res) => res.json())
-    //  .then((data) => {
-    //    setCategory(data);
-    //  });
   }, [refresh]);
 
   //for search
-  //  const handleChange = (e) => {
-  //    setSearch(e.target.value);
-  //  };
+    const handleChange = (e) => {
+      setSearch(e.target.value);
+    };
 
   //for search
-  //  useEffect(() => {
-  //    let value = search.toLowerCase();
-  //    let toySearch = toys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name.startsWith(value);
-  //    });
-  //    setFilteredToys(toySearch);
-  //  }, [search]);
+    useEffect(() => {
+      let value = search.toLowerCase();
+      let toySearch = users.filter((data) => {
+        console.log(data)
+        const name = data.name.toLowerCase();
+        const email = data.email.toLowerCase();
+        return name.startsWith(value) || email.startsWith(value) ;
+      });
+      setFilteredUsers(toySearch);
+    }, [search]);
 
   //for search
-  //  const handleSubmit = (e) => {
-  //    e.preventDefault();
+    const handleSubmit = (e) => {
+      e.preventDefault();
 
-  //    let value = search.toLowerCase();
+      let value = search.toLowerCase();
 
-  //    let toySearch = loadedToys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name === value;
-  //    });
+      let toySearch = users.filter((data) => {
+        const name = data.name.toLowerCase();
+        return name === value;
+      });
 
-  //    setFilteredToys(toySearch);
-  //  };
+      setFilteredUsers(toySearch);
+    };
 
-  //  const handleCategory = (e) => {
-  //    e.preventDefault();
-  //    //console.log(e.target.value);
-  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        setAllToys(data);
-  //        setFilteredToys(data);
-  //      });
-  //  };
-
-  //  const handleSort = (e) => {
-  //    if (e.target.value === "price-lowest") {
-  //      const s = [...filteredToys].sort((a, b) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
-
-  //    if (e.target.value === "price-highest") {
-  //      const s = [...filteredToys].sort((b, a) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
-  //  };
 
   const handleAdmin = (email) => {
-    fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
-      method: "PATCH",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ role: "admin" }),
-    })
-      .then((res) => res.json())
+    put(`users/${email}`, {
+      role: "admin",
+    }, 'updateUser')
       .then((data) => {
         console.log(data);
         setRefresh(data.approved);
@@ -96,7 +64,7 @@ const ManageUsers = () => {
   };
 
   const handleRemove = (email) => {
-    del(`users/${email}`, 'userDelete')
+    del(`users/${email}`, "userDelete")
       .then((data) => {
         console.log(data);
         setRefresh(data.approved);
@@ -109,46 +77,18 @@ const ManageUsers = () => {
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
         <div className="overflow-x-auto pt-5 sm:pt-[8rem]">
-          {/*<div class="flex items-center justify-between mb-4">
-            <div class="flex items-center space-x-4 text-primary">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex flex-col sm:flex-row items-start gap-4 sm:items-center justify-between w-full text-primary">
+              <div className="text-4xl font-semibold">Manage Users</div>
               <input
                 type="text"
                 placeholder="Search toys..."
-                class="px-4 py-2 border border-secondary text-secondary bg-transparent rounded-lg focus:outline-none "
-                onchange="{handleSearch}"
+                class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
                 onChange={handleChange}
                 onSubmit={handleSubmit}
               />
-              <select
-                onChange={handleCategory}
-                //defaultValue="All Categories"
-                class="px-4 py-2 border border-secondary bg-transparent text-secondary rounded-lg focus:outline-none "
-              >
-                <option>All Categories</option>
-                {category.map((c) => (
-                  <option value={c.value} className="bg-primary text-secondary">
-                    {c.name}
-                  </option>
-                ))}
-              </select>
             </div>
-            <select
-              class="px-4 py-2 border border-secondary bg-transparent rounded-lg focus:outline-none "
-              //  value="{sortOption}"
-              onChange={handleSort}
-            >
-              <option value="" className="bg-primary">
-                Sort By
-              </option>
-
-              <option value="price-lowest" className="bg-primary">
-                Price (Lowest to Highest)
-              </option>
-              <option value="price-highest" className="bg-primary">
-                Price (Highest to Lowest)
-              </option>
-            </select>
-          </div>*/}
+          </div>
 
           <table className="table">
             {/* head */}
