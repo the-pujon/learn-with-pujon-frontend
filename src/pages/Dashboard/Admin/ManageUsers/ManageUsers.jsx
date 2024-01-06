@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaChalkboardTeacher, FaUserGraduate } from "react-icons/fa";
 import { MdAdminPanelSettings, MdDeleteSweep } from "react-icons/md";
+import useApi from "../../../../Hooks/useApi";
 
 const ManageUsers = () => {
   const [users, setAllUsers] = useState([]);
@@ -8,6 +9,8 @@ const ManageUsers = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
+
+  const {get,post,put, del} = useApi()
 
   useEffect(() => {
     fetch("https://sv-ashen.vercel.app/api/users")
@@ -93,10 +96,7 @@ const ManageUsers = () => {
   };
 
   const handleRemove = (email) => {
-    fetch(`https://sv-ashen.vercel.app/api/users/${email}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
+    del(`users/${email}`, 'userDelete')
       .then((data) => {
         console.log(data);
         setRefresh(data.approved);
@@ -108,7 +108,7 @@ const ManageUsers = () => {
   return (
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
-        <div className="overflow-x-auto pt-[8rem]">
+        <div className="overflow-x-auto pt-5 sm:pt-[8rem]">
           {/*<div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-4 text-primary">
               <input

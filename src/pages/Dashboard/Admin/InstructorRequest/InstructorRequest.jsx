@@ -106,7 +106,7 @@ const InstructorRequest = () => {
   return (
     <div>
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
-        <div className="overflow-x-auto pt-[8rem]">
+        <div className="overflow-x-auto pt-5 sm:pt-[8rem]">
           {/*<div class="flex items-center justify-between mb-4">
             <div class="flex items-center space-x-4 text-primary">
               <input

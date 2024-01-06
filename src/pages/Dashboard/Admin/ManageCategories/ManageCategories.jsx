@@ -51,7 +51,7 @@ const ManageCategories=() => {
 
     return (
         <div className="wrapper min-h-screen  text-primary backdrop-blur-md">
-            <div className="flex divide-x gap-4 min-h-screen  overflow-x-auto pt-[8rem]">
+            <div className="flex flex-col md:flex-row divide-x gap-4 min-h-screen  overflow-x-auto pt-5 sm:pt-[8rem]">
                 <div className="basis-[35rem]" >
                     {/* for add category */}
                     <div className="pb-10">
@@ -204,7 +204,7 @@ const ManageCategories=() => {
                         </form>
                     </>
                 </div>
-                <div className="flex-1 max-h-[80vh] overflow-auto">
+                <div className="flex-1 md:max-h-[80vh] md:overflow-auto">
                     <ShowCategories loading={loading} filteredCategories={filteredCategories} setRefresh={setRefresh} />
                 </div>
             </div>

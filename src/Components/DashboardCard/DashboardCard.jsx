@@ -9,7 +9,7 @@ const DashboardCard = ({ name, total, url }) => {
     <div className="flex flex-col p-3 border rounded-md shadow-xl gap-2">
       <div className="text-sm">Total {name}</div>
       <div className="text-3xl font-semibold text-primary">
-        {name === "earnings" ? `$ ${total}` : total}
+        {name === "earnings" ? `$ ${total.toFixed(2)}` : total}
       </div>
       {/*<div title="approved / not approved" >
         <span className="text-green-500" >5</span> / <span className="text-red-500" >10</span>

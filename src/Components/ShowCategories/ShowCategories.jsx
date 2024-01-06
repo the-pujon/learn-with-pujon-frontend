@@ -35,9 +35,9 @@ const ShowCategories=({filteredCategories,setRefresh}) => {
             <td> {category.CategorySlug}</td>
             <td>
               <div className="dropdown dropdown-bottom dropdown-end ">
-                <div tabIndex={0} role="button" className="badge-primary badge">Show Subcategory</div>
+                <div tabIndex={0} role="button" className="badge-primary badge"><span className='hidden sm:block' >Show Subcategory</span><span className='sm:hidden'> Subcategory</span></div>
                 <div tabIndex={0} className="dropdown-content z-[1] card card-compact  max-h-[30vh] overflow-auto p-2 shadow bg-primary text-secondary">
-                  <div className="card-body w-[30rem]">
+                  <div className="card-body w-[10rem] md:w-[30rem]">
                     {
                       category.subcategory.length===0? <div className='w-32'>No Subcategory yet</div>:
                         <table className="table">

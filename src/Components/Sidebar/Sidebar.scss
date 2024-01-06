@@ -21,23 +21,25 @@
         }
 
 
-        &:active {
-            background: none;
+        @media only screen and (min-width:600px) {
+            &:active {
+                background: none;
 
-            &::after {
-                opacity: 1;
+                &::after {
+                    opacity: 1;
+                }
             }
-        }
 
-        &:hover {
-            &::after {
-                opacity: 1;
+            &:hover {
+                &::after {
+                    opacity: 1;
 
+                }
             }
-        }
 
-        &:focus {
-            background-color: transparent;
+            &:focus {
+                background-color: transparent;
+            }
         }
     }
 
