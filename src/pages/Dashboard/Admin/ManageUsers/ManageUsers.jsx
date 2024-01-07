@@ -88,131 +88,133 @@ const ManageUsers = () => {
             </div>
           </div>
 
-          {!loading &&  filteredUsers.length <= 0 ? (
-            <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
-              <div>
-                <img src={Empty} alt="empty" />
+          <div className="max-w-full overflow-auto">
+            {!loading && filteredUsers.length <= 0 ? (
+              <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
+                <div>
+                  <img src={Empty} alt="empty" />
+                </div>
               </div>
-            </div>
-          ) : (
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading && (
+            ) : (
+              <table className="table">
+                {/* head */}
+                <thead>
                   <tr>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
                   </tr>
-                )}
-                {filteredUsers?.map((user) => (
-                  <tr key={user._id}>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img
-                              src={user?.image}
-                              alt="Avatar Tailwind CSS Component"
-                            />
+                </thead>
+                <tbody>
+                  {loading && (
+                    <tr>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                    </tr>
+                  )}
+                  {filteredUsers?.map((user) => (
+                    <tr key={user._id}>
+                      <td>
+                        <div className="flex items-center space-x-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle w-12 h-12">
+                              <img
+                                src={user?.image}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="font-bold">{user.name}</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center space-x-3">
+                          <div>
+                            <div className="font-bold">{user.email}</div>
                           </div>
                         </div>
-
-                        <div className="font-bold">{user.name}</div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold">{user.email}</div>
+                      </td>
+                      <td>
+                        {user.role === "admin" && (
+                          <div className="flex items-center gap-1">
+                            <MdAdminPanelSettings /> Admin
+                          </div>
+                        )}
+                        {user.role === "instructor" && (
+                          <div className="flex items-center gap-1">
+                            <FaChalkboardTeacher /> Instructor
+                          </div>
+                        )}
+                        {user.role === "user" && (
+                          <div className="flex items-center gap-1">
+                            <FaUserGraduate /> User
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        <div className="flex gap-2">
+                          <button
+                            disabled={user.role === "admin"}
+                            onClick={() => handleAdmin(user.email)}
+                            className={
+                              "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 disabled:cursor-not-allowed"
+                            }
+                          >
+                            <MdAdminPanelSettings /> Make Admin
+                          </button>
+                          <button
+                            disabled={user.role === "admin"}
+                            onClick={() => handleRemove(user.email)}
+                            className={
+                              "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center disabled:cursor-not-allowed"
+                            }
+                          >
+                            <MdDeleteSweep /> Remove User
+                          </button>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      {user.role === "admin" && (
-                        <div className="flex items-center gap-1">
-                          <MdAdminPanelSettings /> Admin
-                        </div>
-                      )}
-                      {user.role === "instructor" && (
-                        <div className="flex items-center gap-1">
-                          <FaChalkboardTeacher /> Instructor
-                        </div>
-                      )}
-                      {user.role === "user" && (
-                        <div className="flex items-center gap-1">
-                          <FaUserGraduate /> User
-                        </div>
-                      )}
-                    </td>
-                    <td>
-                      <div className="flex gap-2">
-                        <button
-                          disabled={user.role === "admin"}
-                          onClick={() => handleAdmin(user.email)}
-                          className={
-                            "border-gray-600 border py-1 px-2 rounded-full text-gray-600 font-normal flex items-center gap-1 disabled:cursor-not-allowed"
-                          }
-                        >
-                          <MdAdminPanelSettings /> Make Admin
-                        </button>
-                        <button
-                          disabled={user.role === "admin"}
-                          onClick={() => handleRemove(user.email)}
-                          className={
-                            "border-red-400 border py-1 px-2 rounded-full text-red-600 font-normal flex gap-1 items-center disabled:cursor-not-allowed"
-                          }
-                        >
-                          <MdDeleteSweep /> Remove User
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       </div>
     </div>

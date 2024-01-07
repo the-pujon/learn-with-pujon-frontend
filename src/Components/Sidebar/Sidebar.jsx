@@ -5,14 +5,12 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FaChalkboardTeacher, FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
 import logo from "../../assets/logos/logo3.png";
+import {SiGoogleclassroom} from "react-icons/si";
 
 const Sidebar = () => {
   return (
     <div>
-
-
-<div className=" md:hidden inset-y-0 z-10 flex w-20 bg-primary h-screen sticky top-0">
-
+      <div className=" md:hidden inset-y-0 z-10 flex w-20 bg-primary h-screen sticky top-0">
         <div className="z-10 flex flex-col flex-1">
           <div className=" pl-5 pt-5  ">
             <img src={logo} alt="" className="w-10 " />
@@ -34,10 +32,10 @@ const Sidebar = () => {
               <FaChalkboardTeacher className="text-xl" />
             </NavLink>
             <NavLink
-              to="/dashboard/courseRequest"
+              to="/dashboard/manageCourses"
               className="flex items-center space-x-2 w-fit"
             >
-              <AiOutlineHome className="text-xl" />
+              <SiGoogleclassroom className="text-xl" />
             </NavLink>
             <NavLink
               to="/dashboard/categories"
@@ -48,7 +46,10 @@ const Sidebar = () => {
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
             </NavLink>
-            <NavLink to="/dashboard/allTransactions" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard/allTransactions"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
             </NavLink>
           </nav>
@@ -59,10 +60,6 @@ const Sidebar = () => {
           </div>*/}
         </div>
       </div>
-
-
-
-
 
       <div className="fixed hidden inset-y-0 z-10 md:flex w-80">
         <svg
@@ -79,7 +76,9 @@ const Sidebar = () => {
         <div className="z-10 flex flex-col flex-1">
           <div className="flex items-end justify-between flex-shrink-0 pl-2  w-28">
             <img src={logo} alt="" className="w-24 " />
-            <div className="text-2xl text-secondary font-normal mb-2">SKILLS VOYAGE</div>
+            <div className="text-2xl text-secondary font-normal mb-2">
+              SKILLS VOYAGE
+            </div>
           </div>
           <nav className="flex flex-col flex-1 w-64 p-4 mt-4 gap-4 text-secondary sidebar">
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
@@ -101,11 +100,11 @@ const Sidebar = () => {
               <span className="text-base">Manage Instructors</span>
             </NavLink>
             <NavLink
-              to="/dashboard/courseRequest"
+              to="/dashboard/manageCourses"
               className="flex items-center space-x-2 w-fit"
             >
-              <AiOutlineHome className="text-xl" />
-              <span className="text-base">Course Request</span>
+              <SiGoogleclassroom className="text-xl" />
+              <span className="text-base">Manage Courses</span>
             </NavLink>
             <NavLink
               to="/dashboard/categories"
@@ -118,7 +117,10 @@ const Sidebar = () => {
               <AiOutlineHome className="text-xl" />
               <span className="text-base">All Classes</span>
             </NavLink>
-            <NavLink to="/dashboard/allTransactions" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard/allTransactions"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
               <span className="text-base">All Transactions</span>
             </NavLink>

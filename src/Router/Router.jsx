@@ -8,7 +8,6 @@ import BecomeInstructor from "../pages/ClientSide/Instructors/BecomeInstructor/B
 import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
 import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
-import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 //import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 import PrivateRoute from "./PrivateRoute";
@@ -24,6 +23,7 @@ import InstructorOnlyRoute from "./InstructorOnlyRoute.jsx";
 import DashboardLayout from "../Layout/DashboardLayout.jsx";
 import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard.jsx";
 import ManageInstructors from "../pages/Dashboard/Admin/ManageInstructors/ManageInstructors.jsx";
+import ManageCourses from "../pages/Dashboard/Admin/ManageCourses/ManageCourses.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -133,11 +133,11 @@ export const Router = createBrowserRouter([
         ),
       },
       {
-        path: "courseRequest",
+        path: "manageCourses",
         element: (
           <PrivateRoute>
             <AdminOnlyRoute>
-              <CourseRequest />
+              <ManageCourses />
             </AdminOnlyRoute>
           </PrivateRoute>
         ),

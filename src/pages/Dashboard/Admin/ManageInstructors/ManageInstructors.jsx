@@ -81,149 +81,151 @@ const ManageInstructors = () => {
             </div>
           </div>
 
-          {!loading && filteredInstructors.length <= 0 ? (
-            <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
-              <div>
-                <img src={Empty} alt="empty" />
+          <div className="max-w-full overflow-auto">
+            {!loading && filteredInstructors.length <= 0 ? (
+              <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
+                <div>
+                  <img src={Empty} alt="empty" />
+                </div>
               </div>
-            </div>
-          ) : (
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Instructor Name</th>
-                  <th>Email</th>
-                  <th>Category</th>
-                  <th>Experience</th>
-                  <th>Education</th>
-                  <th>About</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading && (
+            ) : (
+              <table className="table">
+                {/* head */}
+                <thead>
                   <tr>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
-                    <td>
-                      <SkeletonTheme
-                        baseColor="#ABB3BF"
-                        highlightColor="#CED3DA"
-                        height={50}
-                      >
-                        <Skeleton />
-                      </SkeletonTheme>
-                    </td>
+                    <th>Instructor Name</th>
+                    <th>Email</th>
+                    <th>Category</th>
+                    <th>Experience</th>
+                    <th>Education</th>
+                    <th>About</th>
+                    <th>Action</th>
                   </tr>
-                )}
+                </thead>
+                <tbody>
+                  {loading && (
+                    <tr>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                      <td>
+                        <SkeletonTheme
+                          baseColor="#ABB3BF"
+                          highlightColor="#CED3DA"
+                          height={50}
+                        >
+                          <Skeleton />
+                        </SkeletonTheme>
+                      </td>
+                    </tr>
+                  )}
 
-                {filteredInstructors?.map((instructor) => (
-                  <tr key={instructor._id}>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img
-                              src={instructor?.instructorImage}
-                              alt="Avatar Tailwind CSS Component"
-                            />
+                  {filteredInstructors?.map((instructor) => (
+                    <tr key={instructor._id}>
+                      <td>
+                        <div className="flex items-center space-x-3">
+                          <div className="avatar">
+                            <div className="mask mask-squircle w-12 h-12">
+                              <img
+                                src={instructor?.instructorImage}
+                                alt="Avatar Tailwind CSS Component"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="font-bold">{instructor.name}</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center space-x-3">
+                          <div>
+                            <div className="font-bold">{instructor.email}</div>
                           </div>
                         </div>
-
-                        <div className="font-bold">{instructor.name}</div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div>
-                          <div className="font-bold">{instructor.email}</div>
+                      </td>
+                      <td>{instructor.category}</td>
+                      <td> {instructor.experience}</td>
+                      <td> {instructor.education}</td>
+                      <td> {instructor.about}</td>
+                      <th>
+                        <div className="flex items-center gap-4">
+                          <button
+                            disabled={instructor.approved}
+                            onClick={() => {
+                              handleApproved(instructor.email);
+                            }}
+                            className={
+                              instructor.approved
+                                ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
+                                : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
+                            }
+                          >
+                            {instructor.approved ? "Approved" : "Not approved"}
+                          </button>
+                          <button
+                            onClick={() => handleDelete(instructor.email)}
+                          >
+                            <AiOutlineClose className="text-2xl font-bold" />
+                          </button>
                         </div>
-                      </div>
-                    </td>
-                    <td>{instructor.category}</td>
-                    <td> {instructor.experience}</td>
-                    <td> {instructor.education}</td>
-                    <td> {instructor.about}</td>
-                    <th>
-                      <div className="flex items-center gap-4">
-                        <button
-                          disabled={instructor.approved}
-                          onClick={() => {
-                            handleApproved(instructor.email);
-                          }}
-                          className={
-                            instructor.approved
-                              ? "border-green-600 border py-1 px-2 rounded-full text-green-600 font-normal"
-                              : "border-red-600 border py-1 px-2 rounded-full text-red-600 font-normal"
-                          }
-                        >
-                          {instructor.approved
-                            ? "Approved"
-                            : "Not approved"}
-                        </button>
-                        <button onClick={() => handleDelete(instructor.email)}>
-                          <AiOutlineClose className="text-2xl font-bold" />
-                        </button>
-                      </div>
-                    </th>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                      </th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       </div>
     </div>
