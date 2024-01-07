@@ -40,20 +40,6 @@ const ManageUsers = () => {
     setFilteredUsers(userSearch);
   }, [search]);
 
-  //for search
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let value = search.toLowerCase();
-
-    let userSearch = users.filter((data) => {
-      const name = data.name.toLowerCase();
-      return name === value;
-    });
-
-    setFilteredUsers(userSearch);
-  };
-
   //update user
   const handleAdmin = (email) => {
     put(
@@ -98,7 +84,6 @@ const ManageUsers = () => {
                 placeholder="Search users..."
                 class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
                 onChange={handleChange}
-                onSubmit={handleSubmit}
               />
             </div>
           </div>

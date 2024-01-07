@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import useApi from "./../../../../Hooks/useApi";
+import useApi from "../../../../Hooks/useApi";
 import { AiOutlineClose } from "react-icons/ai";
 import Empty from "../../../../assets/animations/empty.gif";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-const InstructorRequest = () => {
+const ManageInstructors = () => {
   const [instructors, setAllInstructors] = useState([]);
   const [filteredInstructors, setFilteredInstructors] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState([]);
   const [refresh, setRefresh] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const { get, put, del } = useApi();
 
@@ -16,61 +17,27 @@ const InstructorRequest = () => {
     get("instructors").then((data) => {
       setAllInstructors(data);
       setFilteredInstructors(data);
+      setLoading(false);
     });
   }, [refresh]);
 
   //for search
-  //  const handleChange = (e) => {
-  //    setSearch(e.target.value);
-  //  };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   //for search
-  //  useEffect(() => {
-  //    let value = search.toLowerCase();
-  //    let toySearch = toys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name.startsWith(value);
-  //    });
-  //    setFilteredToys(toySearch);
-  //  }, [search]);
+  useEffect(() => {
+    let value = search.toLowerCase();
+    let toySearch = instructors.filter((data) => {
+      const name = data.name.toLowerCase();
+      const email = data.email.toLowerCase();
+      return name.startsWith(value) || email.startsWith(value);
+    });
+    setFilteredInstructors(toySearch);
+  }, [search]);
 
-  //for search
-  //  const handleSubmit = (e) => {
-  //    e.preventDefault();
-
-  //    let value = search.toLowerCase();
-
-  //    let toySearch = loadedToys.filter((data) => {
-  //      const name = data.name.toLowerCase();
-  //      return name === value;
-  //    });
-
-  //    setFilteredToys(toySearch);
-  //  };
-
-  //  const handleCategory = (e) => {
-  //    e.preventDefault();
-  //    //console.log(e.target.value);
-  //    fetch(`https://sv-ashen.vercel.app/api/toys?category=${e.target.value}`)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        setAllToys(data);
-  //        setFilteredToys(data);
-  //      });
-  //  };
-
-  //  const handleSort = (e) => {
-  //    if (e.target.value === "price-lowest") {
-  //      const s = [...filteredToys].sort((a, b) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
-
-  //    if (e.target.value === "price-highest") {
-  //      const s = [...filteredToys].sort((b, a) => a.price - b.price);
-  //      setFilteredToys(s);
-  //    }
-  //  };
-
+  //for approving instructor
   const handleApproved = (email) => {
     put(`instructors/${email}`, { approved: true }, "instructorUpdate")
       .then((data) => {
@@ -90,6 +57,7 @@ const InstructorRequest = () => {
     setRefresh(null);
   };
 
+  //deleting instructor
   const handleDelete = (email) => {
     del(`instructors/${email}`, "instructorDelete").then((data) => {
       setRefresh(data.approved);
@@ -102,19 +70,18 @@ const InstructorRequest = () => {
       <div className="wrapper min-h-screen text-primary backdrop-blur-md">
         <div className="overflow-x-auto pt-5 sm:pt-[8rem]">
           <div class="flex items-center justify-between mb-4">
-          <div class="flex flex-col sm:flex-row items-start gap-4 sm:items-center justify-between w-full text-primary">
+            <div class="flex flex-col sm:flex-row items-start gap-4 sm:items-center justify-between w-full text-primary">
               <div className="text-4xl font-semibold">Manage Instructors</div>
               <input
                 type="text"
-                placeholder="Search users..."
+                placeholder="Search instructors..."
                 class="px-4 py-2 border border-primary text-primary bg-transparent rounded-lg focus:outline-none "
-                //onChange={handleChange}
-                //onSubmit={handleSubmit}
+                onChange={handleChange}
               />
             </div>
           </div>
 
-          {filteredInstructors.length <= 0 ? (
+          {!loading && filteredInstructors.length <= 0 ? (
             <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
               <div>
                 <img src={Empty} alt="empty" />
@@ -135,6 +102,74 @@ const InstructorRequest = () => {
                 </tr>
               </thead>
               <tbody>
+                {loading && (
+                  <tr>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                    <td>
+                      <SkeletonTheme
+                        baseColor="#ABB3BF"
+                        highlightColor="#CED3DA"
+                        height={50}
+                      >
+                        <Skeleton />
+                      </SkeletonTheme>
+                    </td>
+                  </tr>
+                )}
+
                 {filteredInstructors?.map((instructor) => (
                   <tr key={instructor._id}>
                     <td>
@@ -177,7 +212,7 @@ const InstructorRequest = () => {
                         >
                           {instructor.approved
                             ? "Approved"
-                            : "Not approved yet"}
+                            : "Not approved"}
                         </button>
                         <button onClick={() => handleDelete(instructor.email)}>
                           <AiOutlineClose className="text-2xl font-bold" />
@@ -195,4 +230,4 @@ const InstructorRequest = () => {
   );
 };
 
-export default InstructorRequest;
+export default ManageInstructors;

@@ -6,7 +6,6 @@ import Courses from "../pages/ClientSide/Courses/Courses/Courses";
 import Authentication from "../pages/Authentication/Authentication/Authentication";
 import BecomeInstructor from "../pages/ClientSide/Instructors/BecomeInstructor/BecomeInstructor";
 import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
-import InstructorRequest from "../pages/Dashboard/Admin/InstructorRequest/InstructorRequest";
 import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
 import CourseRequest from "../pages/Dashboard/Admin/CourseRequest/CourseRequest";
@@ -24,6 +23,7 @@ import ErrorPage from "../pages/ErrorPage.jsx";
 import InstructorOnlyRoute from "./InstructorOnlyRoute.jsx";
 import DashboardLayout from "../Layout/DashboardLayout.jsx";
 import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard.jsx";
+import ManageInstructors from "../pages/Dashboard/Admin/ManageInstructors/ManageInstructors.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -123,11 +123,11 @@ export const Router = createBrowserRouter([
       </PrivateRoute>
       },
       {
-        path: "instructorApplication",
+        path: "manageInstructor",
         element: (
           <PrivateRoute>
             <AdminOnlyRoute>
-              <InstructorRequest />
+              <ManageInstructors/>
             </AdminOnlyRoute>
           </PrivateRoute>
         ),
