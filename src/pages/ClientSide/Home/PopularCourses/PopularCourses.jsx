@@ -30,15 +30,15 @@ const PopularCourses = () => {
       <div className="wrapper ">
         <div className="flex items-center justify-center flex-col mb-5">
           <p className="uppercase tracking-wider flex gap-2 items-center">
-            <FaCircle className="text-[.5rem]" />{" "}
-            <FaCircle className="text-[.6rem]" />{" "}
+            <FaCircle className="text-[.5rem]" />
+            <FaCircle className="text-[.6rem]" />
             <FaCircle className="text-xs" />
             Learn new skills
-            <FaCircle className="text-xs" />{" "}
-            <FaCircle className="text-[.6rem]" />{" "}
+            <FaCircle className="text-xs" />
+            <FaCircle className="text-[.6rem]" />
             <FaCircle className="text-[.5rem]" />
           </p>
-          <h1 className="text-6xl">
+          <h1 className="text-4xl sm:text-6xl text-center">
             <b>Popular</b> Courses.
           </h1>
         </div>

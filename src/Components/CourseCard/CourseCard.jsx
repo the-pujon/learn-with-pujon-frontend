@@ -27,11 +27,11 @@ const CourseCard = ({ card }) => {
           <p className="absolute top-4 right-4 font-semibold px-2 py-1 text-primary bg-secondary rounded-full shadow-sm">
             ${card?.price}
           </p>
-          <div className=" h-2/4 sm:h-56 overflow-hidden">
+          <div className="h-56 sm:h-56 overflow-hidden">
             <img
               className="w-full rounded-t"
               src={card?.classImage}
-              alt="Photo by aldi sigun on Unsplash"
+              alt="course Photo"
             />
             <p className="absolute top-48 right-4 font-semibold px-2 py-1 text-primary bg-secondary rounded-full shadow-sm">
               <span className="flex items-center gap-2 justify-center">
