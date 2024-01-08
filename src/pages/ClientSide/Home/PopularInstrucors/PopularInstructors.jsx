@@ -54,12 +54,12 @@ const PopularInstructors = () => {
             <FaCircle className="text-[.5rem]" />{" "}
             <FaCircle className="text-[.6rem]" />{" "}
             <FaCircle className="text-xs" />
-            Meet Our Genius Instructors
+            <span className="text-xs sm:text-base">Meet Our Genius Instructors</span>
             <FaCircle className="text-xs" />{" "}
             <FaCircle className="text-[.6rem]" />{" "}
             <FaCircle className="text-[.5rem]" />
           </p>
-          <h1 className="text-6xl">
+          <h1 className="text-4xl sm:text-6xl text-center">
             <b>Popular</b> Instructors.
           </h1>
         </div>

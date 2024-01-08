@@ -33,7 +33,7 @@ const PopularCourses = () => {
             <FaCircle className="text-[.5rem]" />
             <FaCircle className="text-[.6rem]" />
             <FaCircle className="text-xs" />
-            Learn new skills
+            <span className="text-xs sm:text-base">Learn new skills</span>
             <FaCircle className="text-xs" />
             <FaCircle className="text-[.6rem]" />
             <FaCircle className="text-[.5rem]" />
