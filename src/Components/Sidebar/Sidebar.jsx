@@ -1,14 +1,30 @@
 import React from "react";
-import wave from "../../assets/wave5.svg";
-import { Link, NavLink } from "react-router-dom";
-import { AiOutlineHome } from "react-icons/ai";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AiOutlineHome, AiOutlineLogin } from "react-icons/ai";
 import { FaChalkboardTeacher, FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
 import logo from "../../assets/logos/logo3.png";
-import {SiGoogleclassroom} from "react-icons/si";
-import { MdOutlineAccountBalanceWallet, MdOutlineCategory } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
+import {
+  MdOutlineAccountBalanceWallet,
+  MdOutlineCategory,
+} from "react-icons/md";
+import { useUser } from "../../Hooks/useUser";
+import { toast } from "react-hot-toast";
 
 const Sidebar = () => {
+  const navigate = useNavigate()
+  const { logOut } = useUser();
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    logOut().then(() => {
+      toast.success("Log out Successful", { position: "top-right" });
+      navigate('/')
+      window.location.reload();
+    });
+  };
+
   return (
     <div>
       <div className=" md:hidden inset-y-0 z-10 flex w-20 bg-primary h-screen sticky top-0">
@@ -17,7 +33,10 @@ const Sidebar = () => {
             <img src={logo} alt="" className="w-10 " />
           </div>
           <nav className="flex flex-col flex-1 w-20 p-4 mt-4 gap-4 text-secondary sidebar">
-            <NavLink to="/dashboard" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
             </NavLink>
             <NavLink
@@ -54,11 +73,11 @@ const Sidebar = () => {
               <AiOutlineHome className="text-xl" />
             </NavLink>
           </nav>
-          {/*<div className="flex-shrink-0 p-4">
-            <button className="flex items-center space-x-2">
-              <span>Logout</span>
+          <div className="flex-shrink-0 p-4">
+            <button onClick={handleLogOut} className="flex items-center space-x-2 text-secondary">
+            <AiOutlineLogin className="text-xl" />
             </button>
-          </div>*/}
+          </div>
         </div>
       </div>
 
@@ -82,7 +101,10 @@ const Sidebar = () => {
             </div>
           </div>
           <nav className="flex flex-col flex-1 w-64 p-4 mt-4 gap-4 text-secondary sidebar">
-            <NavLink to="/dashboard" className="flex items-center space-x-2 w-fit">
+            <NavLink
+              to="/dashboard"
+              className="flex items-center space-x-2 w-fit"
+            >
               <AiOutlineHome className="text-xl" />
               <p className="text-base"> Home</p>
             </NavLink>
@@ -111,7 +133,7 @@ const Sidebar = () => {
               to="/dashboard/categories"
               className="flex items-center space-x-2 w-fit"
             >
-              <MdOutlineCategory  className="text-xl" />
+              <MdOutlineCategory className="text-xl" />
               <span className="text-base">Manage Categories</span>
             </NavLink>
             <NavLink
@@ -127,7 +149,11 @@ const Sidebar = () => {
             </NavLink>
           </nav>
           <div className="flex-shrink-0 p-4">
-            <button className="flex items-center space-x-2">
+            <button
+              onClick={handleLogOut}
+              className="flex items-center space-x-2 text-white"
+            >
+              <AiOutlineLogin className="text-xl" />
               <span>Logout</span>
             </button>
           </div>
