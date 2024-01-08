@@ -6,6 +6,7 @@ import { FaChalkboardTeacher, FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
 import logo from "../../assets/logos/logo3.png";
 import {SiGoogleclassroom} from "react-icons/si";
+import { MdOutlineCategory } from "react-icons/md";
 
 const Sidebar = () => {
   return (
@@ -41,7 +42,7 @@ const Sidebar = () => {
               to="/dashboard/categories"
               className="flex items-center space-x-2 w-fit"
             >
-              <AiOutlineHome className="text-xl" />
+              <MdOutlineCategory className="text-xl" />
             </NavLink>
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
@@ -110,8 +111,8 @@ const Sidebar = () => {
               to="/dashboard/categories"
               className="flex items-center space-x-2 w-fit"
             >
-              <AiOutlineHome className="text-xl" />
-              <span className="text-base">Categories</span>
+              <MdOutlineCategory  className="text-xl" />
+              <span className="text-base">Manage Categories</span>
             </NavLink>
             <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />

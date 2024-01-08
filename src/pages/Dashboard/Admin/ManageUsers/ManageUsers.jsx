@@ -12,15 +12,13 @@ const ManageUsers = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  const { get, put, del } = useApi();
+  const { get, put, del, loading } = useApi();
 
   useEffect(() => {
-    get("users").then((data) => {
+    get("users", 'getUsers').then((data) => {
       setAllUsers(data);
       setFilteredUsers(data);
-      setLoading(false);
     });
   }, [refresh]);
 
@@ -89,7 +87,7 @@ const ManageUsers = () => {
           </div>
 
           <div className="max-w-full overflow-auto">
-            {!loading && filteredUsers.length <= 0 ? (
+             {!loading && filteredUsers.length <= 0 ? (
               <div className=" flex w-full h-[80vh] justify-center items-center text-xl">
                 <div>
                   <img src={Empty} alt="empty" />
@@ -107,7 +105,7 @@ const ManageUsers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {loading && (
+                  {loading === 'getUsers' && (
                     <tr>
                       <td>
                         <SkeletonTheme

@@ -7,11 +7,12 @@ const ManageCategories=() => {
     const [filteredCategories,setFilteredCategories]=useState([]);
     const [subcategory,setSubcategory]=useState(null)
     const [showDropdown,setShowDropdown]=useState('');
+    //const [loading, setLoading] = useState(true)
 
     const {get,post,loading}=useApi()
 
     useEffect(() => {
-        get("categories", 'CategoryRead')
+        get("categories", 'getCategories')
             .then((data) => {
                 setFilteredCategories(data);
                 setRefresh(null)
@@ -51,7 +52,9 @@ const ManageCategories=() => {
 
     return (
         <div className="wrapper min-h-screen  text-primary backdrop-blur-md">
-            <div className="flex flex-col md:flex-row divide-x gap-4 min-h-screen  overflow-x-auto pt-5 sm:pt-[8rem]">
+  <div className="text-4xl font-semibold py-5 sm:pt-[8rem]" >Manage Categories</div>
+            <div className="flex flex-col md:flex-row divide-x gap-4 min-h-screen  overflow-x-auto ">
+
                 <div className="basis-[35rem]" >
                     {/* for add category */}
                     <div className="pb-10">
@@ -205,7 +208,7 @@ const ManageCategories=() => {
                     </>
                 </div>
                 <div className="flex-1 md:max-h-[80vh] md:overflow-auto">
-                    <ShowCategories loading={loading} filteredCategories={filteredCategories} setRefresh={setRefresh} />
+                    <ShowCategories loading={loading} filteredCategories={filteredCategories} setRefresh={setRefresh} categoryLoading={loading} />
                 </div>
             </div>
         </div>
