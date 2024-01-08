@@ -5,21 +5,9 @@ import logo1 from "../../assets/logos/logo3.png";
 import { useUser } from "../../Hooks/useUser";
 import { useSelector } from "react-redux";
 import useRole from "./../../Hooks/useRole";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
+import { MdMenuOpen } from "react-icons/md";
 
-const navbarOption = (
-  <>
-    <li>
-      <NavLink to="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink to="/instructors">Instructors</NavLink>
-    </li>
-    <li>
-      <NavLink to="/courses">Courses</NavLink>
-    </li>
-  </>
-);
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart);
   const [scroll, setScroll] = useState(true);
@@ -27,15 +15,49 @@ const Navbar = () => {
   const { loggedUser, logOut, userLoading } = useUser();
   const [role] = useRole();
 
+  const navbarOption = (
+    <>
+      <li>
+        <NavLink to="/" className="text-base sm:text-xl">
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/instructors" className="text-base sm:text-xl">
+          Instructors
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/courses" className="text-base sm:text-xl">
+          Courses
+        </NavLink>
+      </li>
+      {role !== "instructor" && (
+        <li className=" sm:hidden">
+          <NavLink to="/becomeInstructor" className="text-base sm:text-xl">
+            Become an Instructor
+          </NavLink>
+        </li>
+      )}
+    </>
+  );
 
   /**
    * Used for navbar animation when scroll
    */
   const listenScrollEvent = () => {
-    if (location === "/") {
-      window.scrollY > 650 ? setScroll(false) : setScroll(true);
+    if (window.innerWidth > 640) {
+      if (location === "/") {
+        window.scrollY > 650 ? setScroll(false) : setScroll(true);
+      } else {
+        setScroll(false);
+      }
     } else {
-      setScroll(false);
+      if (location === "/") {
+        window.scrollY > 350 ? setScroll(false) : setScroll(true);
+      } else {
+        setScroll(false);
+      }
     }
   };
 
@@ -52,9 +74,9 @@ const Navbar = () => {
    */
   const handleLogOut = (e) => {
     e.preventDefault();
-    logOut().then(() =>{
-      toast.success('Log out Successful', {position:'top-right'})
-      window.location.reload()
+    logOut().then(() => {
+      toast.success("Log out Successful", { position: "top-right" });
+      window.location.reload();
     });
   };
 
@@ -62,48 +84,26 @@ const Navbar = () => {
     <div
       className={` text-white fixed z-50 w-full transition-all duration-500 ease-linear  ${
         scroll
-          ? " py-12 backdrop-blur-sm bg-opacity-0 "
-          : " backdrop-blur-sm bg-primary/70 bg-opacity-100 py-3"
+          ? "py-3 sm:py-12 backdrop-blur-sm bg-opacity-0"
+          : " backdrop-blur-sm bg-primary/70 bg-opacity-100 py-0"
       }`}
     >
       <div className="wrapper">
         <div className="navbar bg-base-100">
           <div className="navbar-start">
-            <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h8m-8 6h16"
-                  />
-                </svg>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black bg-white/5"
-              >
-                {navbarOption}
-              </ul>
-            </div>
+            {/* logo */}
             <Link to="/" className=" text-5xl font-medium">
               <img
                 src={logo1}
                 alt=""
                 className={`${
-                  scroll ? "w-32" : "w-20"
+                  scroll ? " w-16 sm:w-32" : "w-12 sm:w-20"
                 } transition-all duration-500 ease-linear`}
               />
             </Link>
           </div>
 
+          {/* big device nav button */}
           <div className="navbar-center">
             {" "}
             <ul className=" menu menu-horizontal px-1 hidden md:flex">
@@ -112,14 +112,16 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end">
-            {role === "instructor" || (
-              <ul>
+            {/* become a instructor */}
+            {role === "instructor" || role === "admin" || (
+              <ul className="">
                 <li>
                   <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
                 </li>
               </ul>
             )}
 
+            {/* cart */}
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <div className="indicator">
@@ -165,7 +167,7 @@ const Navbar = () => {
               </div>
             </div>
 
-
+            {/* account dropdown */}
             <div className="dropdown dropdown-end text-black">
               {loggedUser ? (
                 <>
@@ -193,9 +195,7 @@ const Navbar = () => {
                       </li>
                     )}
                     <li className=" bg-primary/20 p-2 backdrop-blur-md">
-                      <Link to={"/paymentHistory"}>
-                        Payment History
-                      </Link>
+                      <Link to={"/paymentHistory"}>Payment History</Link>
                     </li>
                     {role === "instructor" && (
                       <li className=" bg-primary/20 p-2 backdrop-blur-md">
@@ -226,6 +226,19 @@ const Navbar = () => {
                   </ul>
                 </>
               )}
+            </div>
+
+            {/* small device navButton */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <MdMenuOpen className="text-4xl" />
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content !text-2xl flex flex-col gap-1 mt-3 z-[1] p-2 shadow rounded-box w-52 text-secondary bg-primary/50"
+              >
+                {navbarOption}
+              </ul>
             </div>
           </div>
         </div>
