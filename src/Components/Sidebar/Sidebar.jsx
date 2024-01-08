@@ -6,7 +6,7 @@ import { FaChalkboardTeacher, FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
 import logo from "../../assets/logos/logo3.png";
 import {SiGoogleclassroom} from "react-icons/si";
-import { MdOutlineCategory } from "react-icons/md";
+import { MdOutlineAccountBalanceWallet, MdOutlineCategory } from "react-icons/md";
 
 const Sidebar = () => {
   return (
@@ -17,7 +17,7 @@ const Sidebar = () => {
             <img src={logo} alt="" className="w-10 " />
           </div>
           <nav className="flex flex-col flex-1 w-20 p-4 mt-4 gap-4 text-secondary sidebar">
-            <NavLink to="/" className="flex items-center space-x-2 w-fit">
+            <NavLink to="/dashboard" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
             </NavLink>
             <NavLink
@@ -27,7 +27,7 @@ const Sidebar = () => {
               <FaUsersCog className="text-xl" />
             </NavLink>
             <NavLink
-              to="/dashboard/instructorApplication"
+              to="/dashboard/manageInstructor"
               className="flex items-center space-x-2 w-fit"
             >
               <FaChalkboardTeacher className="text-xl" />
@@ -44,13 +44,13 @@ const Sidebar = () => {
             >
               <MdOutlineCategory className="text-xl" />
             </NavLink>
-            <NavLink to="/" className="flex items-center space-x-2 w-fit">
-              <AiOutlineHome className="text-xl" />
-            </NavLink>
             <NavLink
               to="/dashboard/allTransactions"
               className="flex items-center space-x-2 w-fit"
             >
+              <MdOutlineAccountBalanceWallet className="text-xl" />
+            </NavLink>
+            <NavLink to="/" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
             </NavLink>
           </nav>
@@ -82,7 +82,7 @@ const Sidebar = () => {
             </div>
           </div>
           <nav className="flex flex-col flex-1 w-64 p-4 mt-4 gap-4 text-secondary sidebar">
-            <NavLink to="/" className="flex items-center space-x-2 w-fit">
+            <NavLink to="/dashboard" className="flex items-center space-x-2 w-fit">
               <AiOutlineHome className="text-xl" />
               <p className="text-base"> Home</p>
             </NavLink>
@@ -114,16 +114,16 @@ const Sidebar = () => {
               <MdOutlineCategory  className="text-xl" />
               <span className="text-base">Manage Categories</span>
             </NavLink>
-            <NavLink to="/" className="flex items-center space-x-2 w-fit">
-              <AiOutlineHome className="text-xl" />
-              <span className="text-base">All Classes</span>
-            </NavLink>
             <NavLink
               to="/dashboard/allTransactions"
               className="flex items-center space-x-2 w-fit"
             >
-              <AiOutlineHome className="text-xl" />
+              <MdOutlineAccountBalanceWallet className="text-xl" />
               <span className="text-base">All Transactions</span>
+            </NavLink>
+            <NavLink to="/" className="flex items-center space-x-2 w-fit">
+              <AiOutlineHome className="text-xl" />
+              <span className="text-base">All Classes</span>
             </NavLink>
           </nav>
           <div className="flex-shrink-0 p-4">

@@ -236,7 +236,6 @@ const ManageCategories = () => {
         </div>
         <div className="flex-1 md:max-h-[80vh] md:overflow-auto">
           <ShowCategories
-            loading={loading}
             filteredCategories={filteredCategories}
             setRefresh={setRefresh}
             categoryLoading={loading}
