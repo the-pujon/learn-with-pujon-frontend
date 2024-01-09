@@ -9,9 +9,10 @@ import { toast } from "react-hot-toast";
 import { MdMenuOpen } from "react-icons/md";
 
 const Navbar = () => {
-  const cartItems = useSelector((state) => state.cart);
-  const [scroll, setScroll] = useState(true);
   const location = useLocation().pathname;
+  const cartItems = useSelector((state) => state.cart);
+  const [scroll, setScroll] = useState(location === "/" ?   true : false);
+
   const { loggedUser, logOut, userLoading } = useUser();
   const [role] = useRole();
 
@@ -67,7 +68,7 @@ const Navbar = () => {
       window.removeEventListener("scroll", listenScrollEvent);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, [location, scroll]);
 
   /**
    * Used for log out

@@ -55,7 +55,6 @@ const useAuth = () => {
   //onState
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (currentUser) => {
-      setUserLoading(false);
       if (currentUser) {
         fetch("http://localhost:5000/api/users/jwt", {
           method: "POST",

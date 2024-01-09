@@ -1,15 +1,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useUser } from "./../Hooks/useUser";
-import useRole from "../Hooks/useRole";
 
 const PrivateRoute = ({ children }) => {
   const { loggedUser, userLoading } = useUser();
-
-  const role = useRole(loggedUser?.email)
-  console.log(role)
-
-  console.log(loggedUser?.email)
 
   if (userLoading) {
     return (
