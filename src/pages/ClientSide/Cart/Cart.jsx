@@ -59,13 +59,12 @@ const Cart = () => {
 
   return (
     <div>
-      {" "}
-      <div class="container mx-auto min-h-[70vh] flex items-center justify-center w-full text-primary">
-        <div class="flex shadow-md w-full">
-          <div class="w-3/4 bg-transparent backdrop-blur-md border-r-2 px-10 py-10">
-            <div class="flex justify-between border-b pb-8">
-              <h1 class="font-semibold text-2xl">Your Selected Courses</h1>
-              <h2 class="font-semibold text-2xl">
+      <div class="container mx-auto min-h-screen sm:min-h-screen pt-16 pb-5 sm:pb-0 sm:pt-0 flex items-center justify-center w-full text-primary">
+        <div class="flex flex-col sm:flex-row shadow-md w-full py-5">
+          <div class="w-full sm:w-3/4 bg-transparent backdrop-blur-md sm:border-r-2 px-5 sm:px-10 py-5 sm:py-10">
+            <div class="flex justify-between border-b gap-3 border-primary pb-4 sm:pb-8">
+              <h1 class="font-semibold text-xl sm:text-2xl whitespace-nowrap">Your Selected Courses :</h1>
+              <h2 class="font-semibold text-xl sm:text-2xl whitespace-nowrap">
                 {cartItems.totalItem} Items
               </h2>
             </div>
@@ -82,7 +81,8 @@ const Cart = () => {
                 </p>
               </div>
             ) : (
-              <table className="table">
+              <div className="w-full overflow-auto" >
+                <table className="table">
                 {/* head */}
                 <thead>
                   <tr>
@@ -136,11 +136,12 @@ const Cart = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
             )}
             {cartItems.courses.length === 0 || (
               <Link
                 to="/courses"
-                class="flex font-semibold text-primary text-sm mt-10"
+                class=" hidden sm:flex font-semibold text-primary text-sm mt-10"
               >
                 <svg
                   class="fill-current mr-2 text-primary w-4"
@@ -153,23 +154,23 @@ const Cart = () => {
             )}
           </div>
 
-          <div id="summary" class="w-1/4 px-8 py-10 backdrop-blur-md">
-            <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-            <div class="flex justify-between mt-10 mb-5">
+          <div id="summary" class="w-full sm:w-1/4 px-5 sm:px-8 sm:py-10 backdrop-blur-md">
+            <h1 class="font-semibold text-xl sm:text-2xl border-b border-primary pb-3 sm:pb-8">Order Summary</h1>
+            <div class="flex justify-between mt-3 mb-3 sm:mt-10 sm:mb-5">
               <span class="font-semibold text-sm uppercase">Subtotal</span>
               <span class="font-semibold text-sm">
                 $ {cartItems.totalPrice}
               </span>
             </div>
-            <div class="flex justify-between mt-10 mb-5">
+            <div class="flex justify-between  mt-3 mb-3 sm:mt-10 sm:mb-5">
               <span class="font-semibold text-sm uppercase">Tax (10%)</span>
               <span class="font-semibold text-sm">
                 $ {(cartItems.totalPrice * 0.1).toFixed(2)}
               </span>
             </div>
 
-            <div class="border-t mt-8">
-              <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+            <div class="border-t border-primary mt-2 sm:mt-8">
+              <div class="flex font-semibold justify-between py-2 sm:py-6 text-sm uppercase">
                 <span>Total cost</span>
                 <span>
                   $ {cartItems.totalPrice + cartItems.totalPrice * 0.1}

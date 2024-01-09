@@ -21,7 +21,7 @@ const Banner = ({ image, title }) => {
               cascade
               duration={2000}
               damping={1e-1}
-              className=" text-5xl leading-tight md:text-6xl text-center sm:text-start text-white font-bold flex flex-col"
+              className=" text-4xl leading-tight md:text-6xl text-center sm:text-start text-white font-bold flex flex-col"
             >
               <span>WELCOME To</span>
               <span>SKILLS VOYAGE</span>
@@ -33,7 +33,7 @@ const Banner = ({ image, title }) => {
               cascade
               duration={2000}
               damping={1e-1}
-              className=" text-3xl leading-tight md:text-2xl text-center sm:text-start text-secondary font-medium flex flex-col"
+              className=" text-2xl leading-tight md:text-2xl text-center sm:text-start text-secondary font-medium flex flex-col"
             >
               <span>'Lean what your heart says,</span>
               <span> learn from your heart'</span>
