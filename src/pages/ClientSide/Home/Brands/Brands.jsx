@@ -7,12 +7,12 @@ import udemy from "../../../../assets/brands/udemy.svg";
 const Brands = () => {
   return (
     <div>
-      <div className="wrapper">
-        <div className="flex items-center gap-10 justify-center">
-          <img src={byjus} alt="" className="w-72" />
-          <img src={coursera} alt="" className="w-72" />
-          <img src={freecodecamp} alt="" className="w-72" />
-          <img src={udemy} alt="" className="w-72" />
+      <div className="wrapper py-5">
+        <div className="flex items-center gap-2 flex-wrap sm:gap-10 justify-center ">
+          <img src={byjus} alt="" className="w-32 sm:w-72" />
+          <img src={coursera} alt="" className="w-32 sm:w-72" />
+          <img src={freecodecamp} alt="" className="w-32 sm:w-72" />
+          <img src={udemy} alt="" className="w-32 sm:w-72" />
         </div>
       </div>
     </div>

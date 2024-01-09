@@ -14,14 +14,14 @@ const Banner = ({ image, title }) => {
           backgroundImage: `url(${image}), linear-gradient(90deg, rgba(33, 53, 85,1) 30%, rgba(0,212,255,0) 100%)`,
         }}
       >
-        <div className="wrapper min-h-screen flex flex-col gap-4 justify-center ">
+        <div className="wrapper min-h-screen flex flex-col gap-4 items-center sm:items-start justify-center ">
           <div className="  text-secondary uppercase  ">
             <Fade
               delay={0}
               cascade
               duration={2000}
               damping={1e-1}
-              className=" text-2xl leading-tight md:text-6xl  text-white font-bold flex flex-col"
+              className=" text-5xl leading-tight md:text-6xl text-center sm:text-start text-white font-bold flex flex-col"
             >
               <span>WELCOME To</span>
               <span>SKILLS VOYAGE</span>
@@ -33,7 +33,7 @@ const Banner = ({ image, title }) => {
               cascade
               duration={2000}
               damping={1e-1}
-              className=" text-2xl leading-tight md:text-2xl  text-secondary font-medium flex flex-col"
+              className=" text-3xl leading-tight md:text-2xl text-center sm:text-start text-secondary font-medium flex flex-col"
             >
               <span>'Lean what your heart says,</span>
               <span> learn from your heart'</span>
