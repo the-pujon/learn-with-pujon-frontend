@@ -28,25 +28,25 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <li></li>
     </ul>
 
-    <Provider store={store}>
-      <AuthProvider>
-        <AnimatedCursor
-          innerSize={8}
-          outerSize={35}
-          innerScale={1}
-          outerScale={2}
-          outerAlpha={0}
-          hasBlendMode={true}
-          showSystemCursor={true}
-          innerStyle={{
-            backgroundColor: "#213555",
-          }}
-          outerStyle={{
-            border: "3px solid #213555",
-          }}
-        />
-        <RouterProvider router={Router} />
-      </AuthProvider>
-    </Provider>
+      <Provider store={store}>
+        <AuthProvider>
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={35}
+            innerScale={1}
+            outerScale={2}
+            outerAlpha={0}
+            hasBlendMode={true}
+            showSystemCursor={true}
+            innerStyle={{
+              backgroundColor: "#213555",
+            }}
+            outerStyle={{
+              border: "3px solid #213555",
+            }}
+          />
+          <RouterProvider router={Router} />
+        </AuthProvider>
+      </Provider>
   </div>
 );
