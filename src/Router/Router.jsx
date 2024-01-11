@@ -24,6 +24,7 @@ import DashboardLayout from "../Layout/DashboardLayout.jsx";
 import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard.jsx";
 import ManageInstructors from "../pages/Dashboard/Admin/ManageInstructors/ManageInstructors.jsx";
 import ManageCourses from "../pages/Dashboard/Admin/ManageCourses/ManageCourses.jsx";
+import LoginPage from "../pages/Authentication/LoginPage/LoginPage.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ export const Router = createBrowserRouter([
         path: "courseDetails/:id",
         element: <CourseDetails />,
       },
+      {
+        path:"/login",
+        element: <LoginPage/>
+      }
     ],
   },
   {
