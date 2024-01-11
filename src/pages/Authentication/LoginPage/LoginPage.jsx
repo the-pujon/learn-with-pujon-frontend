@@ -15,7 +15,7 @@ const LoginPage = () => {
         <div>
           <img src={logo1} alt="" className="w-32" />
         </div>
-        <div className="text-4xl mt-4 text-primary font-semibold" >Login</div>
+        <div className="text-4xl mt-4 text-primary font-bold" >Login</div>
         <form action="" className="w-full flex items-center gap-5 mt-10 flex-col" >
           <div className="form-control relative  w-full">
             <input
@@ -63,7 +63,7 @@ const LoginPage = () => {
             </button>
         </div>
 
-        <div className="text-primary mt-4" >Do not have an account? <Link>Sign up</Link></div>
+        <div className="text-primary mt-4" >Do not have an account? <Link to={'/signup'}>Sign up</Link></div>
       </div>
     </div>
   );

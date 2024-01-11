@@ -25,6 +25,7 @@ import Dashboard from "../pages/Dashboard/Admin/Dashboard/Dashboard.jsx";
 import ManageInstructors from "../pages/Dashboard/Admin/ManageInstructors/ManageInstructors.jsx";
 import ManageCourses from "../pages/Dashboard/Admin/ManageCourses/ManageCourses.jsx";
 import LoginPage from "../pages/Authentication/LoginPage/LoginPage.jsx";
+import SignUpPage from "../pages/Authentication/SignUpPage/SignUpPage.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -106,6 +107,10 @@ export const Router = createBrowserRouter([
       {
         path:"/login",
         element: <LoginPage/>
+      },
+      {
+        path:"/signup",
+        element: <SignUpPage/>
       }
     ],
   },

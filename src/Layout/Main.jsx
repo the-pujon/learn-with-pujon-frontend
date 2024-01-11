@@ -6,7 +6,7 @@ import Footer from "../Components/Footer/Footer";
 const Main = () => {
   const pathName = useLocation().pathname;
 
-  const noHeaderFooter = pathName === "/login";
+  const noHeaderFooter = pathName === "/login" || pathName === "/signup";
 
   return (
     <div className=" ">
