@@ -95,7 +95,6 @@ const SignUpPage = () => {
               },
               "createUser"
             )
-              .then((res) => res.json())
               .then((data) => {
                 navigate("/");
               })
