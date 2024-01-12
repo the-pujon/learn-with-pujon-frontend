@@ -8,13 +8,15 @@ import { AuthProvider } from "./Context/AuthContext";
 import { Provider } from "react-redux";
 import store from "./App/Store";
 import AnimatedCursor from "react-animated-cursor";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 import "react-loading-skeleton/dist/skeleton.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
-    <div><Toaster/></div>
+    <div>
+      <Toaster />
+    </div>
     <ul className="circles -z-50">
       <li></li>
       <li></li>
@@ -28,8 +30,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <li></li>
     </ul>
 
-      <Provider store={store}>
-        <AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <div className="hidden sm:block" >
           <AnimatedCursor
             innerSize={8}
             outerSize={35}
@@ -45,8 +48,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               border: "3px solid #213555",
             }}
           />
-          <RouterProvider router={Router} />
-        </AuthProvider>
-      </Provider>
+        </div>
+        <RouterProvider router={Router} />
+      </AuthProvider>
+    </Provider>
   </div>
 );
