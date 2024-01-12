@@ -220,7 +220,7 @@ const Navbar = () => {
                 <>
                   <ul>
                     <li className="text-xl text-white">
-                      <NavLink to="/auth" className={" flex items-center"}>
+                      <NavLink to="/login" className={" flex items-center"}>
                         Login
                       </NavLink>
                     </li>

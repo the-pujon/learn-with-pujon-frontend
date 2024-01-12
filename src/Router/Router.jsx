@@ -46,10 +46,6 @@ export const Router = createBrowserRouter([
         element: <Courses />,
       },
       {
-        path: "auth",
-        element: <Authentication />,
-      },
-      {
         path: "becomeInstructor",
         element: (
           <PrivateRoute>
