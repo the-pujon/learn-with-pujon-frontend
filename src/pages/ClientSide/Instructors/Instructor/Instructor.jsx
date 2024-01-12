@@ -13,20 +13,12 @@ const Instructor = () => {
 
   //  console.log(id);
   useEffect(() => {
-    fetch(
-      `https://sv-ashen.vercel.app/api/instructors/singleInstructor?id=${id}`
-    )
-      .then((res) => res.json())
+    get(`instructors/singleInstructor?id=${id}`,'getInstructor')
       .then((data) => {
-        console.log(data);
         setInstructorDetails(data);
-        //setInstructorEmail(data.instructor.email)
-        console.log(data.email);
         const encodedEmail = encodeURIComponent(data.email);
-        console.log(encodedEmail);
 
         get(`courses/email/${encodedEmail}`).then((res) => {
-          console.log(res);
           setInstructorCourses(res);
         });
       });
@@ -54,19 +46,7 @@ const Instructor = () => {
 
               <p className="py-6">
                 <span className="text-xl font-medium">About</span>
-                <br />P{instructorDetails.about} Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Commodi, quis. Illo nostrum
-                ratione porro ipsum dolorem, minima quidem ut! Hic ea minima
-                dolorum fugiat laudantium nesciunt animi quas ut velit unde
-                debitis modi, sapiente enim repellat veniam mollitia! Similique
-                repudiandae at sequi laborum perspiciatis distinctio architecto
-                quos unde quisquam, libero iste eaque, maiores incidunt neque
-                quam hic nulla ratione, dolore id! Molestias eligendi ducimus
-                atque minima laboriosam cupiditate, magnam corporis! Culpa
-                excepturi quisquam quidem architecto maxime perferendis, harum
-                soluta cum esse repellat nulla error quas itaque! Deleniti magni
-                sit eaque, harum tenetur rerum. Blanditiis nisi voluptates unde
-                eum, modi voluptas?
+                <br />{instructorDetails.about}
               </p>
 
               <li className="">Email: {instructorDetails.email}</li>

@@ -8,7 +8,6 @@ import Instructor from "../pages/ClientSide/Instructors/Instructor/Instructor";
 import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse.jsx";
 import Cart from "../pages/ClientSide/Cart/Cart";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
-//import AddCourse from "../pages/ClientSide/Instructors/AddCourse/AddCourse";
 import PrivateRoute from "./PrivateRoute";
 import MyCourses from "../pages/ClientSide/Instructors/MyCourses/MyCourses";
 import AllTransactions from "../pages/Dashboard/Admin/AllTransactions/AllTransactions";

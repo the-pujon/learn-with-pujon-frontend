@@ -13,7 +13,7 @@ const Navbar = () => {
   const cartItems = useSelector((state) => state.cart);
   const [scroll, setScroll] = useState(location === "/" ?   true : false);
 
-  const { loggedUser, logOut, userLoading } = useUser();
+  const { loggedUser, logOut } = useUser();
   const [role] = useRole();
 
   const navbarOption = (

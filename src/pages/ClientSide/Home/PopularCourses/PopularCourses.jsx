@@ -10,13 +10,15 @@ import "swiper/css";
 
 // import required modules
 import { Autoplay } from "swiper/modules";
+import useApi from "../../../../Hooks/useApi";
 
 const PopularCourses = () => {
   const [popularClasses, setPopularClasses] = useState([]);
 
+  const {get} = useApi()
+
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/courses")
-      .then((res) => res.json())
+    get("courses", 'getPopularCourses')
       .then((data) => {
         const sliceData = data.slice(0, 6);
 

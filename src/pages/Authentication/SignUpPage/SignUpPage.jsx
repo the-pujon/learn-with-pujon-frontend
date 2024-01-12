@@ -78,13 +78,11 @@ const SignUpPage = () => {
 
   //google login
   const handleGoogleLogin = () => {
-    console.log("sd");
     loginWithGoogle()
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
 
         get(`users/${email}`, "getUser").then((data) => {
-          console.log(data);
           if (data) {
             navigate("/");
           } else {
@@ -99,7 +97,6 @@ const SignUpPage = () => {
             )
               .then((res) => res.json())
               .then((data) => {
-                console.log(data);
                 navigate("/");
               })
               .catch((err) => console.error(err));

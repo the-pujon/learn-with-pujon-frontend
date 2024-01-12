@@ -44,12 +44,10 @@ const ManageInstructors = () => {
         if (data.approved) {
           put(`users/${email}`, { role: "instructor" }, "userUpdate")
             .then((data) => {
-              console.log(data);
               setRefresh(data.approved);
             })
             .catch((err) => console.error(err));
         } else {
-          console.log(data);
           setRefresh(data.approved);
         }
       })

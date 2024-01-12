@@ -18,7 +18,6 @@ const MyCourses = () => {
   useEffect(() => {
     get(`courses/email/${loggedUser?.email}`, 'getCourses')
       .then((data) => {
-        console.log(data);
         setAllCourses(data);
         setFilteredCourses(data);
       });
@@ -39,6 +38,7 @@ const MyCourses = () => {
     setFilteredCourses(courseSearch);
   }, [search]);
 
+  //for sort
   const handleSort = (e) => {
     if (e.target.value === "price-lowest") {
       const s = [...filteredCourses].sort((a, b) => a.price - b.price);

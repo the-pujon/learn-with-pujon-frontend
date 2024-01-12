@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -11,7 +11,6 @@ import { Pagination } from "swiper/modules";
 import CourseCard from "../CourseCard/CourseCard";
 
 export default function CourseSlider({ instructorCourses }) {
-  console.log(instructorCourses);
   return (
     <>
       <Swiper

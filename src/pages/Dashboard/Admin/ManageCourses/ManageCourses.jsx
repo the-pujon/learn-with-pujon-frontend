@@ -39,6 +39,7 @@ const ManageCourses = () => {
   }, [search]);
 
 
+  //for sort
   const handleSort = (e) => {
     if (e.target.value === "price-lowest") {
       const s = [...filteredCourses].sort((a, b) => a.price - b.price);

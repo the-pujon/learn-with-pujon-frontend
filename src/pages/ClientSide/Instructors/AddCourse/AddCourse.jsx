@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import {useUser} from "../../../../Hooks/useUser";
-import {json,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import upImage from "../../../../assets/upImage.svg";
 import useApi from "../../../../Hooks/useApi";
 
@@ -97,7 +97,6 @@ const AddCourse=() => {
 
         post("courses", classDataWithArray,'addCourse')
           .then((res) => {
-            console.log(res)
             navigate("/courses");
           })
           .catch((err) => console.error(err));

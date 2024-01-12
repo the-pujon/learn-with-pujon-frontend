@@ -19,17 +19,17 @@ const CourseDetails = () => {
   useEffect(() => {
     get(`courses/${id}`).then((res) => {
       if (res.error) return console.log(res.error);
-      console.log(res);
       setCardData(res);
+
+      //getting smiler courses
       get(`courses/category/${res?.classCategory}`).then((result) => {
-        console.log(result);
-        const courses = result.filter((r) => r._id !== res._id);
-        console.log(courses); //removing current course that is already showing
+        const courses = result.filter((r) => r._id !== res._id); //removing current course that is already showing
         setSameCategoryCourses(courses);
       });
     });
   }, []);
 
+  //adding in cart
   const handleAddToCart = () => {
     const cart = {
       _id: cardData._id,

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import Chart from "../../../../Components/Chart/Chart";
 import DashboardCard from "../../../../Components/DashboardCard/DashboardCard";
 import useApi from "./../../../../Hooks/useApi";
@@ -33,7 +31,6 @@ const Dashboard = () => {
       );
       setTotalEarnings(earnings);
       setEarningsDetails(res)
-      console.log(res);
     });
   }, []);
 

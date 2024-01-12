@@ -13,34 +13,20 @@ import "swiper/css/effect-coverflow";
 import { EffectCoverflow, Pagination } from "swiper/modules";
 import InstructorCard from "../../../../Components/InstructorCard/InstructorCard";
 import { FaCircle } from "react-icons/fa";
+import useApi from "../../../../Hooks/useApi";
 
 const PopularInstructors = () => {
   const [popularInstructor, setPopularInstructor] = useState([]);
-
-  //useEffect(() => {
-  //  fetch("https://learn-with-pujon-backend.vercel.app/instructors")
-  //    .then((res) => res.json())
-  //    .then((data) => {
-  //      const sliceData = data.slice(0, 6);
-
-  //      setPopularInstructor(sliceData);
-  //    })
-  //    .catch((err) => console.error(err));
-  //}, []);
+  const {get} = useApi()
 
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/instructors")
-      .then((res) => res.json())
+    get("instructors", 'getPopularInstructors')
       .then((data) => {
         const allInstructors = data;
         const approvedInstructors = allInstructors.filter(
           (instructor) => instructor.approved === true
         );
-
         const sliceData = approvedInstructors.slice(0, 6);
-
-        console.log(sliceData);
-
         setPopularInstructor(sliceData);
       })
       .catch((err) => console.error(err));

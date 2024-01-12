@@ -18,10 +18,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     const form = e.target;
-
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email,password)
 
     //login with email
     loginWithEmail(email, password)
@@ -37,13 +35,11 @@ const LoginPage = () => {
 
   //google login
   const handleGoogleLogin = () => {
-    console.log("sd");
     loginWithGoogle()
       .then((res) => {
         const { displayName, email, photoURL } = res.user;
 
         get(`users/${email}`, "getUser").then((data) => {
-          console.log(data);
           if (data) {
             navigate("/");
           } else {
@@ -58,7 +54,6 @@ const LoginPage = () => {
             )
               .then((res) => res.json())
               .then((data) => {
-                console.log(data);
                 navigate("/");
               })
               .catch((err) => console.error(err));

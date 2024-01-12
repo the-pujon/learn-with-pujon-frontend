@@ -14,7 +14,6 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const handleRemove = (id) => {
-    console.log("remove");
     dispatch(removeItemFromCart(id));
   };
 

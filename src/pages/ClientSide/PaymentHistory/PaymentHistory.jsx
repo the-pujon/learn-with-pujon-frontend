@@ -6,7 +6,6 @@ import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
 import Empty from "../../../assets/animations/empty.gif"
 
 const PaymentHistory = () => {
-  const [allTransactions, setAllTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   const { loggedUser } = useUser();
@@ -16,8 +15,6 @@ const PaymentHistory = () => {
   useEffect(() => {
     get(`payments/${loggedUser?.email}`, 'getAllHistory')
       .then((data) => {
-        console.log(data);
-        setAllTransactions(data);
         setFilteredTransactions(data);
       });
   }, [loggedUser]);

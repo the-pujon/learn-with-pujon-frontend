@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaRegEye } from "react-icons/fa";
 import { useUser } from "./../../../../Hooks/useUser";
 import useApi from "../../../../Hooks/useApi";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -16,7 +15,6 @@ const AllTransactions = () => {
 
   useEffect(() => {
     get(`payments`, "getPayments").then((data) => {
-      console.log(data);
       setAllTransactions(data);
       setFilteredTransactions(data);
     });
