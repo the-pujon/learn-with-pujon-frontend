@@ -45,43 +45,61 @@ const CourseDetails = () => {
 
   return (
     <div className="wrapper min-h-screen text-primary">
-      <div className="flex gap-4 pt-32 pb-5">
-        <div className="basis-3/4 h-full overflow-auto">
+      <div className="flex flex-col sm:flex-row gap-4 pt-32 pb-5">
+        <div className="sm:basis-3/4 h-full sm:overflow-auto">
           <div>
             <img
               alt="Instructor"
-              className="w-full h-[35rem]"
+              className="w-full sm:h-[35rem]"
               src={cardData?.classImage}
             />
           </div>
 
-          <div className="text-5xl py-3 font-semibold">{cardData?.name}</div>
+          <div className="text-4xl sm:text-5xl py-3 font-semibold">{cardData?.name}</div>
 
-          <div className="flex items-center space-x-10 mb-6">
+          <div className="flex items-center justify-around sm:justify-start space-x-10 mb-6">
             <img
               alt="Instructor"
-              className="w-20 h-20 rounded-full"
-              height="80"
+              className="w-32 rounded-lg sm:w-20 sm:h-20 sm:rounded-full"
               src={cardData?.instructor?.instructorImage}
               style={{
-                aspectRatio: "80/80",
+                aspectRatio: "100/80",
                 objectFit: "cover",
               }}
-              width="80"
             />
-            <div>
+            <div className="sm:hidden flex flex-col gap-4" >
+              <div>
+                <div className="text-sm text-gray-500">Instructor</div>
+                <div className="text-lg font-semibold">
+                  {cardData?.instructor?.name}
+                </div>
+              </div>
+              <div>
+                <div className="text-sm text-gray-500">Category</div>
+                <div className="text-lg font-semibold">
+                  {cardData?.instructor?.category}
+                </div>
+              </div>
+              <div>
+                <div className="text-sm text-gray-500">Experience</div>
+                <div className="text-lg font-semibold">
+                  {cardData?.instructor?.experience} years
+                </div>
+              </div>
+            </div>
+            <div className="hidden sm:block" >
               <div className="text-sm text-gray-500">Instructor</div>
               <div className="text-lg font-semibold">
                 {cardData?.instructor?.name}
               </div>
             </div>
-            <div>
+            <div className="hidden sm:block" >
               <div className="text-sm text-gray-500">Category</div>
               <div className="text-lg font-semibold">
                 {cardData?.instructor?.category}
               </div>
             </div>
-            <div>
+            <div className="hidden sm:block" >
               <div className="text-sm text-gray-500">Experience</div>
               <div className="text-lg font-semibold">
                 {cardData?.instructor?.experience} years
@@ -91,7 +109,7 @@ const CourseDetails = () => {
 
           {/*tabs*/}
 
-          <div>
+          <div className="text-sm sm:text-base">
             <Tabs>
               <TabList>
                 <Tab>Overview</Tab>
@@ -146,7 +164,7 @@ const CourseDetails = () => {
             </Tabs>
           </div>
         </div>
-        <div className="basis-1/4 max-h-screen h-[90vh] overflow-auto sticky top-32">
+        <div className="sm:basis-1/4 sm:max-h-screen sm:h-[90vh] sm:overflow-auto sm:sticky sm:top-32">
           <div>
             <div className="text-2xl font-medium text-primary py-2">
               Course Details
@@ -212,7 +230,7 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      {sameCategoryCourses?.length > 0 &&
+      {sameCategoryCourses?.length > 0 && (
         <div>
           <h1 className="text-4xl mb-4 text-primary font-semibold mt-20">
             You may also like this courses
@@ -221,7 +239,7 @@ const CourseDetails = () => {
             <CourseSlider instructorCourses={sameCategoryCourses} />
           </div>
         </div>
-      }
+      )}
     </div>
   );
 };
