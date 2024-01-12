@@ -115,7 +115,7 @@ const Navbar = () => {
           <div className="navbar-end">
             {/* become a instructor */}
             {role === "instructor" || role === "admin" || (
-              <ul className="">
+              <ul className="hidden sm:block">
                 <li>
                   <NavLink to="/becomeInstructor">Become an Instructor</NavLink>
                 </li>
