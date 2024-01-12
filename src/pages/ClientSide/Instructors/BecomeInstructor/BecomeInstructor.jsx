@@ -69,18 +69,18 @@ const BecomeInstructor = () => {
 
   return (
     <div className="">
-      <div className="flex wrapper min-h-screen pt-16 items-center justify-center">
-        <div className="flex-1  flex items-center justify-center ">
+      <div className="flex flex-col sm:flex-row wrapper min-h-screen pt-16 gap-4 items-center justify-center">
+        <div className="flex-1 pt-5 sm:pt-0 flex items-center justify-center ">
           {upLoadedImages ? (
             <img
               src={URL.createObjectURL(upLoadedImages)}
               alt=""
-              className="w-80 rounded-full p-5"
+              className="w-44 sm:w-80 rounded-full p-5"
             />
           ) : (
-            <div className="border border-primary w-80  h-80 rounded-full flex items-center justify-center">
+            <div className="border border-primary w-44 sm:w-80  h-44 sm:h-80 rounded-full flex items-center justify-center">
               {" "}
-              <img src={upImage} alt="" className="  p-5 w-52" />
+              <img src={upImage} alt="" className="  p-5 w-32 sm:w-52" />
             </div>
           )}
         </div>
