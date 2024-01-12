@@ -28,13 +28,13 @@ const Instructor = () => {
     <div>
       <div className="wrapper pt-32">
         <div className="hero  bg-base-200">
-          <div className="hero-content flex-col lg:flex-row-reverse wrapper w-full justify-between">
+          <div className="hero-content flex-col lg:flex-row-reverse wrapper sm:w-full justify-between">
             <img
               src={instructorDetails.instructorImage}
               className="max-w-sm w-full flex-1 rounded-lg shadow-2xl"
             />
-            <div className=" w-[50rem]">
-              <h1 className="text-5xl pb-1 font-bold">
+            <div className=" sm:w-[50rem]">
+              <h1 className="text-4xl sm:text-5xl pb-1 font-bold">
                 {instructorDetails.name}
               </h1>
               <p className="text-xl text-gray-500 pb-1">

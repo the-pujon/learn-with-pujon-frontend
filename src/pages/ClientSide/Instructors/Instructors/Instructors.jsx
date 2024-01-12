@@ -20,6 +20,7 @@ const Instructors = () => {
   useEffect(() => {
     get("instructors",'getInstructors')
       .then((data) => {
+        console.log(data)
         const allInstructors = data;
         const approvedInstructors = allInstructors.filter(
           (instructor) => instructor.approved === true
