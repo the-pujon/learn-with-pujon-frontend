@@ -5,13 +5,6 @@ import PageCover from "../../../../Components/PageCover/PageCover";
 import bannerImage from "../../../../assets/banner/index";
 import useApi from "../../../../Hooks/useApi";
 
-const instructorCategory = [
-  "Programming Instructors",
-  "Math Instructors",
-  "English Instructors",
-  "Physics Instructors",
-];
-
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 

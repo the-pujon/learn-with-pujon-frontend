@@ -14,21 +14,38 @@ export default function CourseSlider({ instructorCourses }) {
   return (
     <>
       <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
-        grabCursor={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {instructorCourses?.map((course) => (
-          <SwiperSlide>
-            <CourseCard card={course} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          slidesPerView={1}
+          spaceBetween={0}
+          grabCursor={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper items-center justify-center !flex md:!hidden "
+        >
+          {instructorCourses.map((course) => (
+            <SwiperSlide key={course._id}>
+              <CourseCard card={course} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <Swiper
+          slidesPerView={4}
+          spaceBetween={0}
+          grabCursor={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper items-center justify-center !hidden md:!flex "
+        >
+          {instructorCourses.map((course) => (
+            <SwiperSlide key={course._id}>
+              <CourseCard card={course} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
     </>
   );
 }
