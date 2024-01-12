@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import toast from "react-hot-toast"
 
 const useApi = () => {
@@ -7,7 +7,7 @@ const useApi = () => {
   const [loading, setLoading] = useState(false);
   const jwtToken = localStorage.getItem('access-token')
 
-  const apiUrl = `http://localhost:5000/api`;
+  const apiUrl = `${import.meta.env.VITE_BASE_URL}/api`;
 
   const headers = {
     'Content-Type': 'application/json',

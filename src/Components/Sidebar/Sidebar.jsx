@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineHome, AiOutlineLogin } from "react-icons/ai";
 import { FaChalkboardTeacher, FaUsersCog } from "react-icons/fa";
 import "./Sidebar.scss";
@@ -27,11 +27,12 @@ const Sidebar = () => {
 
   return (
     <div>
+      {/* for phone */}
       <div className=" md:hidden inset-y-0 z-10 flex w-20 bg-primary h-screen sticky top-0">
         <div className="z-10 flex flex-col flex-1">
-          <div className=" pl-5 pt-5  ">
+          <Link to={'/'} className=" pl-5 pt-5  ">
             <img src={logo} alt="" className="w-10 " />
-          </div>
+          </Link>
           <nav className="flex flex-col flex-1 w-20 p-4 mt-4 gap-4 text-secondary sidebar">
             <NavLink
               to="/dashboard"
@@ -94,12 +95,12 @@ const Sidebar = () => {
         </svg>
 
         <div className="z-10 flex flex-col flex-1">
-          <div className="flex items-end justify-between flex-shrink-0 pl-2  w-28">
+          <Link to={'/'} className="flex items-end justify-between flex-shrink-0 pl-2  w-28">
             <img src={logo} alt="" className="w-24 " />
             <div className="text-2xl text-secondary font-normal mb-2">
               SKILLS VOYAGE
             </div>
-          </div>
+          </Link>
           <nav className="flex flex-col flex-1 w-64 p-4 mt-4 gap-4 text-secondary sidebar">
             <NavLink
               to="/dashboard"

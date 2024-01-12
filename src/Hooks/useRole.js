@@ -10,7 +10,7 @@ const useRole = () => {
 
   useEffect(() => {
 
-    fetch(`http://localhost:5000/api/users/${loggedUser?.email}`,{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/users/${loggedUser?.email}`,{
       headers:{
         "Content-type": "application/json",
         Authorization: `Bearer ${token}`

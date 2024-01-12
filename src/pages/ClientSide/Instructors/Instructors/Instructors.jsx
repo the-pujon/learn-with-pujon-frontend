@@ -3,7 +3,7 @@ import InstructorCard from "../../../../Components/InstructorCard/InstructorCard
 
 import PageCover from "../../../../Components/PageCover/PageCover";
 import bannerImage from "../../../../assets/banner/index";
-import CategoryDropdown from "../../../../Components/CategoryDropdown/CategoryDropdown";
+import useApi from "../../../../Hooks/useApi";
 
 const instructorCategory = [
   "Programming Instructors",
@@ -15,9 +15,10 @@ const instructorCategory = [
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
+  const {get} = useApi()
+
   useEffect(() => {
-    fetch("https://sv-ashen.vercel.app/api/instructors")
-      .then((res) => res.json())
+    get("instructors",'getInstructors')
       .then((data) => {
         const allInstructors = data;
         const approvedInstructors = allInstructors.filter(

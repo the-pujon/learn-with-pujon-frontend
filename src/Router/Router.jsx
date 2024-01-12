@@ -25,6 +25,7 @@ import ManageInstructors from "../pages/Dashboard/Admin/ManageInstructors/Manage
 import ManageCourses from "../pages/Dashboard/Admin/ManageCourses/ManageCourses.jsx";
 import LoginPage from "../pages/Authentication/LoginPage/LoginPage.jsx";
 import SignUpPage from "../pages/Authentication/SignUpPage/SignUpPage.jsx";
+import SuccessfulPaymentEndpoint from "../pages/ClientSide/paymentSuccess/PaymentSuccess.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const Router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path:"/paid",
+        element:<SuccessfulPaymentEndpoint/>
       },
       {
         path: "instructors",

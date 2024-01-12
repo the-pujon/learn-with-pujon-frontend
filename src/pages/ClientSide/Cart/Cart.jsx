@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeAll,
-  removeItemFromCart,
-} from "../../../Features/CartSlice/CartSlice";
+import { removeItemFromCart } from "../../../Features/CartSlice/CartSlice";
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { useUser } from "./../../../Hooks/useUser";
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart);
-  const [isPaymentSuccessful, setPaymentSuccessful] = useState(false);
+  const [isPaymentSuccessful, setPaymentSuccessful] = useState("unpaid");
   const { loggedUser } = useUser();
 
   const dispatch = useDispatch();
@@ -22,11 +19,7 @@ const Cart = () => {
   };
 
   const makePayment = async (totalPrice) => {
-    const stripe = await loadStripe(
-      "pk_test_51NIBhSHkcuY3CefPvUijdLj28l4fJrqiHJuXjmMXHHMyXbFf1a9SrKtAc6tBU8GM9VhaiT6K9Q1eb5bNWQu7GIIC009YNPmpaQ"
-    );
-
-    console.log(cartItems)
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
     const body = {
       products: cartItems.courses,
@@ -35,18 +28,20 @@ const Cart = () => {
       email: loggedUser.email,
       paymentStatus: isPaymentSuccessful,
     };
-    console.log(body)
+
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch("http://localhost:5000/api/checkout", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/checkout`,
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
 
     const session = await response.json();
-    //dispatch(removeAll());
 
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
@@ -59,12 +54,14 @@ const Cart = () => {
 
   return (
     <div>
-      <div class="container mx-auto min-h-screen sm:min-h-screen pt-16 pb-5 sm:pb-0 sm:pt-0 flex items-center justify-center w-full text-primary">
-        <div class="flex flex-col sm:flex-row shadow-md w-full py-5">
-          <div class="w-full sm:w-3/4 bg-transparent backdrop-blur-md sm:border-r-2 px-5 sm:px-10 py-5 sm:py-10">
-            <div class="flex justify-between border-b gap-3 border-primary pb-4 sm:pb-8">
-              <h1 class="font-semibold text-xl sm:text-2xl whitespace-nowrap">Your Selected Courses :</h1>
-              <h2 class="font-semibold text-xl sm:text-2xl whitespace-nowrap">
+      <div className="container mx-auto min-h-screen sm:min-h-screen pt-16 pb-5 sm:pb-0 sm:pt-0 flex items-center justify-center w-full text-primary">
+        <div className="flex flex-col sm:flex-row shadow-md w-full py-5">
+          <div className="w-full sm:w-3/4 bg-transparent backdrop-blur-md sm:border-r-2 px-5 sm:px-10 py-5 sm:py-10">
+            <div className="flex justify-between border-b gap-3 border-primary pb-4 sm:pb-8">
+              <h1 className="font-semibold text-xl sm:text-2xl whitespace-nowrap">
+                Your Selected Courses :
+              </h1>
+              <h2 className="font-semibold text-xl sm:text-2xl whitespace-nowrap">
                 {cartItems.totalItem} Items
               </h2>
             </div>
@@ -81,70 +78,70 @@ const Cart = () => {
                 </p>
               </div>
             ) : (
-              <div className="w-full overflow-auto" >
+              <div className="w-full overflow-auto">
                 <table className="table">
-                {/* head */}
-                <thead>
-                  <tr>
-                    <th>Course</th>
-                    <th>Instructor</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.courses?.map((course) => (
-                    <tr key={course._id}>
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                              <img
-                                src={course?.classImage}
-                                alt="Avatar Tailwind CSS Component"
-                              />
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="font-bold">{course.name}</div>
-                            <div className="text-sm text-gray-500">
-                              {course.category}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div className="flex items-center space-x-3">
-                          <div>
-                            <div className="font-bold">
-                              {course.instructorName}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="font-semibold">$ {course.price}</td>
-
-                      <td>
-                        <button
-                          onClick={() => handleRemove(course._id)}
-                          class="text-center w-1/5 font-semibold text-sm"
-                        >
-                          <AiFillDelete className="text-2xl" />
-                        </button>
-                      </td>
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th>Course</th>
+                      <th>Instructor</th>
+                      <th>Price</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {cartItems.courses?.map((course, i) => (
+                      <tr key={i}>
+                        <td>
+                          <div className="flex items-center space-x-3">
+                            <div className="avatar">
+                              <div className="mask mask-squircle w-12 h-12">
+                                <img
+                                  src={course?.classImage}
+                                  alt="Avatar Tailwind CSS Component"
+                                />
+                              </div>
+                            </div>
+
+                            <div>
+                              <div className="font-bold">{course.name}</div>
+                              <div className="text-sm text-gray-500">
+                                {course.category}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="flex items-center space-x-3">
+                            <div>
+                              <div className="font-bold">
+                                {course.instructorName}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="font-semibold">$ {course.price}</td>
+
+                        <td>
+                          <button
+                            onClick={() => handleRemove(course._id)}
+                            className="text-center w-1/5 font-semibold text-sm"
+                          >
+                            <AiFillDelete className="text-2xl" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
             {cartItems.courses.length === 0 || (
               <Link
                 to="/courses"
-                class=" hidden sm:flex font-semibold text-primary text-sm mt-10"
+                className=" hidden sm:flex font-semibold text-primary text-sm mt-10"
               >
                 <svg
-                  class="fill-current mr-2 text-primary w-4"
+                  className="fill-current mr-2 text-primary w-4"
                   viewBox="0 0 448 512"
                 >
                   <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
@@ -154,31 +151,40 @@ const Cart = () => {
             )}
           </div>
 
-          <div id="summary" class="w-full sm:w-1/4 px-5 sm:px-8 sm:py-10 backdrop-blur-md">
-            <h1 class="font-semibold text-xl sm:text-2xl border-b border-primary pb-3 sm:pb-8">Order Summary</h1>
-            <div class="flex justify-between mt-3 mb-3 sm:mt-10 sm:mb-5">
-              <span class="font-semibold text-sm uppercase">Subtotal</span>
-              <span class="font-semibold text-sm">
+          <div
+            id="summary"
+            className="w-full sm:w-1/4 px-5 sm:px-8 sm:py-10 backdrop-blur-md"
+          >
+            <h1 className="font-semibold text-xl sm:text-2xl border-b border-primary pb-3 sm:pb-8">
+              Order Summary
+            </h1>
+            <div className="flex justify-between mt-3 mb-3 sm:mt-10 sm:mb-5">
+              <span className="font-semibold text-sm uppercase">Subtotal</span>
+              <span className="font-semibold text-sm">
                 $ {cartItems.totalPrice}
               </span>
             </div>
-            <div class="flex justify-between  mt-3 mb-3 sm:mt-10 sm:mb-5">
-              <span class="font-semibold text-sm uppercase">Tax (10%)</span>
-              <span class="font-semibold text-sm">
+            <div className="flex justify-between  mt-3 mb-3 sm:mt-10 sm:mb-5">
+              <span className="font-semibold text-sm uppercase">Tax (10%)</span>
+              <span className="font-semibold text-sm">
                 $ {(cartItems.totalPrice * 0.1).toFixed(2)}
               </span>
             </div>
 
-            <div class="border-t border-primary mt-2 sm:mt-8">
-              <div class="flex font-semibold justify-between py-2 sm:py-6 text-sm uppercase">
+            <div className="border-t border-primary mt-2 sm:mt-8">
+              <div className="flex font-semibold justify-between py-2 sm:py-6 text-sm uppercase">
                 <span>Total cost</span>
                 <span>
                   $ {cartItems.totalPrice + cartItems.totalPrice * 0.1}
                 </span>
               </div>
               <button
-                onClick={()=>{makePayment(cartItems.totalPrice + cartItems.totalPrice * 0.1)}}
-                class=" SVButton-2 py-2 uppercase w-full"
+                onClick={() => {
+                  makePayment(
+                    cartItems.totalPrice + cartItems.totalPrice * 0.1
+                  );
+                }}
+                className=" SVButton-2 py-2 uppercase w-full"
               >
                 <span> Checkout</span>
               </button>
