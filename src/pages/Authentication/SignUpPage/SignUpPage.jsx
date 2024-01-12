@@ -109,7 +109,7 @@ const SignUpPage = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div
-        className="w-1/4 p-10 flex items-center justify-center flex-col rounded-md shadow-2xl"
+        className="w-full sm:w-1/4 p-10 flex items-center justify-center flex-col rounded-md shadow-2xl"
         style={{
           background:
             "conic-gradient(from 270deg at 0% 0%, rgba(255, 255, 255, .5) 50%, rgba(33, 53, 85, 1) 100%)",
