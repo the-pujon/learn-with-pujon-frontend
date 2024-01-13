@@ -1,11 +1,24 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { FaStar } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../Features/CartSlice/CartSlice";
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ card }) => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  const [disable, setDisable] = useState([])
+
+  useEffect(() => {
+    const courseIds = cartItems?.courses.map((course) => course._id) || [];
+    setDisable(courseIds);
+
+    // Cleanup function
+    return () => {
+      setDisable([]);
+    };
+  }, [cartItems]);
+
 
   //for adding in cart
   const handleAddToCart = () => {
@@ -17,6 +30,8 @@ const CourseCard = ({ card }) => {
       price: card.price,
       classImage: card.classImage,
     };
+
+    setDisable((prev)=>[...prev, card._id])
 
     dispatch(addItemToCart(cart));
   };
@@ -72,8 +87,10 @@ const CourseCard = ({ card }) => {
                   </button>{" "}
                 </Link>
                 <button
+                //disabled={disable === undefined}
+                disabled={disable.includes(card._id)}
                   onClick={handleAddToCart}
-                  className="justify-center px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300"
+                  className="justify-center disabled:cursor-not-allowed disabled:bg-secondary disabled:text-primary px-4 py-2 cursor-pointer w-fit border border-primary hover:bg-primary hover:text-secondary transition-colors duration-300"
                 >
                   Select Course
                 </button>
